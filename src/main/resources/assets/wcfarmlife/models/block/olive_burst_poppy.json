@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "wcfarmlife:block/olive_burst_poppy"
+  }
+}
