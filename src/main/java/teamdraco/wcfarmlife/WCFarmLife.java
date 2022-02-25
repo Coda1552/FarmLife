@@ -13,6 +13,8 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import teamdraco.wcfarmlife.client.ClientEventHandler;
+import teamdraco.wcfarmlife.common.entities.DomesticTribullEntity;
+import teamdraco.wcfarmlife.common.entities.GalliraptorEntity;
 import teamdraco.wcfarmlife.registry.*;
 
 @Mod.EventBusSubscriber
@@ -23,6 +25,8 @@ public class WCFarmLife {
 
     public WCFarmLife() {
         IEventBus modEventBus = FMLJavaModLoadingContext.get().getModEventBus();
+        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
+
         modEventBus.addListener(this::registerClient);
         modEventBus.addListener(this::registerCommon);
         modEventBus.addListener(this::registerEntityAttributes);
@@ -33,7 +37,6 @@ public class WCFarmLife {
         WCFarmLifeStructures.REGISTRY.register(modEventBus);
         WCFarmLifeSounds.REGISTRY.register(modEventBus);
 
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
     }
 
     private void registerCommon(FMLCommonSetupEvent event) {
@@ -57,7 +60,8 @@ public class WCFarmLife {
     public final static CreativeModeTab GROUP = new CreativeModeTab(MOD_ID) {
         @Override
         public ItemStack makeIcon() {
-            return new ItemStack(WCFarmLifeItems.TRIBULL_SHANK.get());}
+            return new ItemStack(WCFarmLifeItems.TRIBULL_SHANK.get());
+        }
     };
 
 //    public void biomeModification(final BiomeLoadingEvent event) {
