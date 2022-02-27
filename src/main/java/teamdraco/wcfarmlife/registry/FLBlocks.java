@@ -8,12 +8,12 @@ import net.minecraft.world.level.block.SoundType;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
 import net.minecraftforge.registries.RegistryObject;
-import teamdraco.wcfarmlife.WCFarmLife;
+import teamdraco.wcfarmlife.FarmLife;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
 
-public class WCFarmLifeBlocks {
-    public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, WCFarmLife.MOD_ID);
+public class FLBlocks {
+    public static final DeferredRegister<Block> REGISTRY = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmLife.MOD_ID);
 
     public static final RegistryObject<Block> PEACOCK_BURST_POPPY = REGISTRY.register("peacock_burst_poppy", () -> new FlowerBlock(MobEffects.LUCK, 5, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)));
     public static final RegistryObject<Block> ELECTRIC_BURST_POPPY = REGISTRY.register("electric_burst_poppy", () -> new FlowerBlock(MobEffects.HARM, 1, BlockBehaviour.Properties.of(Material.PLANT).noCollission().instabreak().sound(SoundType.GRASS)));

@@ -27,8 +27,8 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import teamdraco.wcfarmlife.registry.WCFarmLifeEntities;
-import teamdraco.wcfarmlife.registry.WCFarmLifeSounds;
+import teamdraco.wcfarmlife.registry.FLEntities;
+import teamdraco.wcfarmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
 
@@ -120,15 +120,15 @@ public class GalliraptorEntity extends Animal {
     }
 
     protected SoundEvent getAmbientSound() {
-        return WCFarmLifeSounds.GALLIRAPTOR_AMBIENT.get();
+        return FLSounds.GALLIRAPTOR_AMBIENT.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return WCFarmLifeSounds.GALLIRAPTOR_HURT.get();
+        return FLSounds.GALLIRAPTOR_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return WCFarmLifeSounds.GALLIRAPTOR_DEATH.get();
+        return FLSounds.GALLIRAPTOR_DEATH.get();
     }
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
@@ -136,7 +136,7 @@ public class GalliraptorEntity extends Animal {
     }
 
     public GalliraptorEntity getBreedOffspring(ServerLevel world, AgeableMob ageable) {
-        GalliraptorEntity entity = WCFarmLifeEntities.GALLIRAPTOR.get().create(this.level);
+        GalliraptorEntity entity = FLEntities.GALLIRAPTOR.get().create(this.level);
         int i = this.getVariant();
         if (this.random.nextInt(5) != 0) {
             if (ageable instanceof GalliraptorEntity && this.random.nextBoolean()) {

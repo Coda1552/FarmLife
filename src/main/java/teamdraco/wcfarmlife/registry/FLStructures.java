@@ -1,8 +1,9 @@
+/*
 package teamdraco.wcfarmlife.registry;
 
 import com.google.common.collect.ImmutableList;
 import com.google.common.collect.ImmutableMap;
-import teamdraco.wcfarmlife.WCFarmLife;
+import teamdraco.wcfarmlife.FarmLife;
 import teamdraco.wcfarmlife.common.world.features.GreenhouseStructure;
 import teamdraco.wcfarmlife.common.world.features.TribullRanchStructure;
 import net.minecraft.util.registry.Registry;
@@ -18,11 +19,11 @@ import net.minecraftforge.registries.ForgeRegistries;
 
 import java.util.Locale;
 
-@Mod.EventBusSubscriber(modid = WCFarmLife.MOD_ID)
-public class WCFarmLifeStructures {
+@Mod.EventBusSubscriber(modid = FarmLife.MOD_ID)
+public class FLStructures {
     public static IStructurePieceType TRIBULL_RANCH_PIECE = register(TribullRanchStructure.Piece::new, "TribullRanch");
     public static IStructurePieceType GREENHOUSE_PIECE = register(GreenhouseStructure.Piece::new, "Greenhouse");
-    public static final DeferredRegister<Structure<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, WCFarmLife.MOD_ID);
+    public static final DeferredRegister<Structure<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.STRUCTURE_FEATURES, FarmLife.MOD_ID);
 
     public static final RegistryObject<Structure<NoFeatureConfig>> TRIBULL_RANCH = REGISTRY.register("tribull_ranch", () -> (new TribullRanchStructure(NoFeatureConfig.CODEC)));
     public static final RegistryObject<Structure<NoFeatureConfig>> GREENHOUSE = REGISTRY.register("greenhouse", () -> (new GreenhouseStructure(NoFeatureConfig.CODEC)));
@@ -45,4 +46,4 @@ public class WCFarmLifeStructures {
 
         DimensionStructuresSettings.DEFAULTS = ImmutableMap.<Structure<?>, StructureSeparationSettings>builder().putAll(DimensionStructuresSettings.DEFAULTS).put(structure, structureSeparationSettings).build();
     }
-}
+}*/

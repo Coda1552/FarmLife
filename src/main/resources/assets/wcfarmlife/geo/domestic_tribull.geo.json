@@ -1,0 +1,116 @@
+{
+	"format_version": "1.12.0",
+	"minecraft:geometry": [
+		{
+			"description": {
+				"identifier": "geometry.DomesticTribullModel",
+				"texture_width": 64,
+				"texture_height": 64,
+				"visible_bounds_width": 4,
+				"visible_bounds_height": 3.5,
+				"visible_bounds_offset": [0, 1.25, 0]
+			},
+			"bones": [
+				{
+					"name": "body",
+					"pivot": [0, 16, -6],
+					"cubes": [
+						{"origin": [-6.5, 10, -13], "size": [13, 12, 14], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "head",
+					"parent": "body",
+					"pivot": [0, 15, -13],
+					"cubes": [
+						{"origin": [-3.5, 12, -20], "size": [7, 6, 7], "uv": [0, 48]}
+					]
+				},
+				{
+					"name": "dewlap",
+					"parent": "head",
+					"pivot": [0, 12, -16],
+					"rotation": [90, 0, 0],
+					"cubes": [
+						{"origin": [0, 9, -20], "size": [0, 7, 4], "uv": [21, 44]}
+					]
+				},
+				{
+					"name": "hornLeft",
+					"parent": "head",
+					"pivot": [2.5, 18, -17.5],
+					"rotation": [15, 0, 20],
+					"cubes": [
+						{"origin": [2, 17, -18.5], "size": [2, 8, 2], "uv": [0, 26]}
+					]
+				},
+				{
+					"name": "hornLeft2",
+					"parent": "hornLeft",
+					"pivot": [2.5, 25, -18.5],
+					"cubes": [
+						{"origin": [2, 23, -23.5], "size": [2, 2, 5], "uv": [30, 26]}
+					]
+				},
+				{
+					"name": "hornRight",
+					"parent": "head",
+					"pivot": [-2.5, 18, -17.5],
+					"rotation": [15, 0, -20],
+					"cubes": [
+						{"origin": [-4, 17, -18.5], "size": [2, 8, 2], "uv": [0, 26]}
+					]
+				},
+				{
+					"name": "hornRight2",
+					"parent": "hornRight",
+					"pivot": [-2.5, 25, -18.5],
+					"cubes": [
+						{"origin": [-4, 23, -23.5], "size": [2, 2, 5], "uv": [30, 26]}
+					]
+				},
+				{
+					"name": "hips",
+					"parent": "body",
+					"pivot": [0, 16, 1],
+					"cubes": [
+						{"origin": [-4.5, 10, 1], "size": [9, 10, 12], "uv": [0, 26]}
+					]
+				},
+				{
+					"name": "tail",
+					"parent": "hips",
+					"pivot": [0, 19, 13],
+					"rotation": [15, 0, 0],
+					"cubes": [
+						{"origin": [0, 9, 12], "size": [0, 10, 2], "uv": [0, 0]}
+					]
+				},
+				{
+					"name": "legBack",
+					"parent": "hips",
+					"pivot": [0, 10, 9],
+					"cubes": [
+						{"origin": [-1.5, 0, 7], "size": [3, 10, 4], "uv": [41, 0]}
+					]
+				},
+				{
+					"name": "armLeft",
+					"parent": "body",
+					"pivot": [3.5, 10, -8],
+					"cubes": [
+						{"origin": [2, 0, -10], "size": [3, 10, 4], "uv": [41, 0]}
+					]
+				},
+				{
+					"name": "armRight",
+					"parent": "body",
+					"pivot": [-3.5, 10, -8],
+					"cubes": [
+						{"origin": [-5, 0, -10], "size": [3, 10, 4], "uv": [41, 0]}
+					]
+				}
+			]
+		}
+	]
+}

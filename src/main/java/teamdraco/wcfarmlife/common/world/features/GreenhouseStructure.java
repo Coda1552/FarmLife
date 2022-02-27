@@ -1,11 +1,12 @@
+/*
 package teamdraco.wcfarmlife.common.world.features;
 
 import com.mojang.serialization.Codec;
-import teamdraco.wcfarmlife.WCFarmLife;
+import teamdraco.wcfarmlife.FarmLife;
 import teamdraco.wcfarmlife.common.entities.GalliraptorEntity;
-import teamdraco.wcfarmlife.registry.WCFarmLifeBlocks;
-import teamdraco.wcfarmlife.registry.WCFarmLifeEntities;
-import teamdraco.wcfarmlife.registry.WCFarmLifeStructures;
+import teamdraco.wcfarmlife.registry.FLBlocks;
+import teamdraco.wcfarmlife.registry.FLEntities;
+import teamdraco.wcfarmlife.registry.FLStructures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.nbt.CompoundNBT;
@@ -79,7 +80,7 @@ public class GreenhouseStructure extends Structure<NoFeatureConfig> {
         private Rotation rotation;
 
         public Piece(TemplateManager templateManagerIn, ResourceLocation resourceLocationIn, BlockPos pos, Rotation rotationIn) {
-            super(WCFarmLifeStructures.GREENHOUSE_PIECE, 0);
+            super(FLStructures.GREENHOUSE_PIECE, 0);
             this.resourceLocation = resourceLocationIn;
             this.templatePosition = pos;
             this.rotation = rotationIn;
@@ -87,7 +88,7 @@ public class GreenhouseStructure extends Structure<NoFeatureConfig> {
         }
 
         public Piece(TemplateManager templateManagerIn, CompoundNBT tagCompound) {
-            super(WCFarmLifeStructures.GREENHOUSE_PIECE, tagCompound);
+            super(FLStructures.GREENHOUSE_PIECE, tagCompound);
             this.resourceLocation = new ResourceLocation(tagCompound.getString("Template"));
             this.rotation = Rotation.valueOf(tagCompound.getString("Rot"));
             this.setupPiece(templateManagerIn);
@@ -98,7 +99,7 @@ public class GreenhouseStructure extends Structure<NoFeatureConfig> {
             int z = pos.getZ();
             BlockPos rotationOffSet = new BlockPos(0, 2, 0).rotate(rotation);
             BlockPos blockpos = rotationOffSet.offset(x, pos.getY(), z);
-            pieceList.add(new Piece(templateManager, new ResourceLocation(WCFarmLife.MOD_ID, "greenhouse"), blockpos, rotation));
+            pieceList.add(new Piece(templateManager, new ResourceLocation(FarmLife.MOD_ID, "greenhouse"), blockpos, rotation));
         }
 
         private void setupPiece(TemplateManager templateManager) {
@@ -126,7 +127,7 @@ public class GreenhouseStructure extends Structure<NoFeatureConfig> {
         protected void handleDataMarker(String function, BlockPos pos, IServerWorld worldIn, Random rand, MutableBoundingBox sbb) {
             if ("galliraptor".equals(function)) {
                 worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
-                GalliraptorEntity entity = WCFarmLifeEntities.GALLIRAPTOR.get().create(worldIn.getLevel());
+                GalliraptorEntity entity = FLEntities.GALLIRAPTOR.get().create(worldIn.getLevel());
                 if (entity != null) {
                     if (rand.nextInt(5) == 0) entity.setAge(-24000);
                     entity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
@@ -136,14 +137,14 @@ public class GreenhouseStructure extends Structure<NoFeatureConfig> {
                 }
             }
             if ("flower".equals(function)) {
-                if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, WCFarmLifeBlocks.PEACOCK_BURST_POPPY.get().defaultBlockState(), 2);
-                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, WCFarmLifeBlocks.ELECTRIC_BURST_POPPY.get().defaultBlockState(), 2);
-                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, WCFarmLifeBlocks.FANCY_BURST_POPPY.get().defaultBlockState(), 2);
-                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, WCFarmLifeBlocks.OLIVE_BURST_POPPY.get().defaultBlockState(), 2);
-                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, WCFarmLifeBlocks.RUSTY_BURST_POPPY.get().defaultBlockState(), 2);
-                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, WCFarmLifeBlocks.SUNSTREAK_BURST_POPPY.get().defaultBlockState(), 2);
+                if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, FLBlocks.PEACOCK_BURST_POPPY.get().defaultBlockState(), 2);
+                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, FLBlocks.ELECTRIC_BURST_POPPY.get().defaultBlockState(), 2);
+                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, FLBlocks.FANCY_BURST_POPPY.get().defaultBlockState(), 2);
+                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, FLBlocks.OLIVE_BURST_POPPY.get().defaultBlockState(), 2);
+                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, FLBlocks.RUSTY_BURST_POPPY.get().defaultBlockState(), 2);
+                else if (rand.nextFloat() < 0.2F) worldIn.setBlock(pos, FLBlocks.SUNSTREAK_BURST_POPPY.get().defaultBlockState(), 2);
                 else worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
             }
         }
     }
-}
+}*/

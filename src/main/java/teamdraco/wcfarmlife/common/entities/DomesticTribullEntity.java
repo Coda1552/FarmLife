@@ -17,13 +17,22 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.phys.HitResult;
-import teamdraco.wcfarmlife.registry.WCFarmLifeEntities;
-import teamdraco.wcfarmlife.registry.WCFarmLifeItems;
-import teamdraco.wcfarmlife.registry.WCFarmLifeSounds;
+import software.bernie.geckolib3.core.IAnimatable;
+import software.bernie.geckolib3.core.IAnimationTickable;
+import software.bernie.geckolib3.core.PlayState;
+import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.controller.AnimationController;
+import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
+import software.bernie.geckolib3.core.manager.AnimationData;
+import software.bernie.geckolib3.core.manager.AnimationFactory;
+import teamdraco.wcfarmlife.registry.FLEntities;
+import teamdraco.wcfarmlife.registry.FLItems;
+import teamdraco.wcfarmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
 
-public class DomesticTribullEntity extends Animal {
+public class DomesticTribullEntity extends Animal implements IAnimatable, IAnimationTickable {
+    private final AnimationFactory factory = new AnimationFactory(this);
 
     public DomesticTribullEntity(EntityType<? extends DomesticTribullEntity> type, Level worldIn) {
         super(type, worldIn);
@@ -51,15 +60,15 @@ public class DomesticTribullEntity extends Animal {
     }
 
     protected SoundEvent getAmbientSound() {
-        return WCFarmLifeSounds.DOMESTIC_TRIBULL_AMBIENT.get();
+        return FLSounds.DOMESTIC_TRIBULL_AMBIENT.get();
     }
 
     protected SoundEvent getHurtSound(DamageSource damageSourceIn) {
-        return WCFarmLifeSounds.DOMESTIC_TRIBULL_HURT.get();
+        return FLSounds.DOMESTIC_TRIBULL_HURT.get();
     }
 
     protected SoundEvent getDeathSound() {
-        return WCFarmLifeSounds.DOMESTIC_TRIBULL_DEATH.get();
+        return FLSounds.DOMESTIC_TRIBULL_DEATH.get();
     }
 
     protected void playStepSound(BlockPos pos, BlockState blockIn) {
@@ -73,15 +82,40 @@ public class DomesticTribullEntity extends Animal {
     @Nullable
     @Override
     public DomesticTribullEntity getBreedOffspring(ServerLevel world, AgeableMob ageable) {
-        return WCFarmLifeEntities.DOMESTIC_TRIBULL.get().create(this.level);
+        return FLEntities.DOMESTIC_TRIBULL.get().create(this.level);
     }
 
     @Override
     public ItemStack getPickedResult(HitResult target) {
-        return new ItemStack(WCFarmLifeItems.DOMESTIC_TRIBULL_SPAWN_EGG.get());
+        return new ItemStack(FLItems.DOMESTIC_TRIBULL_SPAWN_EGG.get());
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
         return this.isBaby() ? 0.5F : 1.0F;
+    }
+
+    @Override
+    public AnimationFactory getFactory() {
+        return this.factory;
+    }
+
+    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
+        if (event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.domestic_tribull.walk", true));
+            return PlayState.CONTINUE;
+        } else {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.domestic_tribull.idle", true));
+            return PlayState.CONTINUE;
+        }
+    }
+
+    @Override
+    public void registerControllers(AnimationData data) {
+        data.addAnimationController(new AnimationController<>(this, "controller", 10, this::predicate));
+    }
+
+    @Override
+    public int tickTimer() {
+        return tickCount;
     }
 }

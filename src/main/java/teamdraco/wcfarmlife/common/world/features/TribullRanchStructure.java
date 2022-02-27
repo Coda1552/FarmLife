@@ -1,10 +1,11 @@
+/*
 package teamdraco.wcfarmlife.common.world.features;
 
 import com.mojang.serialization.Codec;
-import teamdraco.wcfarmlife.WCFarmLife;
+import teamdraco.wcfarmlife.FarmLife;
 import teamdraco.wcfarmlife.common.entities.DomesticTribullEntity;
-import teamdraco.wcfarmlife.registry.WCFarmLifeEntities;
-import teamdraco.wcfarmlife.registry.WCFarmLifeStructures;
+import teamdraco.wcfarmlife.registry.FLEntities;
+import teamdraco.wcfarmlife.registry.FLStructures;
 import net.minecraft.block.Blocks;
 import net.minecraft.entity.SpawnReason;
 import net.minecraft.loot.LootTables;
@@ -35,7 +36,7 @@ import java.util.Random;
 import net.minecraft.world.gen.feature.structure.Structure.IStartFactory;
 
 public class TribullRanchStructure extends Structure<NoFeatureConfig> {
-    private static final ResourceLocation RANCH_LOOT = new ResourceLocation(WCFarmLife.MOD_ID, "gameplay/tribull_ranch_chest");
+    private static final ResourceLocation RANCH_LOOT = new ResourceLocation(FarmLife.MOD_ID, "gameplay/tribull_ranch_chest");
 
     public TribullRanchStructure(Codec<NoFeatureConfig> p_i231977_1_) {
         super(p_i231977_1_);
@@ -78,7 +79,7 @@ public class TribullRanchStructure extends Structure<NoFeatureConfig> {
         private Rotation rotation;
 
         public Piece(TemplateManager templateManagerIn, ResourceLocation resourceLocationIn, BlockPos pos, Rotation rotationIn) {
-            super(WCFarmLifeStructures.TRIBULL_RANCH_PIECE, 0);
+            super(FLStructures.TRIBULL_RANCH_PIECE, 0);
             this.resourceLocation = resourceLocationIn;
             this.templatePosition = pos;
             this.rotation = rotationIn;
@@ -86,7 +87,7 @@ public class TribullRanchStructure extends Structure<NoFeatureConfig> {
         }
 
         public Piece(TemplateManager templateManagerIn, CompoundNBT tagCompound) {
-            super(WCFarmLifeStructures.TRIBULL_RANCH_PIECE, tagCompound);
+            super(FLStructures.TRIBULL_RANCH_PIECE, tagCompound);
             this.resourceLocation = new ResourceLocation(tagCompound.getString("Template"));
             this.rotation = Rotation.valueOf(tagCompound.getString("Rot"));
             this.setupPiece(templateManagerIn);
@@ -97,7 +98,7 @@ public class TribullRanchStructure extends Structure<NoFeatureConfig> {
             int z = pos.getZ();
             BlockPos rotationOffSet = new BlockPos(0, 2, 0).rotate(rotation);
             BlockPos blockpos = rotationOffSet.offset(x, pos.getY(), z);
-            pieceList.add(new Piece(templateManager, new ResourceLocation(WCFarmLife.MOD_ID, "tribull_ranch"), blockpos, rotation));
+            pieceList.add(new Piece(templateManager, new ResourceLocation(FarmLife.MOD_ID, "tribull_ranch"), blockpos, rotation));
         }
 
         private void setupPiece(TemplateManager templateManager) {
@@ -132,7 +133,7 @@ public class TribullRanchStructure extends Structure<NoFeatureConfig> {
             }
             if ("adult".equals(function)) {
                 worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
-                DomesticTribullEntity entity = WCFarmLifeEntities.DOMESTIC_TRIBULL.get().create(worldIn.getLevel());
+                DomesticTribullEntity entity = FLEntities.DOMESTIC_TRIBULL.get().create(worldIn.getLevel());
                 if (entity != null) {
                     entity.setPos(pos.getX() + 0.5, pos.getY(), pos.getZ() + 0.5);
                     entity.finalizeSpawn(worldIn, worldIn.getCurrentDifficultyAt(pos), SpawnReason.STRUCTURE, null, null);
@@ -141,7 +142,7 @@ public class TribullRanchStructure extends Structure<NoFeatureConfig> {
             }
             if ("child".equals(function)) {
                 worldIn.setBlock(pos, Blocks.AIR.defaultBlockState(), 2);
-                DomesticTribullEntity entity = WCFarmLifeEntities.DOMESTIC_TRIBULL.get().create(worldIn.getLevel());
+                DomesticTribullEntity entity = FLEntities.DOMESTIC_TRIBULL.get().create(worldIn.getLevel());
                 if (entity != null) {
                     if (rand.nextInt(3) == 0) {
                         entity.setAge(-24000);
@@ -153,4 +154,4 @@ public class TribullRanchStructure extends Structure<NoFeatureConfig> {
             }
         }
     }
-}
+}*/
