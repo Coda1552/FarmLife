@@ -1,16 +1,16 @@
 {
   "structures": [
     {
-      "structure": "farmlife:tribull_ranch",
+      "structure": "farmlife:greenhouse",
       "weight": 1
     }
   ],
   "placement": {
     "salt": 5932485984,
 
-    "spacing": 24,
+    "spacing": 60,
 
-    "separation": 16,
+    "separation": 40,
 
     "type": "minecraft:random_spread"
   }

@@ -3,6 +3,8 @@ package teamdraco.farmlife.client;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
+import net.minecraft.client.renderer.entity.ThrownItemRenderer;
+import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
@@ -15,12 +17,13 @@ import teamdraco.farmlife.registry.FLBlocks;
 import teamdraco.farmlife.registry.FLEntities;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = FarmLife.MOD_ID)
-public class ClientEventHandler {
+public class ClientEvents {
 
     @SubscribeEvent
     public static void registerClient(FMLClientSetupEvent event) {
         EntityRenderers.register(FLEntities.DOMESTIC_TRIBULL.get(), DomesticTribullRenderer::new);
         EntityRenderers.register(FLEntities.GALLIRAPTOR.get(), GalliraptorRenderer::new);
+        EntityRenderers.register(FLEntities.GALLIRAPTOR_EGG.get(), ThrownItemRenderer::new);
 
         ItemBlockRenderTypes.setRenderLayer(FLBlocks.PEACOCK_BURST_POPPY.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(FLBlocks.ELECTRIC_BURST_POPPY.get(), RenderType.cutout());

@@ -36,7 +36,7 @@ public class GalliraptorModel extends AnimatedTickingGeoModel<GalliraptorEntity>
 
     @Override
     public ResourceLocation getAnimationFileLocation(GalliraptorEntity animatable) {
-        return/* new ResourceLocation(FarmLife.MOD_ID, "animations/entity/galliraptor.animation.json");*/ null;
+        return animatable.isBaby() ? new ResourceLocation(FarmLife.MOD_ID, "animations/entity/galliraptor_chick.animation.json") : new ResourceLocation(FarmLife.MOD_ID, "animations/entity/galliraptor.animation.json");
     }
 
     @Override

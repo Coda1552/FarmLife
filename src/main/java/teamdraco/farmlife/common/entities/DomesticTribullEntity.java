@@ -40,7 +40,7 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
 
     protected void registerGoals() {
         this.goalSelector.addGoal(0, new FloatGoal(this));
-        this.goalSelector.addGoal(1, new PanicGoal(this, 2.0D));
+        this.goalSelector.addGoal(1, new PanicGoal(this, 1.15D));
         this.goalSelector.addGoal(2, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(3, new TemptGoal(this, 1.25D, Ingredient.of(Items.WHEAT), false));
         this.goalSelector.addGoal(4, new FollowParentGoal(this, 1.25D));
@@ -50,9 +50,7 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 14.0D)
-                .add(Attributes.MOVEMENT_SPEED, 0.2D);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 14.0D).add(Attributes.MOVEMENT_SPEED, 0.2D);
     }
 
     public boolean isFood(ItemStack stack) {
@@ -101,10 +99,11 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.domestic_tribull.walk", true));
+            event.getController().setAnimationSpeed(1.5);
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.walk", true));
             return PlayState.CONTINUE;
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.domestic_tribull.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.idle", true));
             return PlayState.CONTINUE;
         }
     }

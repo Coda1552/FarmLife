@@ -35,7 +35,10 @@ import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import teamdraco.farmlife.common.entities.ai.AvoidPredatorGoal;
+import teamdraco.farmlife.common.entities.ai.GalliraptorTargetGoal;
 import teamdraco.farmlife.registry.FLEntities;
+import teamdraco.farmlife.registry.FLItems;
 import teamdraco.farmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
@@ -55,49 +58,24 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         this.goalSelector.addGoal(0, new FloatGoal(this));
         this.goalSelector.addGoal(1, new BreedGoal(this, 1.0D));
         this.goalSelector.addGoal(2, new TemptGoal(this, 1.0D, TEMPTATION_ITEMS, false));
+        this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Fox.class, 20.0F, 1.25D, 1.4D));
+        this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Ocelot.class, 20.0F, 1.25D, 1.4D));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
         this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, true));
         this.goalSelector.addGoal(4, new LeapAtTargetGoal(this, 0.4F));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
-        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Fox.class, false));
-        this.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>(this, Ocelot.class, false));
+        this.targetSelector.addGoal(0, new GalliraptorTargetGoal<>(this, Fox.class, false));
+        this.targetSelector.addGoal(0, new GalliraptorTargetGoal<>(this, Ocelot.class, false));
     }
-
-    public boolean hurt(DamageSource source, float amount) {
-        if (this.isInvulnerableTo(source)) {
-            return false;
-        } else {
-            Entity entity = source.getEntity();
-
-            if (entity != null && !(entity instanceof Player) && !(entity instanceof AbstractArrow)) {
-                amount = (amount + 1.0F) / 2.0F;
-            }
-
-            return super.hurt(source, amount);
-        }
-    }
-
-    public boolean doHurtTarget(Entity entityIn) {
-        boolean flag = entityIn.hurt(DamageSource.mobAttack(this), (float)((int)this.getAttributeValue(Attributes.ATTACK_DAMAGE)));
-            if (flag) {
-                this.doEnchantDamageEffects(this, entityIn);
-            }
-
-            return flag;
-    }
-
 
     protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
         return this.isBaby() ? sizeIn.height * 0.85F : 0.72F;
     }
 
     public static AttributeSupplier.Builder createAttributes() {
-        return Mob.createMobAttributes()
-                .add(Attributes.MAX_HEALTH, 12.0D)
-                .add(Attributes.MOVEMENT_SPEED, (double)0.3F)
-                .add(Attributes.ATTACK_DAMAGE, 1.5f);
+        return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 12.0D).add(Attributes.MOVEMENT_SPEED, 0.3D).add(Attributes.ATTACK_DAMAGE, 1.5D);
     }
 
     @Override
@@ -118,8 +96,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         super.aiStep();
         if (!this.level.isClientSide && this.isAlive() && !this.isBaby() && --this.timeUntilNextEgg <= 0) {
             this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-            this.spawnAtLocation(Items.EGG);
-            this.spawnAtLocation(Items.EGG);
+            this.spawnAtLocation(FLItems.GALLIRAPTOR_EGG.get());
             this.timeUntilNextEgg = this.random.nextInt(8000) + 8000;
         }
     }
@@ -190,19 +167,18 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
     }
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-/*        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.walk", true));
+        if (event.isMoving()) {
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor_chick.walk", true));
             return PlayState.CONTINUE;
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.idle", true));
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor_chick.idle", true));
             return PlayState.CONTINUE;
-        }*/
-        return PlayState.CONTINUE;
+        }
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 10, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "controller", 20, this::predicate));
     }
 
     @Override
