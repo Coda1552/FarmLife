@@ -1,0 +1,17 @@
+{
+  "structures": [
+    {
+      "structure": "farmlife:greenhouse",
+      "weight": 1
+    }
+  ],
+  "placement": {
+    "salt": 5932485985,
+
+    "spacing": 12,
+
+    "separation": 4,
+
+    "type": "minecraft:random_spread"
+  }
+}

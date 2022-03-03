@@ -1,0 +1,75 @@
+{
+  "processors": [
+    {
+      "processor_type": "minecraft:rule",
+
+      "rules": [
+        {
+          "input_predicate": {
+            "block": "farmlife:peacock_burst_poppy",
+            "probability": 0.2,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "farmlife:electric_burst_poppy"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "farmlife:peacock_burst_poppy",
+            "probability": 0.2,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "farmlife:fancy_burst_poppy"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "farmlife:peacock_burst_poppy",
+            "probability": 0.2,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "farmlife:olive_burst_poppy"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "farmlife:peacock_burst_poppy",
+            "probability": 0.2,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "farmlife:rusty_burst_poppy"
+          }
+        },
+        {
+          "input_predicate": {
+            "block": "farmlife:peacock_burst_poppy",
+            "probability": 0.2,
+            "predicate_type": "minecraft:random_block_match"
+          },
+          "location_predicate": {
+            "predicate_type": "minecraft:always_true"
+          },
+          "output_state": {
+            "Name": "farmlife:sunstreak_burst_poppy"
+          }
+        }
+      ]
+    }
+  ]
+}

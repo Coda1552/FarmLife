@@ -1,6 +1,0 @@
-{
-  "parent": "block/flower_pot_cross",
-  "textures": {
-    "plant": "wcfarmlife:block/fancy_burst_poppy"
-  }
-}

@@ -1,6 +1,0 @@
-{
-  "parent": "minecraft:block/cross",
-  "textures": {
-    "cross": "wcfarmlife:block/fancy_burst_poppy"
-  }
-}

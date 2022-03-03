@@ -1,0 +1,6 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "farmlife:block/electric_burst_poppy"
+  }
+}

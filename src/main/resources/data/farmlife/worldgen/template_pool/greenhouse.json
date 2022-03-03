@@ -1,0 +1,22 @@
+{
+  "name": "farmlife:greenhouse",
+
+  "fallback": "minecraft:empty",
+
+  "elements": [
+    {
+
+      "weight": 1,
+      "element": {
+
+        "location": "farmlife:greenhouse",
+
+        "processors": "farmlife:randomize_flowers",
+
+        "projection": "rigid",
+
+        "element_type": "minecraft:single_pool_element"
+      }
+    }
+  ]
+}

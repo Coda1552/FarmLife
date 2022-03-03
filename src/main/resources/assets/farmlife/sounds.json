@@ -1,0 +1,64 @@
+{
+  "domestic_tribull.ambient": {
+    "subtitle": "farmlife.domestic_tribull.ambient",
+    "sounds": [
+      {
+        "name": "farmlife:domestic_tribull/ambient",
+        "streaming": true
+      }
+    ]
+  },
+  "domestic_tribull.hurt": {
+    "subtitle": "farmlife.domestic_tribull.hurt",
+    "sounds": [
+      {
+        "name": "farmlife:domestic_tribull/hurt",
+        "streaming": true
+      }
+    ]
+  },
+  "domestic_tribull.death": {
+    "subtitle": "farmlife.domestic_tribull.death",
+    "sounds": [
+      {
+        "name": "farmlife:domestic_tribull/death",
+        "streaming": true
+      }
+    ]
+  },
+  "galliraptor.ambient": {
+    "subtitle": "farmlife.galliraptor.ambient",
+    "sounds": [
+      {
+        "name": "farmlife:galliraptor/ambient",
+        "streaming": true
+      }
+    ]
+  },
+  "galliraptor.hurt": {
+    "subtitle": "farmlife.galliraptor.hurt",
+    "sounds": [
+      {
+        "name": "farmlife:galliraptor/hurt",
+        "streaming": true
+      }
+    ]
+  },
+  "galliraptor.death": {
+    "subtitle": "farmlife.galliraptor.death",
+    "sounds": [
+      {
+        "name": "farmlife:galliraptor/death",
+        "streaming": true
+      }
+    ]
+  },
+  "music_disc.life_on_the_farm": {
+    "sounds": [
+      {
+        "name": "farmlife:music_disc/life_on_the_farm",
+        "streaming": true
+      }
+    ]
+  }
+}

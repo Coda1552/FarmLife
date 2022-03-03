@@ -1,9 +1,0 @@
-{
-  "type": "minecraft:smoking",
-  "ingredient": {
-    "item": "wcfarmlife:tribull_shank"
-  },
-  "result": "wcfarmlife:cooked_tribull_shank",
-  "experience": 0.35,
-  "cookingtime": 100
-}
