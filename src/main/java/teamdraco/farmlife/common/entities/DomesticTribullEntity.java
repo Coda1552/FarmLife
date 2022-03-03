@@ -99,7 +99,7 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimationSpeed(1.5);
+            event.getController().setAnimationSpeed(1.75);
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.walk", true));
             return PlayState.CONTINUE;
         } else {
