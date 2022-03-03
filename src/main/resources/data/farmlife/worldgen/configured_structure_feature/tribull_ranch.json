@@ -2,12 +2,12 @@
   "type": "minecraft:village",
 
   "config": {
-    "start_pool": "farmlife:greenhouse",
+    "start_pool": "farmlife:tribull_ranch",
 
     "size": 1
   },
 
-  "biomes": "#farmlife:has_structure/greenhouse",
+  "biomes": "#farmlife:has_structure/tribull_ranch",
 
   "adapt_noise": true,
 

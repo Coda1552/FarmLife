@@ -29,9 +29,19 @@ public class DomesticTribullModel extends AnimatedTickingGeoModel<DomesticTribul
     public void setLivingAnimations(DomesticTribullEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
         super.setLivingAnimations(entity, uniqueID, customPredicate);
         IBone head = this.getAnimationProcessor().getBone("head");
+        IBone body = this.getAnimationProcessor().getBone("body");
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
 
         head.setRotationX(extraData.headPitch * ((float) Math.PI / 180F));
         head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
+
+        if (entity.isBaby()) {
+            body.setScaleX(0.5F);
+            body.setScaleY(0.5F);
+            body.setScaleZ(0.5F);
+            body.setPositionY(-8.25F);
+            body.setPositionZ(3.5F);
+        }
+
     }
 }
