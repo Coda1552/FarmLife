@@ -1,8 +1,16 @@
 package teamdraco.farmlife;
 
+import net.minecraft.Util;
+import net.minecraft.core.Position;
+import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
+import net.minecraft.world.entity.projectile.Projectile;
+import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.Items;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
+import net.minecraft.world.level.block.DispenserBlock;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
@@ -14,6 +22,7 @@ import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
 import teamdraco.farmlife.common.entities.DomesticTribullEntity;
 import teamdraco.farmlife.common.entities.GalliraptorEntity;
+import teamdraco.farmlife.common.entities.item.GalliraptorEggEntity;
 import teamdraco.farmlife.registry.*;
 
 @Mod.EventBusSubscriber
@@ -44,6 +53,14 @@ public class FarmLife {
         ComposterBlock.COMPOSTABLES.put(FLBlocks.OLIVE_BURST_POPPY.get(), 0.3F);
         ComposterBlock.COMPOSTABLES.put(FLBlocks.RUSTY_BURST_POPPY.get(), 0.3F);
         ComposterBlock.COMPOSTABLES.put(FLBlocks.SUNSTREAK_BURST_POPPY.get(), 0.3F);
+
+        DispenserBlock.registerBehavior(Items.EGG, new AbstractProjectileDispenseBehavior() {
+            protected Projectile getProjectile(Level p_123468_, Position p_123469_, ItemStack p_123470_) {
+                return Util.make(new GalliraptorEggEntity(p_123468_, p_123469_.x(), p_123469_.y(), p_123469_.z()), (p_123466_) -> {
+                    p_123466_.setItem(p_123470_);
+                });
+            }
+        });
     }
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
