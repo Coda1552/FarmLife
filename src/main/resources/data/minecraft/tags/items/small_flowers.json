@@ -1,0 +1,11 @@
+{
+  "replace": false,
+  "values": [
+    "farmlife:peacock_burst_poppy",
+    "farmlife:electric_burst_poppy",
+    "farmlife:fancy_burst_poppy",
+    "farmlife:olive_burst_poppy",
+    "farmlife:rusty_burst_poppy",
+    "farmlife:sunstreak_burst_poppy"
+  ]
+}
