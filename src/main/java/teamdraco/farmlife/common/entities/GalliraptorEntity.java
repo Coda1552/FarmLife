@@ -61,7 +61,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Fox.class, 20.0F, 1.25D, 1.4D));
         this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Ocelot.class, 20.0F, 1.25D, 1.4D));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.0D, true));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 2.5D, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -175,37 +175,38 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor_chick.idle", true));
             return PlayState.CONTINUE;
         }
-        else if (event.isMoving() && !isBaby()) {
+        else if (event.isMoving() && !isBaby() && !isAggressive()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.walk", true));
             event.getController().setAnimationSpeed(1.5);
             return PlayState.CONTINUE;
+        }
+        else if (isAggressive() && !isBaby()) {
+            if (event.isMoving())
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.aggro_walk", true));
+            else if (!event.isMoving()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.aggro_idle", true));
+                return PlayState.CONTINUE;
+            }
+        }
+        else if (!isBaby() && random.nextInt(20) == 0 && !isAggressive()) {
+            if (event.isMoving())
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.pecking_walk", false));
+            else if (!event.isMoving()) {
+                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.pecking_idle", false));
+                return PlayState.CONTINUE;
+            }
         }
         else {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.idle", true));
             return PlayState.CONTINUE;
         }
 
-    }
-
-    private <E extends IAnimatable> PlayState miscPredicate(AnimationEvent<E> event) {
-        if (isAggressive() && !isBaby()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.aggro", true));
-            return PlayState.CONTINUE;
-        }
-        if (!event.isMoving() && !isBaby() && random.nextInt(250) == 0) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.pecking", false));
-            return PlayState.CONTINUE;
-        }
-
         return PlayState.CONTINUE;
     }
 
-
-
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "miscController", 10, this::miscPredicate));
-        data.addAnimationController(new AnimationController<>(this, "controller", 20, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "controller", 10, this::predicate));
     }
 
     @Override
