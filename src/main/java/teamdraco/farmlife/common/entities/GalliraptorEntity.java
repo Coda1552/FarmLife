@@ -137,10 +137,6 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         return TEMPTATION_ITEMS.test(stack);
     }
 
-    protected int getExperienceReward(Player player) {
-        return super.getExperienceReward(player);
-    }
-
     public void readAdditionalSaveData(CompoundTag compound) {
         super.readAdditionalSaveData(compound);
         if (compound.contains("EggLayTime")) {
