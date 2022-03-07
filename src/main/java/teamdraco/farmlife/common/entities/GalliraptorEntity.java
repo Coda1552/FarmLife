@@ -134,7 +134,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
     }
 
     public boolean isFood(ItemStack stack) {
-        return stack.getItem() == Items.MELON_SLICE || stack.getItem() == Items.MELON_SEEDS;
+        return TEMPTATION_ITEMS.test(stack);
     }
 
     protected int getExperienceReward(Player player) {
