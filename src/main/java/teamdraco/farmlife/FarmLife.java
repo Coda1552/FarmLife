@@ -23,6 +23,7 @@ import software.bernie.geckolib3.GeckoLib;
 import teamdraco.farmlife.common.entities.DomesticTribullEntity;
 import teamdraco.farmlife.common.entities.GalliraptorEntity;
 import teamdraco.farmlife.common.entities.item.GalliraptorEggEntity;
+import teamdraco.farmlife.common.items.GalliraptorEggItem;
 import teamdraco.farmlife.registry.*;
 
 @Mod.EventBusSubscriber
@@ -54,7 +55,7 @@ public class FarmLife {
         ComposterBlock.COMPOSTABLES.put(FLBlocks.RUSTY_BURST_POPPY.get(), 0.3F);
         ComposterBlock.COMPOSTABLES.put(FLBlocks.SUNSTREAK_BURST_POPPY.get(), 0.3F);
 
-        DispenserBlock.registerBehavior(Items.EGG, new AbstractProjectileDispenseBehavior() {
+        DispenserBlock.registerBehavior(FLItems.GALLIRAPTOR_EGG.get(), new AbstractProjectileDispenseBehavior() {
             protected Projectile getProjectile(Level p_123468_, Position p_123469_, ItemStack p_123470_) {
                 return Util.make(new GalliraptorEggEntity(p_123468_, p_123469_.x(), p_123469_.y(), p_123469_.z()), (p_123466_) -> {
                     p_123466_.setItem(p_123470_);

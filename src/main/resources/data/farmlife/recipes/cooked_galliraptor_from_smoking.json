@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "farmlife:galliraptor"
+  },
+  "result": "farmlife:cooked_galliraptor",
+  "experience": 0.35,
+  "cookingtime": 100
+}
