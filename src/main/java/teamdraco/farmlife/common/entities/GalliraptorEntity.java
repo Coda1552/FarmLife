@@ -61,7 +61,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Fox.class, 20.0F, 1.25D, 1.4D));
         this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Ocelot.class, 20.0F, 1.25D, 1.4D));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 2.5D, true));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.75D, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -169,6 +169,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving() && isBaby()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor_chick.walk", true));
+            event.getController().setAnimationSpeed(2.5);
             return PlayState.CONTINUE;
         }
         else if (!event.isMoving() && isBaby()) {
@@ -177,7 +178,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         }
         else if (event.isMoving() && !isBaby() && !isAggressive()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.walk", true));
-            event.getController().setAnimationSpeed(1.5);
+            event.getController().setAnimationSpeed(2.5);
             return PlayState.CONTINUE;
         }
         else if (isAggressive() && !isBaby()) {
