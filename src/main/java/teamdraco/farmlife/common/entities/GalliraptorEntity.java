@@ -153,7 +153,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-        setVariant(random.nextInt(8));
+        setVariant(random.nextInt(5));
         return spawnDataIn;
     }
 
