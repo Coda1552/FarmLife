@@ -74,7 +74,7 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
     }
 
     protected float getSoundVolume() {
-        return 0.4F;
+        return 0.8F;
     }
 
     @Nullable
