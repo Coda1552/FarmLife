@@ -53,35 +53,35 @@
 				{
 					"name": "hornLeft",
 					"parent": "head",
-					"pivot": [2.5, 18, -17.5],
-					"rotation": [15, 0, 20],
+					"pivot": [1.5, 18, -14.5],
+					"rotation": [15, 0, 60],
 					"cubes": [
-						{"origin": [2, 17, -18.5], "size": [2, 8, 2], "uv": [0, 26]}
+						{"origin": [1, 17, -15.5], "size": [2, 8, 2], "uv": [0, 26]}
 					]
 				},
 				{
 					"name": "hornLeft2",
 					"parent": "hornLeft",
-					"pivot": [2.5, 25, -18.5],
+					"pivot": [1.5, 25, -15.5],
 					"cubes": [
-						{"origin": [2, 23, -23.5], "size": [2, 2, 5], "uv": [30, 26]}
+						{"origin": [1, 23, -20.5], "size": [2, 2, 5], "uv": [30, 26]}
 					]
 				},
 				{
 					"name": "hornRight",
 					"parent": "head",
-					"pivot": [-2.5, 18, -17.5],
-					"rotation": [15, 0, -20],
+					"pivot": [-1.5, 18, -14.5],
+					"rotation": [15, 0, -60],
 					"cubes": [
-						{"origin": [-4, 17, -18.5], "size": [2, 8, 2], "uv": [0, 26]}
+						{"origin": [-3, 17, -15.5], "size": [2, 8, 2], "uv": [0, 26]}
 					]
 				},
 				{
 					"name": "hornRight2",
 					"parent": "hornRight",
-					"pivot": [-2.5, 25, -18.5],
+					"pivot": [-1.5, 25, -15.5],
 					"cubes": [
-						{"origin": [-4, 23, -23.5], "size": [2, 2, 5], "uv": [30, 26]}
+						{"origin": [-3, 23, -20.5], "size": [2, 2, 5], "uv": [30, 26]}
 					]
 				},
 				{

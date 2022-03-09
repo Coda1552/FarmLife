@@ -17,7 +17,7 @@ public class DomesticTribullModel extends AnimatedTickingGeoModel<DomesticTribul
 
     @Override
     public ResourceLocation getTextureLocation(DomesticTribullEntity object) {
-        return new ResourceLocation(FarmLife.MOD_ID, "textures/entity/domestic_tribull.png");
+        return object.isBaby() ? new ResourceLocation(FarmLife.MOD_ID, "textures/entity/domestic_tribull/baby.png") : new ResourceLocation(FarmLife.MOD_ID, "textures/entity/domestic_tribull/adult.png");
     }
 
     @Override

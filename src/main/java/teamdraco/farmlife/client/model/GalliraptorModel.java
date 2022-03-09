@@ -21,7 +21,7 @@ public class GalliraptorModel extends AnimatedTickingGeoModel<GalliraptorEntity>
         hashMap.put(3, new ResourceLocation(FarmLife.MOD_ID, "textures/entity/galliraptor/galliraptor_4.png"));
         hashMap.put(4, new ResourceLocation(FarmLife.MOD_ID, "textures/entity/galliraptor/galliraptor_5.png"));
     });
-    private static final ResourceLocation CHILD_TEXTURE = new ResourceLocation(FarmLife.MOD_ID, "textures/entity/galliraptor/galliraptor_chick.png");
+    private static final ResourceLocation CHILD_TEXTURE = new ResourceLocation(FarmLife.MOD_ID, "textures/entity/galliraptor/chick.png");
 
     @Override
     public ResourceLocation getModelLocation(GalliraptorEntity object) {
@@ -42,10 +42,13 @@ public class GalliraptorModel extends AnimatedTickingGeoModel<GalliraptorEntity>
     @Override
     public void setLivingAnimations(GalliraptorEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
         super.setLivingAnimations(entity, uniqueID, customPredicate);
-        IBone head = this.getAnimationProcessor().getBone("head");
-        EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
 
-        head.setRotationX(extraData.headPitch * ((float) Math.PI / 180F));
-        head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
+        if (!entity.isBaby()) {
+            IBone head = this.getAnimationProcessor().getBone("head");
+            EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
+
+            head.setRotationX(extraData.headPitch * ((float) Math.PI / 180F));
+            head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
+        }
     }
 }

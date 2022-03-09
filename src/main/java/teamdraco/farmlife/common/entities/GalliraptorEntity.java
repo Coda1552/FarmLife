@@ -45,6 +45,7 @@ import javax.annotation.Nullable;
 
 public class GalliraptorEntity extends Animal implements IAnimatable, IAnimationTickable {
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(GalliraptorEntity.class, EntityDataSerializers.INT);
+    private static final EntityDataAccessor<Boolean> PECKING = SynchedEntityData.defineId(GalliraptorEntity.class, EntityDataSerializers.BOOLEAN);
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.MELON, Items.MELON_SEEDS);
     private final AnimationFactory factory = new AnimationFactory(this);
     public int timeUntilNextEgg = this.random.nextInt(8000) + 8000;
@@ -61,7 +62,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Fox.class, 20.0F, 1.25D, 1.4D));
         this.goalSelector.addGoal(2, new AvoidPredatorGoal<>(this, Ocelot.class, 20.0F, 1.25D, 1.4D));
         this.goalSelector.addGoal(3, new FollowParentGoal(this, 1.1D));
-        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.75D, true));
+        this.goalSelector.addGoal(4, new MeleeAttackGoal(this, 1.5D, true));
         this.goalSelector.addGoal(5, new WaterAvoidingRandomStrollGoal(this, 1.0D));
         this.goalSelector.addGoal(6, new LookAtPlayerGoal(this, Player.class, 6.0F));
         this.goalSelector.addGoal(7, new RandomLookAroundGoal(this));
@@ -123,13 +124,15 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
 
     public GalliraptorEntity getBreedOffspring(ServerLevel world, AgeableMob ageable) {
         GalliraptorEntity entity = FLEntities.GALLIRAPTOR.get().create(this.level);
-        int i = this.getVariant();
-        if (this.random.nextInt(5) != 0) {
-            if (ageable instanceof GalliraptorEntity && this.random.nextBoolean()) {
-                i = ((GalliraptorEntity)ageable).getVariant();
+        if (entity != null) {
+            int i = this.getVariant();
+            if (this.random.nextInt(5) != 0) {
+                if (ageable instanceof GalliraptorEntity && this.random.nextBoolean()) {
+                    i = ((GalliraptorEntity) ageable).getVariant();
+                }
             }
+            entity.setVariant(i);
         }
-        entity.setVariant(i);
         return entity;
     }
 
@@ -174,10 +177,11 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
         }
         else if (event.isMoving() && !isBaby() && !isAggressive()) {
             event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.walk", true));
-            event.getController().setAnimationSpeed(2.5);
+            event.getController().setAnimationSpeed(2.85);
             return PlayState.CONTINUE;
         }
         else if (isAggressive() && !isBaby()) {
+            event.getController().setAnimationSpeed(1.0);
             if (event.isMoving())
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.aggro_walk", true));
             else if (!event.isMoving()) {
@@ -185,7 +189,7 @@ public class GalliraptorEntity extends Animal implements IAnimatable, IAnimation
                 return PlayState.CONTINUE;
             }
         }
-        else if (!isBaby() && random.nextInt(20) == 0 && !isAggressive()) {
+        else if (!isBaby() && random.nextInt(250) == 0 && !isAggressive()) {
             if (event.isMoving())
                 event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.pecking_walk", false));
             else if (!event.isMoving()) {
