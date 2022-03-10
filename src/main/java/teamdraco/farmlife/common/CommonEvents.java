@@ -41,6 +41,7 @@ public class CommonEvents {
         }
         if (player.getItemInHand(hand).isEmpty() && level.getBlockState(pos).is(FLBlocks.TRIBULL_MILK_CAULDRON.get())) {
             level.setBlock(pos, Blocks.CAULDRON.defaultBlockState(), 2);
+            // todo - change the output item to cheese
             if (!player.getInventory().add(new ItemStack(FLItems.TRIBULL_SHANK.get()))) {
                 player.drop(new ItemStack(FLItems.TRIBULL_SHANK.get()), false);
             }
