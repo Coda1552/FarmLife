@@ -39,6 +39,13 @@ public class CommonEvents {
                 player.setItemInHand(hand, new ItemStack(Items.BUCKET));
             }
         }
+        if (player.getItemInHand(hand).isEmpty() && level.getBlockState(pos).is(FLBlocks.TRIBULL_MILK_CAULDRON.get())) {
+            level.setBlock(pos, Blocks.CAULDRON.defaultBlockState(), 2);
+            if (!player.getInventory().add(new ItemStack(FLItems.TRIBULL_SHANK.get()))) {
+                player.drop(new ItemStack(FLItems.TRIBULL_SHANK.get()), false);
+            }
+            player.swing(hand);
+        }
     }
 
     @SubscribeEvent

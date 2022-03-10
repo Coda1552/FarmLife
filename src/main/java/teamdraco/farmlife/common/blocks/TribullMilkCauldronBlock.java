@@ -44,13 +44,11 @@ public class TribullMilkCauldronBlock extends AbstractCauldronBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
-
-        if (state.getValue(STAGE) == 1) {
-            state.setValue(STAGE, state.getValue(STAGE) + 1);
-             System.out.println(state.getValue(STAGE));
+        if (state.getValue(STAGE) == 1 && rand.nextFloat() > 0.65F) {
+            level.setBlock(pos, state.setValue(STAGE, state.getValue(STAGE) + 1), 2);
         }
-        if (state.getValue(STAGE).equals(2) && rand.nextFloat() > 0.95F) {
-            state.setValue(STAGE, 3);
+        if (state.getValue(STAGE) == 2 && rand.nextFloat() > 0.65F) {
+            level.setBlock(pos, state.setValue(STAGE, state.getValue(STAGE) + 1), 2);
         }
     }
 
