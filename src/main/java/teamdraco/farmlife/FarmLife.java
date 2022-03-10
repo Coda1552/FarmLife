@@ -2,6 +2,7 @@ package teamdraco.farmlife;
 
 import net.minecraft.Util;
 import net.minecraft.core.Position;
+import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.entity.projectile.ThrownEgg;
@@ -34,7 +35,6 @@ public class FarmLife {
 
     public FarmLife() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
-        IEventBus forgeBus = MinecraftForge.EVENT_BUS;
 
         bus.addListener(this::registerCommon);
         bus.addListener(this::registerEntityAttributes);

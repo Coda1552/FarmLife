@@ -1,0 +1,13 @@
+{
+  "variants": {
+    "stage=1": {
+      "model": "farmlife:block/tribull_milk_cauldron_1"
+    },
+    "stage=2": {
+      "model": "farmlife:block/tribull_milk_cauldron_2"
+    },
+    "stage=3": {
+      "model": "farmlife:block/tribull_milk_cauldron_3"
+    }
+  }
+}

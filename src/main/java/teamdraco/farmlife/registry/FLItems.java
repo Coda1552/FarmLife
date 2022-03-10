@@ -3,9 +3,7 @@ package teamdraco.farmlife.registry;
 import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.food.FoodProperties;
-import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Rarity;
-import net.minecraft.world.item.RecordItem;
+import net.minecraft.world.item.*;
 import net.minecraftforge.common.ForgeSpawnEggItem;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
@@ -21,6 +19,7 @@ public class FLItems {
     public static final RegistryObject<Item> COOKED_TRIBULL_SHANK = REGISTRY.register("cooked_tribull_shank", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().nutrition(10).saturationMod(0.75f).effect(() -> new MobEffectInstance(MobEffects.MOVEMENT_SLOWDOWN, 100, 0), 0.10f).meat().build())));
     public static final RegistryObject<Item> GALLIRAPTOR = REGISTRY.register("galliraptor", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new  FoodProperties.Builder().nutrition(2).saturationMod(0.2f).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().build())));
     public static final RegistryObject<Item> COOKED_GALLIRAPTOR = REGISTRY.register("cooked_galliraptor", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().nutrition(6).saturationMod(0.5f).meat().build())));
+    public static final RegistryObject<Item> TRIBULL_MILK = REGISTRY.register("tribull_milk", () -> new MilkBucketItem(new Item.Properties().tab(FarmLife.GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
 
     // Misc.
     public static final RegistryObject<Item> GALLIRAPTOR_EGG = REGISTRY.register("galliraptor_egg", () -> new GalliraptorEggItem(new Item.Properties().tab(FarmLife.GROUP).stacksTo(16)));

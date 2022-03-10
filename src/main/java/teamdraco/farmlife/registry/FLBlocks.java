@@ -4,16 +4,15 @@ import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.level.block.Block;
-import net.minecraft.world.level.block.FlowerBlock;
-import net.minecraft.world.level.block.FlowerPotBlock;
-import net.minecraft.world.level.block.SoundType;
+import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.material.Material;
+import net.minecraft.world.level.material.MaterialColor;
 import net.minecraftforge.registries.RegistryObject;
 import teamdraco.farmlife.FarmLife;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import teamdraco.farmlife.common.blocks.TribullMilkCauldronBlock;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
@@ -34,6 +33,8 @@ public class FLBlocks {
     public static final RegistryObject<Block> POTTED_OLIVE_BURST_POPPY = REGISTRY.register("potted_olive_burst_poppy", () -> new FlowerPotBlock(OLIVE_BURST_POPPY.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_RUSTY_BURST_POPPY = REGISTRY.register("potted_rusty_burst_poppy", () -> new FlowerPotBlock(RUSTY_BURST_POPPY.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_SUNSTREAK_BURST_POPPY = REGISTRY.register("potted_sunstreak_burst_poppy", () -> new FlowerPotBlock(SUNSTREAK_BURST_POPPY.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
+
+    public static final RegistryObject<Block> TRIBULL_MILK_CAULDRON = REGISTRY.register("tribull_milk_cauldron", () -> new TribullMilkCauldronBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.STONE).requiresCorrectToolForDrops().strength(2.0F).noOcclusion().randomTicks()));
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
         return register(name, block, new Item.Properties().tab(FarmLife.GROUP));
