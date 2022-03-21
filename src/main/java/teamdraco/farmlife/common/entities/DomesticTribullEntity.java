@@ -4,6 +4,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.world.InteractionHand;
+import net.minecraft.world.InteractionResult;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
 import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
@@ -12,6 +14,7 @@ import net.minecraft.world.entity.ai.goal.*;
 import net.minecraft.world.entity.animal.Animal;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
+import net.minecraft.world.item.ItemUtils;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
@@ -51,6 +54,18 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
 
     public static AttributeSupplier.Builder createAttributes() {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 14.0D).add(Attributes.MOVEMENT_SPEED, 0.2D);
+    }
+
+    public InteractionResult mobInteract(Player p_28298_, InteractionHand p_28299_) {
+        ItemStack itemstack = p_28298_.getItemInHand(p_28299_);
+        if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
+            p_28298_.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+            ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_28298_, FLItems.TRIBULL_MILK.get().getDefaultInstance());
+            p_28298_.setItemInHand(p_28299_, itemstack1);
+            return InteractionResult.sidedSuccess(this.level.isClientSide);
+        } else {
+            return super.mobInteract(p_28298_, p_28299_);
+        }
     }
 
     public boolean isFood(ItemStack stack) {

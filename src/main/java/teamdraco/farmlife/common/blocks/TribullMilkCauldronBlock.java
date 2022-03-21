@@ -18,7 +18,7 @@ import net.minecraft.world.phys.HitResult;
 import java.util.Random;
 
 public class TribullMilkCauldronBlock extends AbstractCauldronBlock {
-    private static final IntegerProperty STAGE = IntegerProperty.create("stage", 1, 3);
+    public static final IntegerProperty STAGE = IntegerProperty.create("stage", 1, 3);
 
     public TribullMilkCauldronBlock(BlockBehaviour.Properties p_153498_) {
         super(p_153498_, CauldronInteraction.EMPTY);

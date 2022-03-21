@@ -1,0 +1,12 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "ingredients": [
+    {
+      "item": "farmlife:tribull_cheese_wheel"
+    }
+  ],
+  "result": {
+    "item": "farmlife:tribull_cheese_wedge",
+    "count": 4
+  }
+}

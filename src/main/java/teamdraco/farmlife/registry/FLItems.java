@@ -20,7 +20,7 @@ public class FLItems {
     public static final RegistryObject<Item> GALLIRAPTOR = REGISTRY.register("galliraptor", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new  FoodProperties.Builder().nutrition(2).saturationMod(0.2f).effect(new MobEffectInstance(MobEffects.HUNGER, 600, 0), 0.3F).meat().build())));
     public static final RegistryObject<Item> COOKED_GALLIRAPTOR = REGISTRY.register("cooked_galliraptor", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().nutrition(6).saturationMod(0.5f).meat().build())));
     public static final RegistryObject<Item> TRIBULL_MILK = REGISTRY.register("tribull_milk", () -> new MilkBucketItem(new Item.Properties().tab(FarmLife.GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
-    public static final RegistryObject<Item> TRIBULL_CHEESE = REGISTRY.register("tribull_cheese", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).stacksTo(16)));
+    public static final RegistryObject<Item> TRIBULL_CHEESE_WEDGE = REGISTRY.register("tribull_cheese_wedge", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().saturationMod(0.25F).nutrition(3).build())));
 
     // Misc.
     public static final RegistryObject<Item> GALLIRAPTOR_EGG = REGISTRY.register("galliraptor_egg", () -> new GalliraptorEggItem(new Item.Properties().tab(FarmLife.GROUP).stacksTo(16)));

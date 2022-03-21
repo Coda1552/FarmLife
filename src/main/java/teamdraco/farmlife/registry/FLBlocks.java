@@ -12,6 +12,7 @@ import net.minecraftforge.registries.RegistryObject;
 import teamdraco.farmlife.FarmLife;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
+import teamdraco.farmlife.common.blocks.TribullCheeseWheelBlock;
 import teamdraco.farmlife.common.blocks.TribullMilkCauldronBlock;
 
 import java.util.function.BiFunction;
@@ -35,6 +36,7 @@ public class FLBlocks {
     public static final RegistryObject<Block> POTTED_SUNSTREAK_BURST_POPPY = REGISTRY.register("potted_sunstreak_burst_poppy", () -> new FlowerPotBlock(SUNSTREAK_BURST_POPPY.get(), BlockBehaviour.Properties.of(Material.DECORATION).instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> TRIBULL_MILK_CAULDRON = REGISTRY.register("tribull_milk_cauldron", () -> new TribullMilkCauldronBlock(BlockBehaviour.Properties.of(Material.METAL, MaterialColor.STONE).requiresCorrectToolForDrops().strength(2.0F).noOcclusion().randomTicks()));
+    public static final RegistryObject<Block> TRIBULL_CHEESE_WHEEL = register("tribull_cheese_wheel", () -> new TribullCheeseWheelBlock(BlockBehaviour.Properties.of(Material.CAKE, MaterialColor.COLOR_LIGHT_BLUE).strength(0.5F).sound(SoundType.WOOD)), new Item.Properties().tab(FarmLife.GROUP).stacksTo(16));
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
         return register(name, block, new Item.Properties().tab(FarmLife.GROUP));

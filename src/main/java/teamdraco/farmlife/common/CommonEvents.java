@@ -19,6 +19,7 @@ import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamdraco.farmlife.FarmLife;
+import teamdraco.farmlife.common.blocks.TribullMilkCauldronBlock;
 import teamdraco.farmlife.common.entities.GalliraptorEntity;
 import teamdraco.farmlife.registry.FLBlocks;
 import teamdraco.farmlife.registry.FLItems;
@@ -39,11 +40,11 @@ public class CommonEvents {
                 player.setItemInHand(hand, new ItemStack(Items.BUCKET));
             }
         }
-        if (player.getItemInHand(hand).isEmpty() && level.getBlockState(pos).is(FLBlocks.TRIBULL_MILK_CAULDRON.get())) {
+        if (player.getItemInHand(hand).isEmpty() && level.getBlockState(pos).is(FLBlocks.TRIBULL_MILK_CAULDRON.get()) && level.getBlockState(pos).getValue(TribullMilkCauldronBlock.STAGE) == 3) {
             level.setBlock(pos, Blocks.CAULDRON.defaultBlockState(), 2);
-            // todo - change the output item to cheese
-            if (!player.getInventory().add(new ItemStack(FLItems.TRIBULL_SHANK.get()))) {
-                player.drop(new ItemStack(FLItems.TRIBULL_SHANK.get()), false);
+
+            if (!player.getInventory().add(new ItemStack(FLBlocks.TRIBULL_CHEESE_WHEEL.get()))) {
+                player.drop(new ItemStack(FLBlocks.TRIBULL_CHEESE_WHEEL.get()), false);
             }
             player.swing(hand);
         }
