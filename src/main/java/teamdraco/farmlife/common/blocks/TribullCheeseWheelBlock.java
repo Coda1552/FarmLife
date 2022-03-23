@@ -5,6 +5,7 @@ import net.minecraft.core.Direction;
 import net.minecraft.stats.Stats;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.BlockGetter;
@@ -59,6 +60,13 @@ public class TribullCheeseWheelBlock extends Block {
       } else {
          p_51189_.awardStat(Stats.EAT_CAKE_SLICE);
          p_51189_.getFoodData().eat(3, 0.2F);
+
+         for (MobEffectInstance instance : p_51189_.getActiveEffects()) {
+            if (!instance.getEffect().isBeneficial()) {
+               p_51189_.removeEffect(instance.getEffect());
+            }
+         }
+
          int i = p_51188_.getValue(BITES);
          p_51186_.gameEvent(p_51189_, GameEvent.EAT, p_51187_);
          if (i < 6) {
