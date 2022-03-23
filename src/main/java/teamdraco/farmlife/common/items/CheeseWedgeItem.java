@@ -15,8 +15,10 @@ public class CheeseWedgeItem extends Item {
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
         if (!level.isClientSide) {
-            for (MobEffectInstance instance : entity.getActiveEffects()) {
-                entity.removeEffect(instance.getEffect());
+            if (!entity.getActiveEffects().isEmpty()) {
+                for (MobEffectInstance instance : entity.getActiveEffects()) {
+                    entity.removeEffect(instance.getEffect());
+                }
             }
         }
         return super.finishUsingItem(stack, level, entity);
