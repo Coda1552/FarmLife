@@ -62,6 +62,8 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
             p_28298_.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
             ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_28298_, FLItems.TRIBULL_MILK.get().getDefaultInstance());
             p_28298_.setItemInHand(p_28299_, itemstack1);
+
+            setTarget(p_28298_);
             return InteractionResult.sidedSuccess(this.level.isClientSide);
         } else {
             return super.mobInteract(p_28298_, p_28299_);
