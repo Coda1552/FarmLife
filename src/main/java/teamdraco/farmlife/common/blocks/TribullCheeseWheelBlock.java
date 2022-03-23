@@ -17,7 +17,6 @@ import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
-import net.minecraft.world.level.block.state.properties.BlockStateProperties;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.level.gameevent.GameEvent;
 import net.minecraft.world.level.pathfinder.PathComputationType;
@@ -26,12 +25,12 @@ import net.minecraft.world.phys.shapes.CollisionContext;
 import net.minecraft.world.phys.shapes.VoxelShape;
 
 public class TribullCheeseWheelBlock extends Block {
-   public static final IntegerProperty BITES = BlockStateProperties.BITES;
-   protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[]{Block.box(1.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.box(3.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.box(5.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.box(7.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.box(9.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.box(11.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D), Block.box(13.0D, 0.0D, 1.0D, 15.0D, 8.0D, 15.0D)};
+   public static final IntegerProperty BITES = IntegerProperty.create("bites", 0, 4);
+   protected static final VoxelShape[] SHAPE_BY_BITE = new VoxelShape[]{Block.box(2.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D), Block.box(4.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D), Block.box(6.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D), Block.box(8.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D), Block.box(10.0D, 0.0D, 2.0D, 14.0D, 5.0D, 14.0D)};
 
    public TribullCheeseWheelBlock(BlockBehaviour.Properties p_51184_) {
       super(p_51184_);
-      this.registerDefaultState(this.stateDefinition.any().setValue(BITES, Integer.valueOf(0)));
+      this.registerDefaultState(this.stateDefinition.any().setValue(BITES, 0));
    }
 
    public VoxelShape getShape(BlockState p_51222_, BlockGetter p_51223_, BlockPos p_51224_, CollisionContext p_51225_) {
@@ -61,16 +60,16 @@ public class TribullCheeseWheelBlock extends Block {
          p_51189_.awardStat(Stats.EAT_CAKE_SLICE);
          p_51189_.getFoodData().eat(3, 0.2F);
 
-         for (MobEffectInstance instance : p_51189_.getActiveEffects()) {
-            if (!instance.getEffect().isBeneficial()) {
+         if (!p_51189_.level.isClientSide) {
+            for (MobEffectInstance instance : p_51189_.getActiveEffects()) {
                p_51189_.removeEffect(instance.getEffect());
             }
          }
 
          int i = p_51188_.getValue(BITES);
          p_51186_.gameEvent(p_51189_, GameEvent.EAT, p_51187_);
-         if (i < 6) {
-            p_51186_.setBlock(p_51187_, p_51188_.setValue(BITES, Integer.valueOf(i + 1)), 3);
+         if (i < 4) {
+            p_51186_.setBlock(p_51187_, p_51188_.setValue(BITES, i + 1), 3);
          } else {
             p_51186_.removeBlock(p_51187_, false);
             p_51186_.gameEvent(p_51189_, GameEvent.BLOCK_DESTROY, p_51187_);

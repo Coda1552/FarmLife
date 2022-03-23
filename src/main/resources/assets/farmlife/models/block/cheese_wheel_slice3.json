@@ -1,22 +1,23 @@
 {
-  "textures": {
-    "particle": "farmlife:block/cheese_wheel_side",
-    "bottom": "farmlife:block/cheese_wheel_top",
-    "top": "farmlife:block/cheese_wheel_top",
-    "side": "farmlife:block/cheese_wheel_side",
-    "inside": "farmlife:block/cheese_wheel_inner"
-  },
-  "elements": [
-    {   "from": [ 7, 0, 1 ],
-      "to": [ 15, 8, 15 ],
-      "faces": {
-        "down":  { "texture": "#bottom", "cullface": "down" },
-        "up":    { "texture": "#top" },
-        "north": { "texture": "#side" },
-        "south": { "texture": "#side" },
-        "west":  { "texture": "#inside" },
-        "east":  { "texture": "#side" }
-      }
-    }
-  ]
+	"textures": {
+		"1": "farmlife:block/cheese_wheel_side",
+		"2": "farmlife:block/cheese_wheel_top",
+		"4": "farmlife:block/cheese_wheel_inner",
+		"particle": "farmlife:block/cheese_wheel_side"
+	},
+	"elements": [
+		{
+			"from": [8, 0, 2],
+			"to": [14, 5, 14],
+			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
+			"faces": {
+				"north": {"uv": [2, 11, 14, 16], "texture": "#1"},
+				"east": {"uv": [2, 11, 14, 16], "texture": "#1"},
+				"south": {"uv": [2, 11, 14, 16], "texture": "#1"},
+				"west": {"uv": [2, 11, 14, 16], "texture": "#4"},
+				"up": {"uv": [8, 14, 2, 2], "texture": "#2"},
+				"down": {"uv": [8, 2, 2, 14], "texture": "#2"}
+			}
+		}
+	]
 }

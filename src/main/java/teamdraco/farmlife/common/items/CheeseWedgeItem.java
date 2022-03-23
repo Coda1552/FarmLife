@@ -1,5 +1,6 @@
 package teamdraco.farmlife.common.items;
 
+import net.minecraft.world.effect.MobEffectInstance;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.item.Item;
 import net.minecraft.world.item.ItemStack;
@@ -13,8 +14,11 @@ public class CheeseWedgeItem extends Item {
 
     @Override
     public ItemStack finishUsingItem(ItemStack stack, Level level, LivingEntity entity) {
-        entity.curePotionEffects(stack);
-
+        if (!level.isClientSide) {
+            for (MobEffectInstance instance : entity.getActiveEffects()) {
+                entity.removeEffect(instance.getEffect());
+            }
+        }
         return super.finishUsingItem(stack, level, entity);
     }
 }

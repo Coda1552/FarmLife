@@ -14,12 +14,6 @@
     },
     "bites=4": {
       "model": "farmlife:block/cheese_wheel_slice4"
-    },
-    "bites=5": {
-      "model": "farmlife:block/cheese_wheel_slice5"
-    },
-    "bites=6": {
-      "model": "farmlife:block/cheese_wheel_slice6"
     }
   }
 }

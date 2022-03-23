@@ -1,20 +1,21 @@
 {
   "textures": {
-    "particle": "farmlife:block/cheese_wheel_side",
-    "bottom": "farmlife:block/cheese_wheel_top",
-    "top": "farmlife:block/cheese_wheel_top",
-    "side": "farmlife:block/cheese_wheel_side"
+    "1": "farmlife:block/cheese_wheel_side",
+    "2": "farmlife:block/cheese_wheel_top",
+    "particle": "farmlife:block/cheese_wheel_side"
   },
   "elements": [
-    {   "from": [ 1, 0, 1 ],
-      "to": [ 15, 8, 15 ],
+    {
+      "from": [2, 0, 2],
+      "to": [14, 5, 14],
+      "rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
       "faces": {
-        "down":  { "texture": "#bottom", "cullface": "down" },
-        "up":    { "texture": "#top" },
-        "north": { "texture": "#side" },
-        "south": { "texture": "#side" },
-        "west":  { "texture": "#side" },
-        "east":  { "texture": "#side" }
+        "north": {"uv": [2, 11, 14, 16], "texture": "#1"},
+        "east": {"uv": [2, 11, 14, 16], "texture": "#1"},
+        "south": {"uv": [2, 11, 14, 16], "texture": "#1"},
+        "west": {"uv": [2, 11, 14, 16], "texture": "#1"},
+        "up": {"uv": [14, 14, 2, 2], "texture": "#2"},
+        "down": {"uv": [14, 2, 2, 14], "texture": "#2"}
       }
     }
   ]
