@@ -61,8 +61,8 @@ public class TribullCheeseWheelBlock extends Block {
          p_51189_.getFoodData().eat(3, 0.2F);
 
          if (!p_51189_.level.isClientSide) {
-            for (MobEffectInstance instance : p_51189_.getActiveEffects()) {
-               p_51189_.removeEffect(instance.getEffect());
+            if (p_51189_.getActiveEffects().stream().findFirst().isPresent()) {
+               p_51189_.removeEffect(p_51189_.getActiveEffects().stream().findFirst().get().getEffect());
             }
          }
 
