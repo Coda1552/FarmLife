@@ -1,4 +1,5 @@
 {
+	"credit": "Made with Blockbench",
 	"textures": {
 		"1": "farmlife:block/cheese_wheel_side",
 		"2": "farmlife:block/cheese_wheel_top",
@@ -11,9 +12,9 @@
 			"to": [14, 5, 14],
 			"rotation": {"angle": 0, "axis": "y", "origin": [8, 2.5, 8]},
 			"faces": {
-				"north": {"uv": [2, 11, 14, 16], "texture": "#1"},
+				"north": {"uv": [2, 11, 12, 16], "texture": "#1"},
 				"east": {"uv": [2, 11, 14, 16], "texture": "#1"},
-				"south": {"uv": [2, 11, 14, 16], "texture": "#1"},
+				"south": {"uv": [2, 11, 12, 16], "texture": "#1"},
 				"west": {"uv": [2, 11, 14, 16], "texture": "#4"},
 				"up": {"uv": [12, 14, 2, 2], "texture": "#2"},
 				"down": {"uv": [12, 2, 2, 14], "texture": "#2"}
