@@ -1,0 +1,35 @@
+{
+  "itemGroup.wcfarmlife": "Farm Life",
+
+  "item.wcfarmlife.tribull_shank": "Сырая голяшка три-быка",
+  "item.wcfarmlife.cooked_tribull_shank": "Приготовленная голяшка три-быка",
+  "item.wcfarmlife.music_disc_life_on_the_farm": "Пластинка",
+  "item.wcfarmlife.music_disc_life_on_the_farm.desc": "Mr. Esuoh — Жизнь на ферме",
+
+  "item.wcfarmlife.domestic_tribull_spawn_egg": "Яйцо призыва домашнего три-быка",
+  "item.wcfarmlife.galliraptor_spawn_egg": "Яйцо призыва галлираптор",
+
+  "block.wcfarmlife.peacock_burst_poppy": "Павлиний раскрывшийся мак опийный",
+  "block.wcfarmlife.electric_burst_poppy": "Грозовой раскрывшийся мак опийный",
+  "block.wcfarmlife.fancy_burst_poppy": "Многоцветный раскрывшийся мак опийный",
+  "block.wcfarmlife.olive_burst_poppy": "Оливковый раскрывшийся мак опийный",
+  "block.wcfarmlife.rusty_burst_poppy": "Ржавый раскрывшийся мак опийный",
+  "block.wcfarmlife.sunstreak_burst_poppy": "Раскрывшийся мак опийный солнечной вспышки",
+  "block.wcfarmlife.potted_peacock_burst_poppy": "Павлиний раскрывшийся мак опийный в горшке",
+  "block.wcfarmlife.potted_electric_burst_poppy": "Грозовой раскрывшийся мак опийный в горшке",
+  "block.wcfarmlife.potted_fancy_burst_poppy": "Многоцветный раскрывшийся мак опийный в горшке",
+  "block.wcfarmlife.potted_olive_burst_poppy": "Оливковый раскрывшийся мак опийный в горшке",
+  "block.wcfarmlife.potted_rusty_burst_poppy": "Ржавый раскрывшийся мак опийный в горшке",
+  "block.wcfarmlife.potted_sunstreak_burst_poppy": "Раскрывшийся мак опийный солнечной вспышки в горшке",
+
+  "entity.wcfarmlife.domestic_tribull": "Домашний три-бык",
+  "entity.wcfarmlife.galliraptor": "Галлираптор",
+
+  "wcfarmlife.domestic_tribull.ambient": "Домашний три-бык фыркает",
+  "wcfarmlife.domestic_tribull.hurt": "Домашний три-бык ранен",
+  "wcfarmlife.domestic_tribull.death": "Домашний три-бык погибает",
+
+  "wcfarmlife.galliraptor.ambient": "Галлираптор кудахчет",
+  "wcfarmlife.galliraptor.hurt": "Галлираптор ранен",
+  "wcfarmlife.galliraptor.death": "Галлираптор погибает"
+}
