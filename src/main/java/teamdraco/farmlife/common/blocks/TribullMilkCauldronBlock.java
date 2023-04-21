@@ -3,6 +3,7 @@ package teamdraco.farmlife.common.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
@@ -14,8 +15,6 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.HitResult;
-
-import java.util.Random;
 
 public class TribullMilkCauldronBlock extends AbstractCauldronBlock {
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 1, 3);
@@ -43,7 +42,7 @@ public class TribullMilkCauldronBlock extends AbstractCauldronBlock {
     }
 
     @Override
-    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, Random rand) {
+    public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
         if (state.getValue(STAGE) == 1 && rand.nextFloat() > 0.65F) {
             level.setBlock(pos, state.setValue(STAGE, state.getValue(STAGE) + 1), 2);
         }

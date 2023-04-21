@@ -12,7 +12,7 @@ import teamdraco.farmlife.common.entities.GalliraptorEntity;
 import teamdraco.farmlife.common.entities.item.GalliraptorEggEntity;
 
 public class FLEntities {
-    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITIES, FarmLife.MOD_ID);
+    public static final DeferredRegister<EntityType<?>> REGISTRY = DeferredRegister.create(ForgeRegistries.ENTITY_TYPES, FarmLife.MOD_ID);
 
     public static final RegistryObject<EntityType<DomesticTribullEntity>> DOMESTIC_TRIBULL = create("domestic_tribull", EntityType.Builder.of(DomesticTribullEntity::new, MobCategory.CREATURE).sized(1.1f, 1.2f));
     public static final RegistryObject<EntityType<GalliraptorEntity>> GALLIRAPTOR = create("galliraptor", EntityType.Builder.of(GalliraptorEntity::new, MobCategory.CREATURE).sized(0.6f, 0.8f));

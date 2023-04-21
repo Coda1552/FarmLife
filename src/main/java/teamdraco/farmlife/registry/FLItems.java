@@ -25,7 +25,7 @@ public class FLItems {
 
     // Misc.
     public static final RegistryObject<Item> GALLIRAPTOR_EGG = REGISTRY.register("galliraptor_egg", () -> new GalliraptorEggItem(new Item.Properties().tab(FarmLife.GROUP).stacksTo(16)));
-    public static final RegistryObject<Item> MUSIC_DISC_LIFE_ON_THE_FARM = REGISTRY.register("music_disc_life_on_the_farm", () -> new RecordItem(14, FLSounds.MUSIC_DISC_LIFE_ON_THE_FARM, new Item.Properties().tab(FarmLife.GROUP).rarity(Rarity.RARE).stacksTo(1)));
+    public static final RegistryObject<Item> MUSIC_DISC_LIFE_ON_THE_FARM = REGISTRY.register("music_disc_life_on_the_farm", () -> new RecordItem(14, FLSounds.MUSIC_DISC_LIFE_ON_THE_FARM, new Item.Properties().tab(FarmLife.GROUP).rarity(Rarity.RARE).stacksTo(1),  2223));
 
     // Spawn Eggs
     public static final RegistryObject<Item> DOMESTIC_TRIBULL_SPAWN_EGG = REGISTRY.register("domestic_tribull_spawn_egg", () -> new ForgeSpawnEggItem(FLEntities.DOMESTIC_TRIBULL, 0x92b3b0, 0xce4e4e, new Item.Properties().tab(FarmLife.GROUP)));

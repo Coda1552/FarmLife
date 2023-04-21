@@ -24,24 +24,24 @@ public class GalliraptorModel extends AnimatedTickingGeoModel<GalliraptorEntity>
     private static final ResourceLocation CHILD_TEXTURE = new ResourceLocation(FarmLife.MOD_ID, "textures/entity/galliraptor/chick.png");
 
     @Override
-    public ResourceLocation getModelLocation(GalliraptorEntity object) {
+    public ResourceLocation getModelResource(GalliraptorEntity object) {
         return object.isBaby() ? new ResourceLocation(FarmLife.MOD_ID, "geo/entity/galliraptor_chick.geo.json") : new ResourceLocation(FarmLife.MOD_ID, "geo/entity/galliraptor.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(GalliraptorEntity object) {
+    public ResourceLocation getTextureResource(GalliraptorEntity object) {
         return object.isBaby() ? CHILD_TEXTURE : TEXTURES.getOrDefault(object.getVariant(), TEXTURES.get(0));
 
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(GalliraptorEntity animatable) {
+    public ResourceLocation getAnimationResource(GalliraptorEntity animatable) {
         return animatable.isBaby() ? new ResourceLocation(FarmLife.MOD_ID, "animations/entity/galliraptor_chick.animation.json") : new ResourceLocation(FarmLife.MOD_ID, "animations/entity/galliraptor.animation.json");
     }
 
     @Override
-    public void setLivingAnimations(GalliraptorEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
-        super.setLivingAnimations(entity, uniqueID, customPredicate);
+    public void setCustomAnimations(GalliraptorEntity entity, int uniqueID, AnimationEvent customPredicate) {
+        super.setCustomAnimations(entity, uniqueID, customPredicate);
 
         if (!entity.isBaby()) {
             IBone head = this.getAnimationProcessor().getBone("head");

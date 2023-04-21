@@ -11,11 +11,9 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.Blocks;
-import net.minecraftforge.event.entity.EntityJoinWorldEvent;
+import net.minecraftforge.event.entity.EntityJoinLevelEvent;
 import net.minecraftforge.event.entity.player.PlayerInteractEvent;
-import net.minecraftforge.event.world.BlockEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamdraco.farmlife.FarmLife;
@@ -29,8 +27,8 @@ public class CommonEvents {
 
     @SubscribeEvent
     public static void cauldronInteract(PlayerInteractEvent.RightClickBlock event) {
-        Player player = event.getPlayer();
-        Level level = event.getWorld();
+        Player player = event.getEntity();
+        Level level = event.getLevel();
         BlockPos pos = event.getPos();
         InteractionHand hand = event.getHand();
 
@@ -51,7 +49,7 @@ public class CommonEvents {
     }
 
     @SubscribeEvent
-    public static void spawnEntity(EntityJoinWorldEvent event) {
+    public static void spawnEntity(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
         if (entity instanceof Ocelot ocelot) {
             ocelot.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>((PathfinderMob) entity, GalliraptorEntity.class, true));

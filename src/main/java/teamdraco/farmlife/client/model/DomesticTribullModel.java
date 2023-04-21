@@ -11,23 +11,23 @@ import teamdraco.farmlife.common.entities.DomesticTribullEntity;
 public class DomesticTribullModel extends AnimatedTickingGeoModel<DomesticTribullEntity> {
 
     @Override
-    public ResourceLocation getModelLocation(DomesticTribullEntity object) {
+    public ResourceLocation getModelResource(DomesticTribullEntity object) {
         return new ResourceLocation(FarmLife.MOD_ID, "geo/entity/domestic_tribull.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureLocation(DomesticTribullEntity object) {
+    public ResourceLocation getTextureResource(DomesticTribullEntity object) {
         return object.isBaby() ? new ResourceLocation(FarmLife.MOD_ID, "textures/entity/domestic_tribull/baby.png") : new ResourceLocation(FarmLife.MOD_ID, "textures/entity/domestic_tribull/adult.png");
     }
 
     @Override
-    public ResourceLocation getAnimationFileLocation(DomesticTribullEntity animatable) {
+    public ResourceLocation getAnimationResource(DomesticTribullEntity animatable) {
         return new ResourceLocation(FarmLife.MOD_ID, "animations/entity/domestic_tribull.animation.json");
     }
 
     @Override
-    public void setLivingAnimations(DomesticTribullEntity entity, Integer uniqueID, AnimationEvent customPredicate) {
-        super.setLivingAnimations(entity, uniqueID, customPredicate);
+    public void setCustomAnimations(DomesticTribullEntity entity, int uniqueID, AnimationEvent customPredicate) {
+        super.setCustomAnimations(entity, uniqueID, customPredicate);
         IBone head = this.getAnimationProcessor().getBone("head");
         IBone body = this.getAnimationProcessor().getBone("root");
         EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
