@@ -58,6 +58,7 @@ public class GalliraptorEggEntity extends ThrowableItemProjectile {
                GalliraptorEntity galliraptor = FLEntities.GALLIRAPTOR.get().create(this.level);
                galliraptor.setAge(-24000);
                galliraptor.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
+               galliraptor.setVariant(random.nextInt(5));
                this.level.addFreshEntity(galliraptor);
             }
          }
