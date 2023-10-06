@@ -25,20 +25,22 @@ import software.bernie.geckolib3.core.IAnimatable;
 import software.bernie.geckolib3.core.IAnimationTickable;
 import software.bernie.geckolib3.core.PlayState;
 import software.bernie.geckolib3.core.builder.AnimationBuilder;
+import software.bernie.geckolib3.core.builder.ILoopType;
 import software.bernie.geckolib3.core.controller.AnimationController;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.manager.AnimationData;
 import software.bernie.geckolib3.core.manager.AnimationFactory;
+import software.bernie.geckolib3.util.GeckoLibUtil;
 import teamdraco.farmlife.registry.FLEntities;
 import teamdraco.farmlife.registry.FLItems;
 import teamdraco.farmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
 
-public class DomesticTribullEntity extends Animal implements IAnimatable, IAnimationTickable {
-    private final AnimationFactory factory = new AnimationFactory(this);
+public class DomesticTribull extends Animal implements IAnimatable {
+    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
 
-    public DomesticTribullEntity(EntityType<? extends DomesticTribullEntity> type, Level worldIn) {
+    public DomesticTribull(EntityType<? extends DomesticTribull> type, Level worldIn) {
         super(type, worldIn);
     }
 
@@ -99,13 +101,8 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
 
     @Nullable
     @Override
-    public DomesticTribullEntity getBreedOffspring(ServerLevel world, AgeableMob ageable) {
-        return FLEntities.DOMESTIC_TRIBULL.get().create(this.level);
-    }
-
-    @Override
-    public ItemStack getPickedResult(HitResult target) {
-        return new ItemStack(FLItems.DOMESTIC_TRIBULL_SPAWN_EGG.get());
+    public DomesticTribull getBreedOffspring(ServerLevel world, AgeableMob ageable) {
+        return FLEntities.DOMESTIC_TRIBULL.get().create(world);
     }
 
     protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
@@ -119,22 +116,18 @@ public class DomesticTribullEntity extends Animal implements IAnimatable, IAnima
 
     private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
         if (event.isMoving()) {
-            event.getController().setAnimationSpeed(1.85);
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.walk", true));
-            return PlayState.CONTINUE;
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.walk", ILoopType.EDefaultLoopTypes.LOOP));
+            event.getController().setAnimationSpeed(1.85D);
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.idle", true));
-            return PlayState.CONTINUE;
+            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.idle", ILoopType.EDefaultLoopTypes.LOOP));
+            event.getController().setAnimationSpeed(1.0D);
         }
+        return PlayState.CONTINUE;
     }
 
     @Override
     public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 10, this::predicate));
+        data.addAnimationController(new AnimationController<>(this, "controller", 2, this::predicate));
     }
 
-    @Override
-    public int tickTimer() {
-        return tickCount;
-    }
 }

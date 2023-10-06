@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smoking",
+  "ingredient": {
+    "item": "farmlife:fuli"
+  },
+  "result": "farmlife:cooked_fuli",
+  "experience": 0.35,
+  "cookingtime": 100
+}

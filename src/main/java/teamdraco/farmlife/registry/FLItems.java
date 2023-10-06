@@ -22,6 +22,11 @@ public class FLItems {
     public static final RegistryObject<Item> COOKED_GALLIRAPTOR = REGISTRY.register("cooked_galliraptor", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().nutrition(6).saturationMod(0.5f).meat().build())));
     public static final RegistryObject<Item> TRIBULL_MILK = REGISTRY.register("tribull_milk", () -> new MilkBucketItem(new Item.Properties().tab(FarmLife.GROUP).craftRemainder(Items.BUCKET).stacksTo(1)));
     public static final RegistryObject<Item> TRIBULL_CHEESE_WEDGE = REGISTRY.register("tribull_cheese_wedge", () -> new CheeseWedgeItem(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().saturationMod(0.25F).nutrition(3).build())));
+    public static final RegistryObject<Item> FULI = REGISTRY.register("fuli", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().saturationMod(0.15F).nutrition(2).build())));
+    public static final RegistryObject<Item> COOKED_FULI = REGISTRY.register("cooked_fuli", () -> new Item(new Item.Properties().tab(FarmLife.GROUP).food(new FoodProperties.Builder().saturationMod(0.375F).nutrition(7).build())));
+
+    // Materials
+    public static final RegistryObject<Item> PLATE = REGISTRY.register("plate", () -> new Item(new Item.Properties().tab(FarmLife.GROUP)));
 
     // Misc.
     public static final RegistryObject<Item> GALLIRAPTOR_EGG = REGISTRY.register("galliraptor_egg", () -> new GalliraptorEggItem(new Item.Properties().tab(FarmLife.GROUP).stacksTo(16)));
@@ -30,4 +35,5 @@ public class FLItems {
     // Spawn Eggs
     public static final RegistryObject<Item> DOMESTIC_TRIBULL_SPAWN_EGG = REGISTRY.register("domestic_tribull_spawn_egg", () -> new ForgeSpawnEggItem(FLEntities.DOMESTIC_TRIBULL, 0x92b3b0, 0xce4e4e, new Item.Properties().tab(FarmLife.GROUP)));
     public static final RegistryObject<Item> GALLIRAPTOR_SPAWN_EGG = REGISTRY.register("galliraptor_spawn_egg", () -> new ForgeSpawnEggItem(FLEntities.GALLIRAPTOR, 0xefa83e, 0x182749, new Item.Properties().tab(FarmLife.GROUP)));
+    public static final RegistryObject<Item> PLATEFISH_SPAWN_EGG = REGISTRY.register("platefish_spawn_egg", () -> new ForgeSpawnEggItem(FLEntities.PLATEFISH, 0xc68f19, 0x63351a, new Item.Properties().tab(FarmLife.GROUP)));
 }

@@ -18,7 +18,7 @@ import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import teamdraco.farmlife.FarmLife;
 import teamdraco.farmlife.common.blocks.TribullMilkCauldronBlock;
-import teamdraco.farmlife.common.entities.GalliraptorEntity;
+import teamdraco.farmlife.common.entities.Galliraptor;
 import teamdraco.farmlife.registry.FLBlocks;
 import teamdraco.farmlife.registry.FLItems;
 
@@ -52,10 +52,10 @@ public class CommonEvents {
     public static void spawnEntity(EntityJoinLevelEvent event) {
         Entity entity = event.getEntity();
         if (entity instanceof Ocelot ocelot) {
-            ocelot.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>((PathfinderMob) entity, GalliraptorEntity.class, true));
+            ocelot.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>((PathfinderMob) entity, Galliraptor.class, true));
         }
         if (entity instanceof Fox fox) {
-            fox.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>((PathfinderMob) entity, GalliraptorEntity.class, true));
+            fox.targetSelector.addGoal(0, new NearestAttackableTargetGoal<>((PathfinderMob) entity, Galliraptor.class, true));
         }
     }
 }

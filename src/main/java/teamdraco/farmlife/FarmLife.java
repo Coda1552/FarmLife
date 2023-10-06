@@ -2,17 +2,13 @@ package teamdraco.farmlife;
 
 import net.minecraft.Util;
 import net.minecraft.core.Position;
-import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.entity.projectile.ThrownEgg;
 import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
-import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.IEventBus;
 import net.minecraftforge.fml.common.Mod;
@@ -21,10 +17,10 @@ import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
 import software.bernie.geckolib3.GeckoLib;
-import teamdraco.farmlife.common.entities.DomesticTribullEntity;
-import teamdraco.farmlife.common.entities.GalliraptorEntity;
+import teamdraco.farmlife.common.entities.DomesticTribull;
+import teamdraco.farmlife.common.entities.Galliraptor;
+import teamdraco.farmlife.common.entities.Platefish;
 import teamdraco.farmlife.common.entities.item.GalliraptorEggEntity;
-import teamdraco.farmlife.common.items.GalliraptorEggItem;
 import teamdraco.farmlife.registry.*;
 
 @Mod.EventBusSubscriber
@@ -65,8 +61,9 @@ public class FarmLife {
     }
 
     private void registerEntityAttributes(EntityAttributeCreationEvent event) {
-        event.put(FLEntities.DOMESTIC_TRIBULL.get(), DomesticTribullEntity.createAttributes().build());
-        event.put(FLEntities.GALLIRAPTOR.get(), GalliraptorEntity.createAttributes().build());
+        event.put(FLEntities.DOMESTIC_TRIBULL.get(), DomesticTribull.createAttributes().build());
+        event.put(FLEntities.GALLIRAPTOR.get(), Galliraptor.createAttributes().build());
+        event.put(FLEntities.PLATEFISH.get(), Platefish.createAttributes().build());
     }
 
     public final static CreativeModeTab GROUP = new CreativeModeTab(MOD_ID) {

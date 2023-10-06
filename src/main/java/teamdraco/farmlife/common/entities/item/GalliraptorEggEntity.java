@@ -5,14 +5,12 @@ import net.minecraft.core.particles.ParticleTypes;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
-import net.minecraft.world.entity.animal.Chicken;
 import net.minecraft.world.entity.projectile.ThrowableItemProjectile;
 import net.minecraft.world.item.Item;
-import net.minecraft.world.item.Items;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.phys.EntityHitResult;
 import net.minecraft.world.phys.HitResult;
-import teamdraco.farmlife.common.entities.GalliraptorEntity;
+import teamdraco.farmlife.common.entities.Galliraptor;
 import teamdraco.farmlife.registry.FLEntities;
 import teamdraco.farmlife.registry.FLItems;
 
@@ -55,7 +53,7 @@ public class GalliraptorEggEntity extends ThrowableItemProjectile {
             }
 
             for(int j = 0; j < i; ++j) {
-               GalliraptorEntity galliraptor = FLEntities.GALLIRAPTOR.get().create(this.level);
+               Galliraptor galliraptor = FLEntities.GALLIRAPTOR.get().create(this.level);
                galliraptor.setAge(-24000);
                galliraptor.moveTo(this.getX(), this.getY(), this.getZ(), this.getYRot(), 0.0F);
                galliraptor.setVariant(random.nextInt(5));

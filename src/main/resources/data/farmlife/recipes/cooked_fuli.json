@@ -1,0 +1,9 @@
+{
+  "type": "minecraft:smelting",
+  "ingredient": {
+    "item": "farmlife:fuli"
+  },
+  "result": "farmlife:cooked_fuli",
+  "experience": 0.35,
+  "cookingtime": 200
+}

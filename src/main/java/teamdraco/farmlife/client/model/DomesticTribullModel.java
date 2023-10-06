@@ -3,30 +3,30 @@ package teamdraco.farmlife.client.model;
 import net.minecraft.resources.ResourceLocation;
 import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
 import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
+import software.bernie.geckolib3.model.AnimatedGeoModel;
 import software.bernie.geckolib3.model.provider.data.EntityModelData;
 import teamdraco.farmlife.FarmLife;
-import teamdraco.farmlife.common.entities.DomesticTribullEntity;
+import teamdraco.farmlife.common.entities.DomesticTribull;
 
-public class DomesticTribullModel extends AnimatedTickingGeoModel<DomesticTribullEntity> {
+public class DomesticTribullModel extends AnimatedGeoModel<DomesticTribull> {
 
     @Override
-    public ResourceLocation getModelResource(DomesticTribullEntity object) {
+    public ResourceLocation getModelResource(DomesticTribull object) {
         return new ResourceLocation(FarmLife.MOD_ID, "geo/entity/domestic_tribull.geo.json");
     }
 
     @Override
-    public ResourceLocation getTextureResource(DomesticTribullEntity object) {
+    public ResourceLocation getTextureResource(DomesticTribull object) {
         return object.isBaby() ? new ResourceLocation(FarmLife.MOD_ID, "textures/entity/domestic_tribull/baby.png") : new ResourceLocation(FarmLife.MOD_ID, "textures/entity/domestic_tribull/adult.png");
     }
 
     @Override
-    public ResourceLocation getAnimationResource(DomesticTribullEntity animatable) {
+    public ResourceLocation getAnimationResource(DomesticTribull animatable) {
         return new ResourceLocation(FarmLife.MOD_ID, "animations/entity/domestic_tribull.animation.json");
     }
 
     @Override
-    public void setCustomAnimations(DomesticTribullEntity entity, int uniqueID, AnimationEvent customPredicate) {
+    public void setCustomAnimations(DomesticTribull entity, int uniqueID, AnimationEvent customPredicate) {
         super.setCustomAnimations(entity, uniqueID, customPredicate);
         IBone head = this.getAnimationProcessor().getBone("head");
         IBone body = this.getAnimationProcessor().getBone("root");

@@ -13,6 +13,7 @@ import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamdraco.farmlife.FarmLife;
 import teamdraco.farmlife.client.renderer.DomesticTribullRenderer;
 import teamdraco.farmlife.client.renderer.GalliraptorRenderer;
+import teamdraco.farmlife.client.renderer.PlatefishRenderer;
 import teamdraco.farmlife.registry.FLBlocks;
 import teamdraco.farmlife.registry.FLEntities;
 
@@ -24,6 +25,7 @@ public class ClientEvents {
         EntityRenderers.register(FLEntities.DOMESTIC_TRIBULL.get(), DomesticTribullRenderer::new);
         EntityRenderers.register(FLEntities.GALLIRAPTOR.get(), GalliraptorRenderer::new);
         EntityRenderers.register(FLEntities.GALLIRAPTOR_EGG.get(), ThrownItemRenderer::new);
+        EntityRenderers.register(FLEntities.PLATEFISH.get(), PlatefishRenderer::new);
 
         ItemBlockRenderTypes.setRenderLayer(FLBlocks.PEACOCK_BURST_POPPY.get(), RenderType.cutout());
         ItemBlockRenderTypes.setRenderLayer(FLBlocks.ELECTRIC_BURST_POPPY.get(), RenderType.cutout());
