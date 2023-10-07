@@ -28,6 +28,7 @@ import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.gameevent.GameEvent;
+import net.minecraft.world.level.pathfinder.Path;
 import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IForgeShearable;
 import org.jetbrains.annotations.NotNull;
@@ -279,7 +280,8 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
 
     public void pathToLeader() {
         if (this.isFollower()) {
-            this.getNavigation().moveTo(this.leader, 2.0D);
+            Path path = getNavigation().createPath(this.leader, 3);
+            this.getNavigation().moveTo(path, 1.0D);
         }
 
     }
@@ -347,10 +349,8 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
                 return false;
             } else {
                 this.nextStartTick = this.nextStartTick(this.mob);
-                Predicate<Platefish> predicate = (p_25258_) -> {
-                    return p_25258_.canBeFollowed() || !p_25258_.isFollower();
-                };
-                List<? extends Platefish> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(8.0D, 8.0D, 8.0D), predicate);
+                Predicate<Platefish> predicate = (p_25258_) -> p_25258_.canBeFollowed() || !p_25258_.isFollower();
+                List<? extends Platefish> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(16.0D, 16.0D, 16.0D), predicate);
                 Platefish platefish = DataFixUtils.orElse(list.stream().filter(Platefish::canBeFollowed).findAny(), this.mob);
                 platefish.addFollowers(list.stream().filter((p_25255_) -> !p_25255_.isFollower()));
                 return this.mob.isFollower();
