@@ -9,6 +9,7 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvent;
 import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.DifficultyInstance;
 import net.minecraft.world.damagesource.DamageSource;
 import net.minecraft.world.entity.*;
@@ -108,6 +109,8 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
     @Override
     public @NotNull List<ItemStack> onSheared(@Nullable Player player, @NotNull ItemStack item, Level level, BlockPos pos, int fortune) {
         setSheared(true);
+        gameEvent(GameEvent.SHEAR, player);
+        level.playSound(null, this, SoundEvents.BEEHIVE_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
 
         return List.of(new ItemStack(FLItems.PLATE.get(), 2));
     }
@@ -175,9 +178,8 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
 
-        if (!this.level.isClientSide && this.isAlive() && !this.isBaby() && --this.growTime <= 0) {
+        if (isSheared() && !this.level.isClientSide && this.isAlive() && !this.isBaby() && --this.growTime <= 0) {
             this.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
-            this.gameEvent(GameEvent.ENTITY_PLACE);
             this.growTime = this.random.nextInt(6000) + 6000;
             setSheared(false);
         }
