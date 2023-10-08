@@ -33,15 +33,15 @@ import net.minecraft.world.phys.Vec3;
 import net.minecraftforge.common.IForgeShearable;
 import org.jetbrains.annotations.NotNull;
 import org.jetbrains.annotations.Nullable;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import teamdraco.farmlife.registry.FLEntities;
 import teamdraco.farmlife.registry.FLItems;
 
@@ -49,9 +49,9 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class Platefish extends Animal implements IAnimatable, IForgeShearable {
+public class Platefish extends Animal implements GeoEntity, IForgeShearable {
     private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(Platefish.class, EntityDataSerializers.BOOLEAN);
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     @Nullable
     private Platefish leader;
     private int schoolSize = 1;
@@ -151,7 +151,7 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
             this.setAirSupply(air - 1);
             if (this.getAirSupply() == -20) {
                 this.setAirSupply(0);
-                this.hurt(DamageSource.DROWN, 2.0F);
+                this.hurt(damageSources().drown(), 2.0F);
             }
         } else {
             this.setAirSupply(300);
@@ -172,14 +172,14 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
 
     @Override
     public void aiStep() {
-        if (!this.isInWater() && this.onGround && this.verticalCollision) {
+        if (!this.isInWater() && this.onGround() && this.verticalCollision) {
             this.setDeltaMovement(this.getDeltaMovement().add(((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F), 0.4000000059604645D, ((this.random.nextFloat() * 2.0F - 1.0F) * 0.05F)));
-            this.onGround = false;
+            this.setOnGround(false);
             this.hasImpulse = true;
             this.playSound(this.getFlopSound(), this.getSoundVolume(), this.getVoicePitch());
         }
 
-        if (isSheared() && !this.level.isClientSide && this.isAlive() && !this.isBaby() && --this.growTime <= 0) {
+        if (isSheared() && !this.level().isClientSide && this.isAlive() && !this.isBaby() && --this.growTime <= 0) {
             this.playSound(SoundEvents.TURTLE_EGG_CRACK, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             this.growTime = this.random.nextInt(6000) + 6000;
             setSheared(false);
@@ -261,8 +261,8 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
 
     public void tick() {
         super.tick();
-        if (this.hasFollowers() && this.level.random.nextInt(200) == 1) {
-            List<? extends Platefish> list = this.level.getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
+        if (this.hasFollowers() && this.level().random.nextInt(200) == 1) {
+            List<? extends Platefish> list = this.level().getEntitiesOfClass(this.getClass(), this.getBoundingBox().inflate(8.0D, 8.0D, 8.0D));
             if (list.size() <= 1) {
                 this.schoolSize = 1;
             }
@@ -304,25 +304,23 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
         return p_27531_;
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (isInWater() && event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.platefish.swim", ILoopType.EDefaultLoopTypes.LOOP));
-            event.getController().setAnimationSpeed(1.0D);
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> e) {
+        if (isInWater() && e.isMoving()) {
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.platefish.swim"));
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.platefish.idle", ILoopType.EDefaultLoopTypes.LOOP));
-            event.getController().setAnimationSpeed(1.0D);
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.platefish.idle"));
         }
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 2, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+        data.add(new AnimationController<>(this, "controller", 2, this::predicate));
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
     private static class FollowFlockLeaderGoal extends Goal {
@@ -350,7 +348,7 @@ public class Platefish extends Animal implements IAnimatable, IForgeShearable {
             } else {
                 this.nextStartTick = this.nextStartTick(this.mob);
                 Predicate<Platefish> predicate = (p_25258_) -> p_25258_.canBeFollowed() || !p_25258_.isFollower();
-                List<? extends Platefish> list = this.mob.level.getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(16.0D, 16.0D, 16.0D), predicate);
+                List<? extends Platefish> list = this.mob.level().getEntitiesOfClass(this.mob.getClass(), this.mob.getBoundingBox().inflate(16.0D, 16.0D, 16.0D), predicate);
                 Platefish platefish = DataFixUtils.orElse(list.stream().filter(Platefish::canBeFollowed).findAny(), this.mob);
                 platefish.addFollowers(list.stream().filter((p_25255_) -> !p_25255_.isFollower()));
                 return this.mob.isFollower();

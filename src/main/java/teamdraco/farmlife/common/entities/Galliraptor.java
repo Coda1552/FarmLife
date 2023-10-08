@@ -25,16 +25,13 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimationTickable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.*;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import teamdraco.farmlife.common.entities.ai.AvoidPredatorGoal;
 import teamdraco.farmlife.common.entities.ai.GalliraptorTargetGoal;
 import teamdraco.farmlife.registry.FLEntities;
@@ -43,11 +40,11 @@ import teamdraco.farmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
 
-public class Galliraptor extends Animal implements IAnimatable {
+public class Galliraptor extends Animal implements GeoEntity {
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Galliraptor.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> PECKING = SynchedEntityData.defineId(Galliraptor.class, EntityDataSerializers.BOOLEAN);
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.MELON, Items.MELON_SEEDS);
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public int timeUntilNextEgg = this.random.nextInt(8000) + 8000;
 
     public Galliraptor(EntityType<? extends Galliraptor> type, Level worldIn) {
@@ -94,7 +91,7 @@ public class Galliraptor extends Animal implements IAnimatable {
 
     public void aiStep() {
         super.aiStep();
-        if (!this.level.isClientSide && this.isAlive() && !this.isBaby() && --this.timeUntilNextEgg <= 0) {
+        if (!this.level().isClientSide && this.isAlive() && !this.isBaby() && --this.timeUntilNextEgg <= 0) {
             this.playSound(SoundEvents.CHICKEN_EGG, 1.0F, (this.random.nextFloat() - this.random.nextFloat()) * 0.2F + 1.0F);
             this.spawnAtLocation(FLItems.GALLIRAPTOR_EGG.get());
             this.timeUntilNextEgg = this.random.nextInt(8000) + 8000;
@@ -123,7 +120,7 @@ public class Galliraptor extends Animal implements IAnimatable {
     }
 
     public Galliraptor getBreedOffspring(ServerLevel world, AgeableMob ageable) {
-        Galliraptor entity = FLEntities.GALLIRAPTOR.get().create(this.level);
+        Galliraptor entity = FLEntities.GALLIRAPTOR.get().create(this.level());
         if (entity != null) {
             int i = this.getVariant();
             if (this.random.nextInt(5) != 0) {
@@ -161,46 +158,46 @@ public class Galliraptor extends Animal implements IAnimatable {
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving() && isBaby()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor_chick.walk", ILoopType.EDefaultLoopTypes.LOOP));
-            event.getController().setAnimationSpeed(2.5);
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> e) {
+        if (e.isMoving() && isBaby()) {
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor_chick.walk"));
+            e.getController().setAnimationSpeed(2.5);
         }
-        else if (!event.isMoving() && isBaby()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor_chick.idle", ILoopType.EDefaultLoopTypes.LOOP));
+        else if (!e.isMoving() && isBaby()) {
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor_chick.idle"));
         }
-        else if (event.isMoving() && !isBaby() && !isAggressive()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.walk", ILoopType.EDefaultLoopTypes.LOOP));
-            event.getController().setAnimationSpeed(2.85);
+        else if (e.isMoving() && !isBaby() && !isAggressive()) {
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.walk"));
+            e.getController().setAnimationSpeed(2.85);
         }
         else if (isAggressive() && !isBaby()) {
-            event.getController().setAnimationSpeed(1.0);
-            if (event.isMoving())
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.aggro_walk", ILoopType.EDefaultLoopTypes.LOOP));
-            else if (!event.isMoving()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.aggro_idle", ILoopType.EDefaultLoopTypes.LOOP));
+            e.getController().setAnimationSpeed(1.0);
+            if (e.isMoving())
+                e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.aggro_walk"));
+            else if (!e.isMoving()) {
+                e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.aggro_idle"));
             }
         }
         else if (!isBaby() && random.nextInt(250) == 0 && !isAggressive()) {
-            if (event.isMoving())
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.pecking_walk", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
-            else if (!event.isMoving()) {
-                event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.pecking_idle", ILoopType.EDefaultLoopTypes.PLAY_ONCE));
+            if (e.isMoving())
+                e.setAndContinue(RawAnimation.begin().then("animation.galliraptor.pecking_walk", Animation.LoopType.PLAY_ONCE));
+            else if (!e.isMoving()) {
+                e.setAndContinue(RawAnimation.begin().then("animation.galliraptor.pecking_idle", Animation.LoopType.PLAY_ONCE));
             }
         }
         else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.galliraptor.idle", ILoopType.EDefaultLoopTypes.LOOP));
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.idle"));
         }
 
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 2, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+        data.add(new AnimationController<>(this, "controller", 2, this::predicate));
     }
 }

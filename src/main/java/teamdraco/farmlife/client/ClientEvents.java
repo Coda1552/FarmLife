@@ -1,14 +1,7 @@
 package teamdraco.farmlife.client;
 
-import net.minecraft.client.Minecraft;
-import net.minecraft.client.particle.ParticleEngine;
-import net.minecraft.client.renderer.ItemBlockRenderTypes;
-import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
-import net.minecraft.world.entity.EntityType;
-import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.api.distmarker.OnlyIn;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -18,7 +11,6 @@ import teamdraco.farmlife.client.particle.StinkyParticle;
 import teamdraco.farmlife.client.renderer.DomesticTribullRenderer;
 import teamdraco.farmlife.client.renderer.GalliraptorRenderer;
 import teamdraco.farmlife.client.renderer.PlatefishRenderer;
-import teamdraco.farmlife.registry.FLBlocks;
 import teamdraco.farmlife.registry.FLEntities;
 import teamdraco.farmlife.registry.FLParticles;
 
@@ -35,6 +27,6 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
-        event.register(FLParticles.STINKY.get(), StinkyParticle.Provider::new);
+        event.registerSpriteSet(FLParticles.STINKY.get(), StinkyParticle.Provider::new);
     }
 }

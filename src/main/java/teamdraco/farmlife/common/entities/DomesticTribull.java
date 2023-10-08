@@ -20,25 +20,23 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraft.world.phys.HitResult;
-import software.bernie.geckolib3.core.IAnimatable;
-import software.bernie.geckolib3.core.IAnimationTickable;
-import software.bernie.geckolib3.core.PlayState;
-import software.bernie.geckolib3.core.builder.AnimationBuilder;
-import software.bernie.geckolib3.core.builder.ILoopType;
-import software.bernie.geckolib3.core.controller.AnimationController;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.manager.AnimationData;
-import software.bernie.geckolib3.core.manager.AnimationFactory;
-import software.bernie.geckolib3.util.GeckoLibUtil;
+import software.bernie.geckolib.animatable.GeoEntity;
+import software.bernie.geckolib.core.animatable.GeoAnimatable;
+import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
+import software.bernie.geckolib.core.animation.AnimatableManager;
+import software.bernie.geckolib.core.animation.AnimationController;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.core.animation.RawAnimation;
+import software.bernie.geckolib.core.object.PlayState;
+import software.bernie.geckolib.util.GeckoLibUtil;
 import teamdraco.farmlife.registry.FLEntities;
 import teamdraco.farmlife.registry.FLItems;
 import teamdraco.farmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
 
-public class DomesticTribull extends Animal implements IAnimatable {
-    private final AnimationFactory factory = GeckoLibUtil.createFactory(this);
+public class DomesticTribull extends Animal implements GeoEntity {
+    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
 
     public DomesticTribull(EntityType<? extends DomesticTribull> type, Level worldIn) {
         super(type, worldIn);
@@ -69,7 +67,7 @@ public class DomesticTribull extends Animal implements IAnimatable {
 
             setAggressive(true);
             setTarget(p_28298_);
-            return InteractionResult.sidedSuccess(this.level.isClientSide);
+            return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
             return super.mobInteract(p_28298_, p_28299_);
         }
@@ -110,24 +108,23 @@ public class DomesticTribull extends Animal implements IAnimatable {
     }
 
     @Override
-    public AnimationFactory getFactory() {
-        return this.factory;
+    public AnimatableInstanceCache getAnimatableInstanceCache() {
+        return cache;
     }
 
-    private <E extends IAnimatable> PlayState predicate(AnimationEvent<E> event) {
-        if (event.isMoving()) {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.walk", ILoopType.EDefaultLoopTypes.LOOP));
-            event.getController().setAnimationSpeed(1.85D);
+    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> e) {
+        if (e.isMoving()) {
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.tribull.walk"));
+            e.getController().setAnimationSpeed(1.85D);
         } else {
-            event.getController().setAnimation(new AnimationBuilder().addAnimation("animation.tribull.idle", ILoopType.EDefaultLoopTypes.LOOP));
-            event.getController().setAnimationSpeed(1.0D);
+            e.setAndContinue(RawAnimation.begin().thenLoop("animation.tribull.idle"));
+            e.getController().setAnimationSpeed(1.0D);
         }
         return PlayState.CONTINUE;
     }
 
     @Override
-    public void registerControllers(AnimationData data) {
-        data.addAnimationController(new AnimationController<>(this, "controller", 2, this::predicate));
+    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
+        data.add(new AnimationController<>(this, "controller", 2, this::predicate));
     }
-
 }

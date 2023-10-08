@@ -64,7 +64,7 @@ public class TribullCheeseWheelBlock extends Block {
          p_51189_.awardStat(Stats.EAT_CAKE_SLICE);
          p_51189_.getFoodData().eat(3, 0.2F);
 
-         if (!p_51189_.level.isClientSide) {
+         if (!p_51189_.level().isClientSide) {
             if (p_51189_.getActiveEffects().stream().findFirst().isPresent()) {
                p_51189_.removeEffect(p_51189_.getActiveEffects().stream().findFirst().get().getEffect());
             }
@@ -90,7 +90,7 @@ public class TribullCheeseWheelBlock extends Block {
 
    @Override
    public boolean canSurvive(BlockState p_51209_, LevelReader p_51210_, BlockPos p_51211_) {
-      return p_51210_.getBlockState(p_51211_.below()).getMaterial().isSolid();
+      return p_51210_.getBlockState(p_51211_.below()).isSolid();
    }
 
    @Override

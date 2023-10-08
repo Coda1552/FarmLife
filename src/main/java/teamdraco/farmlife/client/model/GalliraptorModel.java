@@ -3,17 +3,17 @@ package teamdraco.farmlife.client.model;
 import com.google.common.collect.Maps;
 import net.minecraft.Util;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib3.core.event.predicate.AnimationEvent;
-import software.bernie.geckolib3.core.processor.IBone;
-import software.bernie.geckolib3.model.AnimatedGeoModel;
-import software.bernie.geckolib3.model.AnimatedTickingGeoModel;
-import software.bernie.geckolib3.model.provider.data.EntityModelData;
+import software.bernie.geckolib.constant.DataTickets;
+import software.bernie.geckolib.core.animatable.model.CoreGeoBone;
+import software.bernie.geckolib.core.animation.AnimationState;
+import software.bernie.geckolib.model.GeoModel;
+import software.bernie.geckolib.model.data.EntityModelData;
 import teamdraco.farmlife.FarmLife;
 import teamdraco.farmlife.common.entities.Galliraptor;
 
 import java.util.Map;
 
-public class GalliraptorModel extends AnimatedGeoModel<Galliraptor> {
+public class GalliraptorModel extends GeoModel<Galliraptor> {
     public static final Map<Integer, ResourceLocation> TEXTURES = Util.make(Maps.newHashMap(), (hashMap) -> {
         hashMap.put(0, new ResourceLocation(FarmLife.MOD_ID, "textures/entity/galliraptor/galliraptor_1.png"));
         hashMap.put(1, new ResourceLocation(FarmLife.MOD_ID, "textures/entity/galliraptor/galliraptor_2.png"));
@@ -40,15 +40,15 @@ public class GalliraptorModel extends AnimatedGeoModel<Galliraptor> {
     }
 
     @Override
-    public void setCustomAnimations(Galliraptor entity, int uniqueID, AnimationEvent customPredicate) {
-        super.setCustomAnimations(entity, uniqueID, customPredicate);
+    public void setCustomAnimations(Galliraptor animatable, long instanceId, AnimationState<Galliraptor> animationState) {
+        super.setCustomAnimations(animatable, instanceId, animationState);
 
-        if (!entity.isBaby()) {
-            IBone head = this.getAnimationProcessor().getBone("head");
-            EntityModelData extraData = (EntityModelData) customPredicate.getExtraDataOfType(EntityModelData.class).get(0);
+        if (!animatable.isBaby()) {
+            CoreGeoBone head = this.getAnimationProcessor().getBone("head");
+            EntityModelData extraData = animationState.getData(DataTickets.ENTITY_MODEL_DATA);
 
-            head.setRotationX(extraData.headPitch * ((float) Math.PI / 180F));
-            head.setRotationY(extraData.netHeadYaw * ((float) Math.PI / 180F));
+            head.setRotX(extraData.headPitch() * ((float) Math.PI / 180F));
+            head.setRotY(extraData.netHeadYaw() * ((float) Math.PI / 180F));
         }
     }
 }

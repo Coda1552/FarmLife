@@ -4,7 +4,6 @@ import net.minecraft.Util;
 import net.minecraft.core.Position;
 import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.world.entity.projectile.Projectile;
-import net.minecraft.world.item.CreativeModeTab;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.ComposterBlock;
@@ -16,7 +15,6 @@ import net.minecraftforge.fml.event.lifecycle.FMLCommonSetupEvent;
 import net.minecraftforge.fml.javafmlmod.FMLJavaModLoadingContext;
 import org.apache.logging.log4j.LogManager;
 import org.apache.logging.log4j.Logger;
-import software.bernie.geckolib3.GeckoLib;
 import teamdraco.farmlife.common.entities.DomesticTribull;
 import teamdraco.farmlife.common.entities.Galliraptor;
 import teamdraco.farmlife.common.entities.Platefish;
@@ -40,8 +38,7 @@ public class FarmLife {
         FLEntities.ENTITIES.register(bus);
         FLSounds.SOUNDS.register(bus);
         FLParticles.PARTICLES.register(bus);
-
-        GeckoLib.initialize();
+        FLCreativeTabs.CREATIVE_TABS.register(bus);
     }
 
     private void registerCommon(FMLCommonSetupEvent event) {
@@ -66,11 +63,4 @@ public class FarmLife {
         event.put(FLEntities.GALLIRAPTOR.get(), Galliraptor.createAttributes().build());
         event.put(FLEntities.PLATEFISH.get(), Platefish.createAttributes().build());
     }
-
-    public final static CreativeModeTab GROUP = new CreativeModeTab(MOD_ID) {
-        @Override
-        public ItemStack makeIcon() {
-            return new ItemStack(FLItems.TRIBULL_SHANK.get());
-        }
-    };
 }
