@@ -3,6 +3,8 @@ package teamdraco.farmlife.common.blocks;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.cauldron.CauldronInteraction;
 import net.minecraft.server.level.ServerLevel;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.util.RandomSource;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
@@ -43,11 +45,9 @@ public class TribullMilkCauldronBlock extends AbstractCauldronBlock {
 
     @Override
     public void randomTick(BlockState state, ServerLevel level, BlockPos pos, RandomSource rand) {
-        if (state.getValue(STAGE) == 1 && rand.nextFloat() > 0.65F) {
+        if (state.getValue(STAGE) < 3 && rand.nextFloat() > 0.65F) {
             level.setBlock(pos, state.setValue(STAGE, state.getValue(STAGE) + 1), 2);
-        }
-        if (state.getValue(STAGE) == 2 && rand.nextFloat() > 0.65F) {
-            level.setBlock(pos, state.setValue(STAGE, state.getValue(STAGE) + 1), 2);
+            level.playSound(null, pos, SoundEvents.MOOSHROOM_MILK_SUSPICIOUSLY, SoundSource.BLOCKS, 1.0F, 1.0F);
         }
     }
 
