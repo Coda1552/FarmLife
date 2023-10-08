@@ -10,6 +10,7 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.item.Items;
 import net.minecraft.world.level.BlockGetter;
+import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.AbstractCauldronBlock;
 import net.minecraft.world.level.block.Block;
 import net.minecraft.world.level.block.state.BlockBehaviour;
@@ -17,6 +18,7 @@ import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.IntegerProperty;
 import net.minecraft.world.phys.HitResult;
+import teamdraco.farmlife.registry.FLParticles;
 
 public class TribullMilkCauldronBlock extends AbstractCauldronBlock {
     public static final IntegerProperty STAGE = IntegerProperty.create("stage", 1, 3);
@@ -48,6 +50,15 @@ public class TribullMilkCauldronBlock extends AbstractCauldronBlock {
         if (state.getValue(STAGE) < 3 && rand.nextFloat() > 0.65F) {
             level.setBlock(pos, state.setValue(STAGE, state.getValue(STAGE) + 1), 2);
             level.playSound(null, pos, SoundEvents.MOOSHROOM_MILK_SUSPICIOUSLY, SoundSource.BLOCKS, 1.0F, 1.0F);
+        }
+    }
+
+    @Override
+    public void animateTick(BlockState state, Level level, BlockPos pos, RandomSource rand) {
+        int stage = state.getValue(STAGE) - 1;
+
+        for (int i = 0; i < stage; i++) {
+            level.addParticle(FLParticles.STINKY.get(), pos.getX() + rand.nextDouble(), pos.getY() + 1.15D, pos.getZ() + rand.nextDouble(), 0.0, 0.0, 0.0);
         }
     }
 

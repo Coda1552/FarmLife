@@ -1,5 +1,7 @@
 package teamdraco.farmlife.client;
 
+import net.minecraft.client.Minecraft;
+import net.minecraft.client.particle.ParticleEngine;
 import net.minecraft.client.renderer.ItemBlockRenderTypes;
 import net.minecraft.client.renderer.RenderType;
 import net.minecraft.client.renderer.entity.EntityRenderers;
@@ -7,15 +9,18 @@ import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraft.world.entity.EntityType;
 import net.minecraftforge.api.distmarker.Dist;
 import net.minecraftforge.api.distmarker.OnlyIn;
+import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.event.lifecycle.FMLClientSetupEvent;
 import teamdraco.farmlife.FarmLife;
+import teamdraco.farmlife.client.particle.StinkyParticle;
 import teamdraco.farmlife.client.renderer.DomesticTribullRenderer;
 import teamdraco.farmlife.client.renderer.GalliraptorRenderer;
 import teamdraco.farmlife.client.renderer.PlatefishRenderer;
 import teamdraco.farmlife.registry.FLBlocks;
 import teamdraco.farmlife.registry.FLEntities;
+import teamdraco.farmlife.registry.FLParticles;
 
 @Mod.EventBusSubscriber(bus = Mod.EventBusSubscriber.Bus.MOD, modid = FarmLife.MOD_ID)
 public class ClientEvents {
@@ -26,18 +31,10 @@ public class ClientEvents {
         EntityRenderers.register(FLEntities.GALLIRAPTOR.get(), GalliraptorRenderer::new);
         EntityRenderers.register(FLEntities.GALLIRAPTOR_EGG.get(), ThrownItemRenderer::new);
         EntityRenderers.register(FLEntities.PLATEFISH.get(), PlatefishRenderer::new);
+    }
 
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.PEACOCK_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.ELECTRIC_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.FANCY_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.OLIVE_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.RUSTY_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.SUNSTREAK_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.POTTED_PEACOCK_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.POTTED_ELECTRIC_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.POTTED_FANCY_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.POTTED_OLIVE_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.POTTED_RUSTY_BURST_POPPY.get(), RenderType.cutout());
-        ItemBlockRenderTypes.setRenderLayer(FLBlocks.POTTED_SUNSTREAK_BURST_POPPY.get(), RenderType.cutout());
+    @SubscribeEvent
+    public static void registerParticleTypes(RegisterParticleProvidersEvent event) {
+        event.register(FLParticles.STINKY.get(), StinkyParticle.Provider::new);
     }
 }

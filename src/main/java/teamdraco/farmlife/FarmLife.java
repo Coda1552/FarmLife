@@ -35,10 +35,11 @@ public class FarmLife {
         bus.addListener(this::registerCommon);
         bus.addListener(this::registerEntityAttributes);
 
-        FLBlocks.REGISTRY.register(bus);
-        FLItems.REGISTRY.register(bus);
-        FLEntities.REGISTRY.register(bus);
-        FLSounds.REGISTRY.register(bus);
+        FLBlocks.BLOCKS.register(bus);
+        FLItems.ITEMS.register(bus);
+        FLEntities.ENTITIES.register(bus);
+        FLSounds.SOUNDS.register(bus);
+        FLParticles.PARTICLES.register(bus);
 
         GeckoLib.initialize();
     }

@@ -1,6 +1,8 @@
 package teamdraco.farmlife.common;
 
 import net.minecraft.core.BlockPos;
+import net.minecraft.sounds.SoundEvents;
+import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.PathfinderMob;
@@ -34,12 +36,15 @@ public class CommonEvents {
 
         if (player.getItemInHand(hand).is(FLItems.TRIBULL_MILK.get()) && level.getBlockState(pos).is(Blocks.CAULDRON)) {
             level.setBlock(pos, FLBlocks.TRIBULL_MILK_CAULDRON.get().defaultBlockState(), 2);
+            level.playSound(null, pos, SoundEvents.MOOSHROOM_MILK_SUSPICIOUSLY, SoundSource.BLOCKS, 1.0F, 1.0F);
+
             if (!player.isCreative()) {
                 player.setItemInHand(hand, new ItemStack(Items.BUCKET));
             }
         }
         if (player.getItemInHand(hand).isEmpty() && level.getBlockState(pos).is(FLBlocks.TRIBULL_MILK_CAULDRON.get()) && level.getBlockState(pos).getValue(TribullMilkCauldronBlock.STAGE) == 3) {
             level.setBlock(pos, Blocks.CAULDRON.defaultBlockState(), 2);
+            level.playSound(null, pos, SoundEvents.WET_GRASS_PLACE, SoundSource.BLOCKS, 1.0F, 1.0F);
 
             if (!player.getInventory().add(new ItemStack(FLBlocks.TRIBULL_CHEESE_WHEEL.get()))) {
                 player.drop(new ItemStack(FLBlocks.TRIBULL_CHEESE_WHEEL.get()), false);
