@@ -48,7 +48,7 @@
       "entries": [
         {
           "type": "minecraft:item",
-          "name": "farmlife:plate",
+          "name": "farmlife:platefish_plate",
           "conditions": [
             {
               "condition": "minecraft:entity_properties",

@@ -1,4 +1,4 @@
-package codyhuh.farmlife.client.renderer;
+package codyhuh.farmlife.client.render;
 
 import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.RenderType;

@@ -33,9 +33,8 @@ public class FLForgeEvents {
     public static void repairItem(AnvilUpdateEvent e) {
         ItemStack damagedItem = e.getLeft();
         ItemStack repairItem = e.getRight();
-        int cost = e.getCost();
 
-        if (repairItem.is(FLItems.PLATE.get()) && damagedItem.isDamaged()) {
+        if (repairItem.is(FLItems.PLATEFISH_PLATE.get()) && damagedItem.isDamaged()) {
             if (damagedItem.isEmpty()) {
                 e.setOutput(ItemStack.EMPTY);
                 e.setCost(0);

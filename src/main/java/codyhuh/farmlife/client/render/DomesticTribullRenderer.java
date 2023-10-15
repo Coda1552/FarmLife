@@ -1,4 +1,4 @@
-package codyhuh.farmlife.client.renderer;
+package codyhuh.farmlife.client.render;
 
 import codyhuh.farmlife.common.entities.DomesticTribull;
 import com.mojang.blaze3d.vertex.PoseStack;

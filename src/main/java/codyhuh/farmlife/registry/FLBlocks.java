@@ -1,5 +1,6 @@
 package codyhuh.farmlife.registry;
 
+import codyhuh.farmlife.common.blocks.PlatefishPlateBlock;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -34,6 +35,8 @@ public class FLBlocks {
 
     public static final RegistryObject<Block> TRIBULL_MILK_CAULDRON = BLOCKS.register("tribull_milk_cauldron", () -> new TribullMilkCauldronBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(2.0F).noOcclusion().randomTicks()));
     public static final RegistryObject<Block> TRIBULL_CHEESE_WHEEL = register("tribull_cheese_wheel", () -> new TribullCheeseWheelBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.WOOL)), new Item.Properties().stacksTo(16));
+
+    public static final RegistryObject<Block> PLATEFISH_PLATE = BLOCKS.register("platefish_plate", () -> new PlatefishPlateBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.STONE)));
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
         return register(name, block, new Item.Properties());

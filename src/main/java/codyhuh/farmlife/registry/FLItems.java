@@ -26,7 +26,7 @@ public class FLItems {
     public static final RegistryObject<Item> COOKED_FULI = ITEMS.register("cooked_fuli", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.375F).nutrition(7).build())));
 
     // Materials
-    public static final RegistryObject<Item> PLATE = ITEMS.register("plate", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PLATEFISH_PLATE = ITEMS.register("platefish_plate", () -> new BlockItem(FLBlocks.PLATEFISH_PLATE.get(), new Item.Properties()));
 
     // Misc.
     public static final RegistryObject<Item> GALLIRAPTOR_EGG = ITEMS.register("galliraptor_egg", () -> new GalliraptorEggItem(new Item.Properties().stacksTo(16)));

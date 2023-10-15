@@ -12,7 +12,6 @@
   "item.farmlife.tribull_cheese_wedge": "Tri-bull Cheese Wedge",
   "item.farmlife.cooked_fuli": "Cooked Fuli",
   "item.farmlife.fuli": "Raw Fuli",
-  "item.farmlife.plate": "Plate",
 
   "item.farmlife.domestic_tribull_spawn_egg": "Domestic Tri-bull Spawn Egg",
   "item.farmlife.galliraptor_spawn_egg": "Galliraptor Spawn Egg",
@@ -32,6 +31,7 @@
   "block.farmlife.potted_sunstreak_burst_poppy": "Potted Sunstreak Burst Poppy",
   "block.farmlife.tribull_milk_cauldron": "Tri-bull Milk Cauldron",
   "block.farmlife.tribull_cheese_wheel": "Tri-bull Cheese Wheel",
+  "block.farmlife.platefish_plate": "Platefish Plate",
 
   "entity.farmlife.domestic_tribull": "Domestic Tri-bull",
   "entity.farmlife.galliraptor": "Galliraptor",

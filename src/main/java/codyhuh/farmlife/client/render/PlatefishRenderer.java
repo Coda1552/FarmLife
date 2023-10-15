@@ -1,4 +1,4 @@
-package codyhuh.farmlife.client.renderer;
+package codyhuh.farmlife.client.render;
 
 import codyhuh.farmlife.FarmLife;
 import codyhuh.farmlife.common.entities.Platefish;

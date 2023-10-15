@@ -20,6 +20,7 @@ public class FarmLife {
         FLEntities.ENTITIES.register(bus);
         FLSounds.SOUNDS.register(bus);
         FLParticles.PARTICLES.register(bus);
+        FLBlockEntities.BLOCK_ENTITIES.register(bus);
         FLCreativeTabs.CREATIVE_TABS.register(bus);
     }
 }

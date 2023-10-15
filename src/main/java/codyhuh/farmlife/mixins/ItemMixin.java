@@ -13,7 +13,7 @@ public class ItemMixin {
 
     @Inject(method = "isValidRepairItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z", at = @At(value = "HEAD", target = "Lnet/minecraft/world/item/Item;isValidRepairItem(Lnet/minecraft/world/item/ItemStack;Lnet/minecraft/world/item/ItemStack;)Z"), cancellable = true)
     private void isValidRepairItemMixin(ItemStack stack, ItemStack repairItemStack, CallbackInfoReturnable<Boolean> cir) {
-        if (repairItemStack.is(FLItems.PLATE.get())) {
+        if (repairItemStack.is(FLItems.PLATEFISH_PLATE.get())) {
             cir.setReturnValue(true);
         }
     }
