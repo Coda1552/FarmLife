@@ -7,6 +7,8 @@ plugins {
     id 'org.parchmentmc.librarian.forgegradle' version '1.+'
 }
 
+apply plugin: 'org.spongepowered.mixin'
+
 version = mod_version
 group = mod_group_id
 
@@ -120,7 +122,15 @@ repositories {
 dependencies {
     minecraft "net.minecraftforge:forge:${minecraft_version}-${forge_version}"
 
+    annotationProcessor 'org.spongepowered:mixin:0.8.5:processor'
+
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.2.2')
+}
+
+mixin {
+    add sourceSets.main, "${mod_id}.refmap.json"
+
+    config "mixins.${mod_id}.json"
 }
 
 // This block of code expands all declared replace properties in the specified resource targets.

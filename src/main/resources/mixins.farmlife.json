@@ -1,0 +1,15 @@
+{
+  "required": true,
+  "minVersion": "0.8",
+  "package": "codyhuh.farmlife.mixins",
+  "compatibilityLevel": "JAVA_8",
+  "refmap": "farmlife.refmap.json",
+  "mixins": [
+    "ItemMixin"
+  ],
+  "client": [
+  ],
+  "injectors": {
+    "defaultRequire": 1
+  }
+}
