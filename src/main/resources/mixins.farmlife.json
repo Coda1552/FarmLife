@@ -5,7 +5,6 @@
   "compatibilityLevel": "JAVA_8",
   "refmap": "farmlife.refmap.json",
   "mixins": [
-    "ItemMixin"
   ],
   "client": [
   ],

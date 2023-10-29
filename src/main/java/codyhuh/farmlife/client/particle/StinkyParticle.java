@@ -37,9 +37,9 @@ public class StinkyParticle extends RisingParticle {
         }
 
         public Particle createParticle(SimpleParticleType p_107750_, ClientLevel p_107751_, double p_107752_, double p_107753_, double p_107754_, double p_107755_, double p_107756_, double p_107757_) {
-            StinkyParticle electricityParticle = new StinkyParticle(p_107751_, p_107752_, p_107753_, p_107754_, p_107755_, p_107756_, p_107757_, this.sprite);
-            electricityParticle.setAlpha(1.0F);
-            return electricityParticle;
+            StinkyParticle particle = new StinkyParticle(p_107751_, p_107752_, p_107753_, p_107754_, p_107755_, p_107756_, p_107757_, this.sprite);
+            particle.setAlpha(1.0F);
+            return particle;
         }
     }
 }

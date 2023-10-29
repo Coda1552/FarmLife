@@ -28,31 +28,6 @@ import codyhuh.farmlife.registry.FLItems;
 @Mod.EventBusSubscriber(modid = FarmLife.MOD_ID, bus = Mod.EventBusSubscriber.Bus.FORGE)
 public class FLForgeEvents {
 
-    // todo - account for renaming
-    @SubscribeEvent
-    public static void repairItem(AnvilUpdateEvent e) {
-        ItemStack damagedItem = e.getLeft();
-        ItemStack repairItem = e.getRight();
-
-        if (repairItem.is(FLItems.PLATEFISH_PLATE.get()) && damagedItem.isDamaged()) {
-            if (damagedItem.isEmpty()) {
-                e.setOutput(ItemStack.EMPTY);
-                e.setCost(0);
-                e.setMaterialCost(0);
-            }
-            else {
-                ItemStack outputItem = damagedItem.copy();
-
-                e.setMaterialCost(1);
-
-                e.setCost(damagedItem.getBaseRepairCost());
-                outputItem.setDamageValue(Math.min(damagedItem.getDamageValue() - 10, damagedItem.getMaxDamage()));
-
-                e.setOutput(outputItem);
-            }
-        }
-    }
-
     @SubscribeEvent
     public static void cauldronInteract(PlayerInteractEvent.RightClickBlock event) {
         Player player = event.getEntity();

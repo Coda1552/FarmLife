@@ -6,6 +6,8 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.Vec3i;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
+import net.minecraft.world.Container;
+import net.minecraft.world.Containers;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.EntityType;
@@ -49,7 +51,7 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
             int itemCount = blockEntity.countItems(blockEntity.getItems());
 
             if (itemCount < blockEntity.getContainerSize()) {
-                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_FRAME_PLACE, SoundSource.BLOCKS, 0.35F, 1.0F);
+                pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 0.35F, 1.0F);
 
                 blockEntity.setItem(itemCount, stack.split(1));
 
@@ -61,16 +63,21 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
         // todo - account for soup
         else if (stack.isEmpty() && pLevel.getBlockEntity(pPos) instanceof PlatefishPlateBlockEntity blockEntity) {
             int itemCount = blockEntity.countItems(blockEntity.getItems());
+            ItemStack toRemove = blockEntity.getItem(Math.max(1, blockEntity.countItems(blockEntity.getItems())) - 1);
 
-            if (itemCount > 0 && pPlayer.getFoodData().getFoodLevel() < 20) {
-                pLevel.playSound(pPlayer, pPos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0F, 1.0F);
-
-                ItemStack toRemove = blockEntity.getItem(itemCount - 1);
-
-                pPlayer.eat(pLevel, toRemove);
-                blockEntity.removeItem(itemCount, 1);
-
+            if (itemCount > 0) {
+                if (pPlayer.isShiftKeyDown()) {
+                    pPlayer.getInventory().add(toRemove);
+                    pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.35F, 1.0F);
+                    blockEntity.removeItem(itemCount, 1);
+                }
+                else if (pPlayer.getFoodData().getFoodLevel() < 20) {
+                    pLevel.playSound(pPlayer, pPos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0F, 1.0F);
+                    pPlayer.eat(pLevel, toRemove); // todo - particles
+                    blockEntity.removeItem(itemCount, 1);
+                }
                 return InteractionResult.SUCCESS;
+
             }
             return InteractionResult.SUCCESS;
         }
@@ -82,5 +89,18 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
     @Override
     public VoxelShape getShape(BlockState p_60555_, BlockGetter p_60556_, BlockPos p_60557_, CollisionContext p_60558_) {
         return Shapes.box(0.125, 0, 0.125, 0.875, 0.0625, 0.875);
+    }
+
+    @Override
+    public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
+        if (!state.is(newState.getBlock())) {
+            BlockEntity be = worldIn.getBlockEntity(pos);
+            if (be instanceof Container) {
+                Containers.dropContents(worldIn, pos, (Container)be);
+                worldIn.updateNeighbourForOutputSignal(pos, this);
+            }
+
+            super.onRemove(state, worldIn, pos, newState, isMoving);
+        }
     }
 }
