@@ -23,17 +23,20 @@ public class PlatefishPlateBlockEntityRenderer implements BlockEntityRenderer<Pl
             return;
         }
 
-
         Minecraft mc = Minecraft.getInstance();
 
         poseStack.pushPose();
         poseStack.translate(0.5D, 0.05D, 0.625D);
         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
 
+        //RandomSource rand = RandomSource.create();
+        //float f = rand.nextFloat();
+        //poseStack.mulPose(Axis.ZP.rotation(f));
+
         for (int i = 0; i < blockEntity.countItems(blockEntity.getItems()); i++) {
             ItemStack stack = blockEntity.getItem(i);
 
-            RandomSource rand = RandomSource.create();
+            //poseStack.mulPose(Axis.ZP.rotation(i % 2 == 0 ? 0.65F : -0.65F));
 
             poseStack.translate(0.0D, 0.0D, 0.0305D);
             poseStack.scale(0.985F, 0.985F, 1.0F);

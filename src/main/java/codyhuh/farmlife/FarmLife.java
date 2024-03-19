@@ -10,7 +10,6 @@ import org.apache.logging.log4j.Logger;
 @Mod(FarmLife.MOD_ID)
 public class FarmLife {
     public static final String MOD_ID = "farmlife";
-    public static final Logger LOGGER = LogManager.getLogger();
 
     public FarmLife() {
         IEventBus bus = FMLJavaModLoadingContext.get().getModEventBus();
