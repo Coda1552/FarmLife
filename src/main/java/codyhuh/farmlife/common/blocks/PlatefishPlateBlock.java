@@ -60,7 +60,6 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
             return InteractionResult.SUCCESS;
         }
 
-        // todo - account for soup
         else if (stack.isEmpty() && pLevel.getBlockEntity(pPos) instanceof PlatefishPlateBlockEntity blockEntity) {
             int itemCount = blockEntity.countItems(blockEntity.getItems());
             ItemStack toRemove = blockEntity.getItem(Math.max(1, blockEntity.countItems(blockEntity.getItems())) - 1);
@@ -72,8 +71,15 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
                     blockEntity.removeItem(itemCount, 1);
                 }
                 else if (pPlayer.getFoodData().getFoodLevel() < 20) {
+                    // todo - particles
                     pLevel.playSound(pPlayer, pPos, SoundEvents.GENERIC_EAT, SoundSource.PLAYERS, 1.0F, 1.0F);
-                    pPlayer.eat(pLevel, toRemove); // todo - particles
+                    ItemEntity itemEntity = EntityType.ITEM.create(pLevel);
+                    itemEntity.setItem(toRemove.finishUsingItem(pLevel, pPlayer));
+                    itemEntity.moveTo(pPos.getX() + 0.5F, pPos.getY() + 0.5F, pPos.getZ() + 0.5F);
+
+                    pPlayer.eat(pLevel, toRemove);
+
+                    pLevel.addFreshEntity(itemEntity);
                     blockEntity.removeItem(itemCount, 1);
                 }
                 return InteractionResult.SUCCESS;
