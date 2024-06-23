@@ -113,7 +113,15 @@ public class Platefish extends Animal implements GeoEntity, IForgeShearable {
         gameEvent(GameEvent.SHEAR, player);
         level.playSound(null, this, SoundEvents.BEEHIVE_SHEAR, SoundSource.PLAYERS, 1.0F, 1.0F);
 
-        return List.of(new ItemStack(FLItems.PLATEFISH_PLATE.get(), 2));
+        //return List.of(new ItemStack(FLItems.PLATEFISH_PLATE.get(), 2));
+        return List.of();
+    }
+
+    @Override
+    public void push(Entity pEntity) {
+        if (!(pEntity instanceof Platefish)) {
+            super.push(pEntity);
+        }
     }
 
     @Override
