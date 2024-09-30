@@ -24,6 +24,7 @@ public class FLItems {
     public static final RegistryObject<Item> TRIBULL_CHEESE_WEDGE = ITEMS.register("tribull_cheese_wedge", () -> new CheeseWedgeItem(new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.25F).nutrition(3).build())));
     //public static final RegistryObject<Item> FULI = ITEMS.register("fuli", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.15F).nutrition(2).build())));
     //public static final RegistryObject<Item> COOKED_FULI = ITEMS.register("cooked_fuli", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.375F).nutrition(7).build())));
+    public static final RegistryObject<Item> SEA_PLUM = ITEMS.register("sea_plum", () -> new BlockItem(FLBlocks.SEA_PLUM.get(), new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.1F).nutrition(2).build())));
 
     // Materials
     //public static final RegistryObject<Item> PLATEFISH_PLATE = ITEMS.register("platefish_plate", () -> new BlockItem(FLBlocks.PLATEFISH_PLATE.get(), new Item.Properties()));

@@ -127,12 +127,6 @@ dependencies {
     implementation fg.deobf('software.bernie.geckolib:geckolib-forge-1.20.1:4.2.2')
 }
 
-mixin {
-    add sourceSets.main, "${mod_id}.refmap.json"
-
-    config "mixins.${mod_id}.json"
-}
-
 // This block of code expands all declared replace properties in the specified resource targets.
 // A missing property will result in an error. Properties are expanded using ${} Groovy notation.
 // When "copyIdeResources" is enabled, this will also run before the game launches in IDE environments.

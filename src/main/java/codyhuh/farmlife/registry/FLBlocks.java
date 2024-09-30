@@ -1,6 +1,7 @@
 package codyhuh.farmlife.registry;
 
 import codyhuh.farmlife.common.blocks.PlatefishPlateBlock;
+import codyhuh.farmlife.common.blocks.SeaPlumBlock;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
@@ -25,6 +26,8 @@ public class FLBlocks {
     public static final RegistryObject<Block> OLIVE_BURST_POPPY = register("olive_burst_poppy", () -> new FlowerBlock(() -> MobEffects.HUNGER, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
     public static final RegistryObject<Block> RUSTY_BURST_POPPY = register("rusty_burst_poppy", () -> new FlowerBlock(() -> MobEffects.WEAKNESS, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
     public static final RegistryObject<Block> SUNSTREAK_BURST_POPPY = register("sunstreak_burst_poppy", () -> new FlowerBlock(() -> MobEffects.FIRE_RESISTANCE, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+
+    public static final RegistryObject<Block> SEA_PLUM = BLOCKS.register("sea_plum", () -> new SeaPlumBlock(BlockBehaviour.Properties.of().noCollission().sound(SoundType.WET_GRASS).randomTicks()));
 
     public static final RegistryObject<Block> POTTED_PEACOCK_BURST_POPPY = BLOCKS.register("potted_peacock_burst_poppy", () -> new FlowerPotBlock(null, PEACOCK_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
     public static final RegistryObject<Block> POTTED_ELECTRIC_BURST_POPPY = BLOCKS.register("potted_electric_burst_poppy", () -> new FlowerPotBlock(null, ELECTRIC_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
