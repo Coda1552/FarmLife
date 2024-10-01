@@ -39,11 +39,6 @@ public class PlatefishPlateBlockEntityRenderer implements BlockEntityRenderer<Pl
 
             //poseStack.mulPose(Axis.ZP.rotation(i % 2 == 0 ? 0.65F : -0.65F));
 
-            if (i == 1) {
-                poseStack.translate(0.0D, 0.0D, 0.0D);
-                poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
-            }
-
             poseStack.translate(0.05D, 0.1D, 0.0305D);
             //poseStack.scale(0.985F, 0.985F, 1.0F);
 
