@@ -18,7 +18,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class PlatefishPlateBlockEntity extends BaseContainerBlockEntity {
-    private final NonNullList<ItemStack> items = NonNullList.withSize(16, ItemStack.EMPTY);
+    private final NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
 
     public PlatefishPlateBlockEntity(BlockPos p_155229_, BlockState p_155230_) {
         super(FLBlockEntities.PLATEFISH_PLATE.get(), p_155229_, p_155230_);
@@ -57,7 +57,7 @@ public class PlatefishPlateBlockEntity extends BaseContainerBlockEntity {
 
     @Override
     public int getContainerSize() {
-        return 16;
+        return 3;
     }
 
     @Override

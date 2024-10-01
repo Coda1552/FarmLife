@@ -46,6 +46,6 @@ public class FLModEvents {
     public static void registerEntityAttributes(EntityAttributeCreationEvent event) {
         event.put(FLEntities.DOMESTIC_TRIBULL.get(), DomesticTribull.createAttributes().build());
         event.put(FLEntities.GALLIRAPTOR.get(), Galliraptor.createAttributes().build());
-        //event.put(FLEntities.PLATEFISH.get(), Platefish.createAttributes().build());
+        event.put(FLEntities.PLATEFISH.get(), Platefish.createAttributes().build());
     }
 }

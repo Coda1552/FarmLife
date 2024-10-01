@@ -26,7 +26,8 @@ public class PlatefishPlateBlockEntityRenderer implements BlockEntityRenderer<Pl
         Minecraft mc = Minecraft.getInstance();
 
         poseStack.pushPose();
-        poseStack.translate(0.5D, 0.05D, 0.625D);
+        //poseStack.translate(0.5D, 0.05D, 0.625D);
+        poseStack.translate(0.6D, 0.05D, 0.7D);
         poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
 
         //RandomSource rand = RandomSource.create();
@@ -38,8 +39,13 @@ public class PlatefishPlateBlockEntityRenderer implements BlockEntityRenderer<Pl
 
             //poseStack.mulPose(Axis.ZP.rotation(i % 2 == 0 ? 0.65F : -0.65F));
 
-            poseStack.translate(0.0D, 0.0D, 0.0305D);
-            poseStack.scale(0.985F, 0.985F, 1.0F);
+            if (i == 1) {
+                poseStack.translate(0.0D, 0.0D, 0.0D);
+                poseStack.mulPose(Axis.ZP.rotationDegrees(45.0F));
+            }
+
+            poseStack.translate(0.05D, 0.1D, 0.0305D);
+            //poseStack.scale(0.985F, 0.985F, 1.0F);
 
             BakedModel model = mc.getItemRenderer().getModel(stack, mc.level, null, 0);
 
