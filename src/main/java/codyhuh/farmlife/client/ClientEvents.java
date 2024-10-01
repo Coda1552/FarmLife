@@ -6,15 +6,14 @@ import codyhuh.farmlife.client.render.DomesticTribullRenderer;
 import codyhuh.farmlife.client.render.GalliraptorRenderer;
 import codyhuh.farmlife.client.render.PlatefishRenderer;
 import codyhuh.farmlife.client.render.block_entities.PlatefishPlateBlockEntityRenderer;
+import codyhuh.farmlife.client.render.item.SeaPlumFruitRenderer;
 import codyhuh.farmlife.registry.FLBlockEntities;
 import codyhuh.farmlife.registry.FLEntities;
 import codyhuh.farmlife.registry.FLParticles;
-import net.minecraft.client.multiplayer.ClientRegistryLayer;
 import net.minecraft.client.renderer.blockentity.BlockEntityRenderers;
 import net.minecraft.client.renderer.entity.EntityRenderers;
 import net.minecraft.client.renderer.entity.ThrownItemRenderer;
 import net.minecraftforge.api.distmarker.Dist;
-import net.minecraftforge.client.event.EntityRenderersEvent;
 import net.minecraftforge.client.event.RegisterParticleProvidersEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -29,6 +28,7 @@ public class ClientEvents {
         EntityRenderers.register(FLEntities.GALLIRAPTOR.get(), GalliraptorRenderer::new);
         EntityRenderers.register(FLEntities.GALLIRAPTOR_EGG.get(), ThrownItemRenderer::new);
         EntityRenderers.register(FLEntities.PLATEFISH.get(), PlatefishRenderer::new);
+        EntityRenderers.register(FLEntities.SEA_PLUM_FRUIT.get(), SeaPlumFruitRenderer::new);
         BlockEntityRenderers.register(FLBlockEntities.PLATEFISH_PLATE.get(), PlatefishPlateBlockEntityRenderer::new);
     }
 
