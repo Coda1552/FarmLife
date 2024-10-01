@@ -21,7 +21,7 @@ public class FLEntities {
     public static final RegistryObject<EntityType<Platefish>> PLATEFISH = create("platefish", EntityType.Builder.of(Platefish::new, MobCategory.WATER_CREATURE).sized(0.9f, 0.4f));
 
     public static final RegistryObject<EntityType<GalliraptorEggEntity>> GALLIRAPTOR_EGG = create("galliraptor_egg", EntityType.Builder.<GalliraptorEggEntity>of(GalliraptorEggEntity::new, MobCategory.MISC).sized(0.25f, 0.25f));
-    public static final RegistryObject<EntityType<SeaPlumFruit>> SEA_PLUM_FRUIT = create("sea_plum_fruit", EntityType.Builder.of(SeaPlumFruit::new, MobCategory.MISC).sized(0.3125f, 0.3125f));
+    public static final RegistryObject<EntityType<SeaPlumFruit>> SEA_PLUM_FRUIT = create("sea_plum_fruit", EntityType.Builder.of(SeaPlumFruit::new, MobCategory.MISC).sized(0.3125f, 0.3125f).noSummon());
 
     private static <T extends Entity> RegistryObject<EntityType<T>> create(String name, EntityType.Builder<T> builder) {
         return ENTITIES.register(name, () -> builder.build(FarmLife.MOD_ID + "." + name));
