@@ -1,6 +1,8 @@
 package codyhuh.farmlife.client;
 
 import codyhuh.farmlife.FarmLife;
+import codyhuh.farmlife.client.model.DomesticTribullModel;
+import codyhuh.farmlife.client.model.GalliraptorModel;
 import codyhuh.farmlife.client.model.SeaPlumModel;
 import codyhuh.farmlife.client.particle.StinkyParticle;
 import codyhuh.farmlife.client.render.DomesticTribullRenderer;
@@ -24,10 +26,11 @@ public class ClientEvents {
 
     @SubscribeEvent
     public static void registerEntityRenderers(EntityRenderersEvent.RegisterRenderers event) {
+        event.registerEntityRenderer(FLEntities.PLATEFISH.get(), PlatefishRenderer::new);
+
         event.registerEntityRenderer(FLEntities.DOMESTIC_TRIBULL.get(), DomesticTribullRenderer::new);
         event.registerEntityRenderer(FLEntities.GALLIRAPTOR.get(), GalliraptorRenderer::new);
         event.registerEntityRenderer(FLEntities.GALLIRAPTOR_EGG.get(), ThrownItemRenderer::new);
-        event.registerEntityRenderer(FLEntities.PLATEFISH.get(), PlatefishRenderer::new);
         event.registerEntityRenderer(FLEntities.SEA_PLUM_FRUIT.get(), SeaPlumFruitRenderer::new);
 
         event.registerBlockEntityRenderer(FLBlockEntities.PLATEFISH_PLATE.get(), PlatefishPlateBlockEntityRenderer::new);
@@ -37,6 +40,9 @@ public class ClientEvents {
     @SubscribeEvent
     public static void registerModelLayers(EntityRenderersEvent.RegisterLayerDefinitions event) {
         event.registerLayerDefinition(FLModelLayers.SEA_PLUM, SeaPlumModel::createBodyLayer);
+        event.registerLayerDefinition(FLModelLayers.DOMESTIC_TRIBULL, DomesticTribullModel::createBodyLayer);
+        event.registerLayerDefinition(FLModelLayers.GALLIRAPTOR, GalliraptorModel::createBodyLayer);
+        event.registerLayerDefinition(FLModelLayers.GALLIRAPTOR_CHICK, GalliraptorModel::createChickBodyLayer);
     }
 
     @SubscribeEvent

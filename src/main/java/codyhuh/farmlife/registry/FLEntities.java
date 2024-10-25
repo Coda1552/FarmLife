@@ -4,7 +4,7 @@ import codyhuh.farmlife.common.entities.DomesticTribull;
 import codyhuh.farmlife.common.entities.Galliraptor;
 import codyhuh.farmlife.common.entities.Platefish;
 import codyhuh.farmlife.common.entities.item.GalliraptorEggEntity;
-import codyhuh.farmlife.common.entities.item.SeaPlumFruit;
+import codyhuh.farmlife.common.entities.item.SeaPlumFruitEntity;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.MobCategory;
@@ -21,7 +21,7 @@ public class FLEntities {
     public static final RegistryObject<EntityType<Platefish>> PLATEFISH = create("platefish", EntityType.Builder.of(Platefish::new, MobCategory.WATER_CREATURE).sized(0.9f, 0.4f));
 
     public static final RegistryObject<EntityType<GalliraptorEggEntity>> GALLIRAPTOR_EGG = create("galliraptor_egg", EntityType.Builder.<GalliraptorEggEntity>of(GalliraptorEggEntity::new, MobCategory.MISC).sized(0.25f, 0.25f));
-    public static final RegistryObject<EntityType<SeaPlumFruit>> SEA_PLUM_FRUIT = create("sea_plum_fruit", EntityType.Builder.<SeaPlumFruit>of(SeaPlumFruit::new, MobCategory.MISC).sized(0.3125f, 0.3125f).noSummon());
+    public static final RegistryObject<EntityType<SeaPlumFruitEntity>> SEA_PLUM_FRUIT = create("sea_plum_fruit", EntityType.Builder.<SeaPlumFruitEntity>of(SeaPlumFruitEntity::new, MobCategory.MISC).sized(0.3125f, 0.3125f).noSummon());
 
     private static <T extends Entity> RegistryObject<EntityType<T>> create(String name, EntityType.Builder<T> builder) {
         return ENTITIES.register(name, () -> builder.build(FarmLife.MOD_ID + "." + name));

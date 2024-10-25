@@ -1,7 +1,6 @@
 package codyhuh.farmlife.common.block_entities;
 
-import codyhuh.farmlife.common.blocks.SeaPlumBlock;
-import codyhuh.farmlife.common.entities.item.SeaPlumFruit;
+import codyhuh.farmlife.common.entities.item.SeaPlumFruitEntity;
 import codyhuh.farmlife.registry.FLBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
@@ -11,19 +10,18 @@ import net.minecraft.util.RandomSource;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import net.minecraftforge.common.ForgeHooks;
 
 public class SeaPlumBlockEntity extends BlockEntity {
     private final int maxFruits = 3;
     private int fruitCount = 0;
-    public NonNullList<SeaPlumFruit> fruitEntities = NonNullList.create();
+    public NonNullList<SeaPlumFruitEntity> fruitEntities = NonNullList.create();
 
     public SeaPlumBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(FLBlockEntities.SEA_PLUM.get(), pPos, pBlockState);
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SeaPlumBlockEntity be) {
-        
+
     }
 
     public void addFruitEntity(int amount, BlockPos pos) {
@@ -31,7 +29,7 @@ public class SeaPlumBlockEntity extends BlockEntity {
             for (int i = 0; i < amount; i++) {
                 RandomSource rand = RandomSource.create();
 
-                SeaPlumFruit plum = new SeaPlumFruit(level, pos, pos, rand.nextFloat());
+                SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos, pos, rand.nextFloat());
                 plum.moveTo(plum.position().add(0.5D,0.0D,0.5D));
 
                 level.addFreshEntity(plum);

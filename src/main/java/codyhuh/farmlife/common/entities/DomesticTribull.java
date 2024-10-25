@@ -20,23 +20,13 @@ import net.minecraft.world.item.Items;
 import net.minecraft.world.item.crafting.Ingredient;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.state.BlockState;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.AnimatableManager;
-import software.bernie.geckolib.core.animation.AnimationController;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.animation.RawAnimation;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 import codyhuh.farmlife.registry.FLEntities;
 import codyhuh.farmlife.registry.FLItems;
 import codyhuh.farmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
 
-public class DomesticTribull extends Animal implements GeoEntity {
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
+public class DomesticTribull extends Animal {
 
     public DomesticTribull(EntityType<? extends DomesticTribull> type, Level worldIn) {
         super(type, worldIn);
@@ -58,18 +48,18 @@ public class DomesticTribull extends Animal implements GeoEntity {
         return Mob.createMobAttributes().add(Attributes.MAX_HEALTH, 14.0D).add(Attributes.MOVEMENT_SPEED, 0.2D).add(Attributes.ATTACK_DAMAGE, 2.5D);
     }
 
-    public InteractionResult mobInteract(Player p_28298_, InteractionHand p_28299_) {
-        ItemStack itemstack = p_28298_.getItemInHand(p_28299_);
+    public InteractionResult mobInteract(Player player, InteractionHand hand) {
+        ItemStack itemstack = player.getItemInHand(hand);
         if (itemstack.is(Items.BUCKET) && !this.isBaby()) {
-            p_28298_.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
-            ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, p_28298_, FLItems.TRIBULL_MILK.get().getDefaultInstance());
-            p_28298_.setItemInHand(p_28299_, itemstack1);
+            player.playSound(SoundEvents.COW_MILK, 1.0F, 1.0F);
+            ItemStack itemstack1 = ItemUtils.createFilledResult(itemstack, player, FLItems.TRIBULL_MILK.get().getDefaultInstance());
+            player.setItemInHand(hand, itemstack1);
 
             setAggressive(true);
-            setTarget(p_28298_);
+            setTarget(player);
             return InteractionResult.sidedSuccess(this.level().isClientSide);
         } else {
-            return super.mobInteract(p_28298_, p_28299_);
+            return super.mobInteract(player, hand);
         }
     }
 
@@ -105,26 +95,5 @@ public class DomesticTribull extends Animal implements GeoEntity {
 
     protected float getStandingEyeHeight(Pose poseIn, EntityDimensions sizeIn) {
         return this.isBaby() ? 0.5F : 1.0F;
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> e) {
-        if (e.isMoving()) {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.tribull.walk"));
-            e.getController().setAnimationSpeed(1.85D);
-        } else {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.tribull.idle"));
-            e.getController().setAnimationSpeed(1.0D);
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController<>(this, "controller", 2, this::predicate));
     }
 }

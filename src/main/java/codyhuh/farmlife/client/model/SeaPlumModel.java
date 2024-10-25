@@ -1,6 +1,6 @@
 package codyhuh.farmlife.client.model;
 
-import codyhuh.farmlife.common.entities.item.SeaPlumFruit;
+import codyhuh.farmlife.common.entities.item.SeaPlumFruitEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import net.minecraft.client.model.EntityModel;
@@ -9,7 +9,7 @@ import net.minecraft.client.model.geom.PartPose;
 import net.minecraft.client.model.geom.builders.*;
 import net.minecraft.util.Mth;
 
-public class SeaPlumModel<T extends SeaPlumFruit> extends EntityModel<T> {
+public class SeaPlumModel<T extends SeaPlumFruitEntity> extends EntityModel<T> {
 	private final ModelPart stem;
 	private final ModelPart fruit;
 

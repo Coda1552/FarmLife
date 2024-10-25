@@ -3,7 +3,7 @@ package codyhuh.farmlife.client.render.item;
 import codyhuh.farmlife.FarmLife;
 import codyhuh.farmlife.client.FLModelLayers;
 import codyhuh.farmlife.client.model.SeaPlumModel;
-import codyhuh.farmlife.common.entities.item.SeaPlumFruit;
+import codyhuh.farmlife.common.entities.item.SeaPlumFruitEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
 import com.mojang.math.Axis;
@@ -13,12 +13,10 @@ import net.minecraft.client.renderer.entity.EntityRenderer;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
 import net.minecraft.client.renderer.texture.OverlayTexture;
 import net.minecraft.resources.ResourceLocation;
-import org.joml.Matrix3f;
-import org.joml.Matrix4f;
 
-public class SeaPlumFruitRenderer extends EntityRenderer<SeaPlumFruit> {
+public class SeaPlumFruitRenderer extends EntityRenderer<SeaPlumFruitEntity> {
     private static final ResourceLocation TEXTURE = new ResourceLocation(FarmLife.MOD_ID, "textures/entity/sea_plum/sea_plum.png");
-    private final SeaPlumModel<SeaPlumFruit> model;
+    private final SeaPlumModel<SeaPlumFruitEntity> model;
 
     public SeaPlumFruitRenderer(EntityRendererProvider.Context renderManager) {
         super(renderManager);
@@ -27,7 +25,7 @@ public class SeaPlumFruitRenderer extends EntityRenderer<SeaPlumFruit> {
     }
 
     @Override
-    public void render(SeaPlumFruit entity, float pEntityYaw, float pPartialTick, PoseStack poseStack, MultiBufferSource buffer, int pPackedLight) {
+    public void render(SeaPlumFruitEntity entity, float pEntityYaw, float pPartialTick, PoseStack poseStack, MultiBufferSource buffer, int pPackedLight) {
         super.render(entity, pEntityYaw, pPartialTick, poseStack, buffer, pPackedLight);
 
         VertexConsumer vertexConsumer = buffer.getBuffer(RenderType.entityTranslucent(TEXTURE));
@@ -44,7 +42,7 @@ public class SeaPlumFruitRenderer extends EntityRenderer<SeaPlumFruit> {
     }
 
     @Override
-    public ResourceLocation getTextureLocation(SeaPlumFruit pEntity) {
+    public ResourceLocation getTextureLocation(SeaPlumFruitEntity pEntity) {
         return TEXTURE;
     }
 }

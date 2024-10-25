@@ -25,13 +25,6 @@ import net.minecraft.world.level.Level;
 import net.minecraft.world.level.ServerLevelAccessor;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.pathfinder.BlockPathTypes;
-import software.bernie.geckolib.animatable.GeoEntity;
-import software.bernie.geckolib.core.animatable.GeoAnimatable;
-import software.bernie.geckolib.core.animatable.instance.AnimatableInstanceCache;
-import software.bernie.geckolib.core.animation.*;
-import software.bernie.geckolib.core.animation.AnimationState;
-import software.bernie.geckolib.core.object.PlayState;
-import software.bernie.geckolib.util.GeckoLibUtil;
 import codyhuh.farmlife.common.entities.ai.AvoidPredatorGoal;
 import codyhuh.farmlife.common.entities.ai.GalliraptorTargetGoal;
 import codyhuh.farmlife.registry.FLEntities;
@@ -40,11 +33,10 @@ import codyhuh.farmlife.registry.FLSounds;
 
 import javax.annotation.Nullable;
 
-public class Galliraptor extends Animal implements GeoEntity {
+public class Galliraptor extends Animal {
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Galliraptor.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> PECKING = SynchedEntityData.defineId(Galliraptor.class, EntityDataSerializers.BOOLEAN);
     private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.MELON, Items.MELON_SEEDS);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     public int timeUntilNextEgg = this.random.nextInt(8000) + 8000;
 
     public Galliraptor(EntityType<? extends Galliraptor> type, Level worldIn) {
@@ -153,51 +145,10 @@ public class Galliraptor extends Animal implements GeoEntity {
 
     @Override
     public SpawnGroupData finalizeSpawn(ServerLevelAccessor worldIn, DifficultyInstance difficultyIn, MobSpawnType reason, @Nullable SpawnGroupData spawnDataIn, @Nullable CompoundTag dataTag) {
-        setVariant(random.nextInt(5));
+        if (spawnDataIn == null) {
+            setVariant(random.nextInt(5));
+        }
+
         return spawnDataIn;
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> e) {
-        if (e.isMoving() && isBaby()) {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor_chick.walk"));
-            e.getController().setAnimationSpeed(2.5);
-        }
-        else if (!e.isMoving() && isBaby()) {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor_chick.idle"));
-        }
-        else if (e.isMoving() && !isBaby() && !isAggressive()) {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.walk"));
-            e.getController().setAnimationSpeed(2.85);
-        }
-        else if (isAggressive() && !isBaby()) {
-            e.getController().setAnimationSpeed(1.0);
-            if (e.isMoving())
-                e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.aggro_walk"));
-            else if (!e.isMoving()) {
-                e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.aggro_idle"));
-            }
-        }
-        else if (!isBaby() && random.nextInt(250) == 0 && !isAggressive()) {
-            if (e.isMoving())
-                e.setAndContinue(RawAnimation.begin().then("animation.galliraptor.pecking_walk", Animation.LoopType.PLAY_ONCE));
-            else if (!e.isMoving()) {
-                e.setAndContinue(RawAnimation.begin().then("animation.galliraptor.pecking_idle", Animation.LoopType.PLAY_ONCE));
-            }
-        }
-        else {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.galliraptor.idle"));
-        }
-
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController<>(this, "controller", 2, this::predicate));
     }
 }
