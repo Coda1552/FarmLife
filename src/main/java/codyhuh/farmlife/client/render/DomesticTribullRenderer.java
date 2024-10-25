@@ -12,8 +12,8 @@ import net.minecraftforge.api.distmarker.OnlyIn;
 
 @OnlyIn(Dist.CLIENT)
 public class DomesticTribullRenderer extends MobRenderer<DomesticTribull, DomesticTribullModel<DomesticTribull>> {
-    private static final ResourceLocation TRIBULL_LOCATION = new ResourceLocation(FarmLife.MOD_ID,"textures/entity/domestic_tribull/adult_domestic_tribull.png");
-    private static final ResourceLocation BABY_TRIBULL_LOCATION = new ResourceLocation(FarmLife.MOD_ID,"textures/entity/domestic_tribull/baby_domestic_tribull.png");
+    private static final ResourceLocation TRIBULL_TEXTURE = new ResourceLocation(FarmLife.MOD_ID,"textures/entity/domestic_tribull/adult_domestic_tribull.png");
+    private static final ResourceLocation BABY_TRIBULL_TEXTURE = new ResourceLocation(FarmLife.MOD_ID,"textures/entity/domestic_tribull/baby_domestic_tribull.png");
 
     public DomesticTribullRenderer(EntityRendererProvider.Context ctx) {
         super(ctx, new DomesticTribullModel<>(ctx.bakeLayer(FLModelLayers.DOMESTIC_TRIBULL)), 0.7F);
@@ -21,6 +21,6 @@ public class DomesticTribullRenderer extends MobRenderer<DomesticTribull, Domest
 
     @Override
     public ResourceLocation getTextureLocation(DomesticTribull entity) {
-        return entity.isBaby() ? BABY_TRIBULL_LOCATION : TRIBULL_LOCATION;
+        return entity.isBaby() ? BABY_TRIBULL_TEXTURE : TRIBULL_TEXTURE;
     }
 }

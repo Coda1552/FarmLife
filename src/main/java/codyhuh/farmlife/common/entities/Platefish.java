@@ -49,9 +49,8 @@ import java.util.List;
 import java.util.function.Predicate;
 import java.util.stream.Stream;
 
-public class Platefish extends Animal implements GeoEntity, IForgeShearable {
+public class Platefish extends Animal implements IForgeShearable {
     private static final EntityDataAccessor<Boolean> SHEARED = SynchedEntityData.defineId(Platefish.class, EntityDataSerializers.BOOLEAN);
-    private final AnimatableInstanceCache cache = GeckoLibUtil.createInstanceCache(this);
     @Nullable
     private Platefish leader;
     private int schoolSize = 1;
@@ -309,25 +308,6 @@ public class Platefish extends Animal implements GeoEntity, IForgeShearable {
         }
 
         return p_27531_;
-    }
-
-    private <T extends GeoAnimatable> PlayState predicate(AnimationState<T> e) {
-        if (isInWater() && e.isMoving()) {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.platefish.swim"));
-        } else {
-            e.setAndContinue(RawAnimation.begin().thenLoop("animation.platefish.idle"));
-        }
-        return PlayState.CONTINUE;
-    }
-
-    @Override
-    public void registerControllers(AnimatableManager.ControllerRegistrar data) {
-        data.add(new AnimationController<>(this, "controller", 2, this::predicate));
-    }
-
-    @Override
-    public AnimatableInstanceCache getAnimatableInstanceCache() {
-        return cache;
     }
 
     private static class FollowFlockLeaderGoal extends Goal {

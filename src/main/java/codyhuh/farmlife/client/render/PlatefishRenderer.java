@@ -1,34 +1,26 @@
 package codyhuh.farmlife.client.render;
 
 import codyhuh.farmlife.FarmLife;
+import codyhuh.farmlife.client.FLModelLayers;
+import codyhuh.farmlife.client.model.PlatefishModel;
 import codyhuh.farmlife.common.entities.Platefish;
-import com.mojang.blaze3d.vertex.PoseStack;
-import com.mojang.blaze3d.vertex.VertexConsumer;
-import net.minecraft.client.renderer.MultiBufferSource;
 import net.minecraft.client.renderer.entity.EntityRendererProvider;
+import net.minecraft.client.renderer.entity.MobRenderer;
 import net.minecraft.resources.ResourceLocation;
-import software.bernie.geckolib.cache.object.BakedGeoModel;
-import software.bernie.geckolib.model.DefaultedEntityGeoModel;
-import software.bernie.geckolib.renderer.GeoEntityRenderer;
+import net.minecraftforge.api.distmarker.Dist;
+import net.minecraftforge.api.distmarker.OnlyIn;
 
-public class PlatefishRenderer extends GeoEntityRenderer<Platefish> {
+@OnlyIn(Dist.CLIENT)
+public class PlatefishRenderer extends MobRenderer<Platefish, PlatefishModel<Platefish>> {
+    private static final ResourceLocation TEXTURE = new ResourceLocation(FarmLife.MOD_ID,"textures/entity/platefish/platefish.png");
+    private static final ResourceLocation SHEARED_TEXTURE = new ResourceLocation(FarmLife.MOD_ID,"textures/entity/platefish/sheared_platefish.png");
 
-    public PlatefishRenderer(EntityRendererProvider.Context renderManager) {
-        super(renderManager, new DefaultedEntityGeoModel<>(new ResourceLocation(FarmLife.MOD_ID, "platefish")));
-        this.shadowRadius = 0.3F;
+    public PlatefishRenderer(EntityRendererProvider.Context ctx) {
+        super(ctx, new PlatefishModel<>(ctx.bakeLayer(FLModelLayers.PLATEFISH)), 0.2F);
     }
 
     @Override
-    public ResourceLocation getTextureLocation(Platefish animatable) {
-        return animatable.isSheared() ? new ResourceLocation(FarmLife.MOD_ID, "textures/entity/platefish/naked.png") : new ResourceLocation(FarmLife.MOD_ID, "textures/entity/platefish/overgrown.png");
-    }
-
-    @Override
-    public void preRender(PoseStack poseStack, Platefish animatable, BakedGeoModel model, MultiBufferSource bufferSource, VertexConsumer buffer, boolean isReRender, float partialTick, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {
-        super.preRender(poseStack, animatable, model, bufferSource, buffer, isReRender, partialTick, packedLight, packedOverlay, red, green, blue, alpha);
-
-        if (animatable.isBaby()) {
-            poseStack.scale(0.5F, 0.5F, 0.5F);
-        }
+    public ResourceLocation getTextureLocation(Platefish entity) {
+        return entity.isSheared() ? SHEARED_TEXTURE : TEXTURE;
     }
 }
