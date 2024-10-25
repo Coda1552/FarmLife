@@ -6,10 +6,16 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.nbt.Tag;
 import net.minecraft.util.RandomSource;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
+import org.jetbrains.annotations.Nullable;
+
+import java.util.Objects;
+import java.util.UUID;
 
 public class SeaPlumBlockEntity extends BlockEntity {
     private final int maxFruits = 3;
@@ -21,20 +27,21 @@ public class SeaPlumBlockEntity extends BlockEntity {
     }
 
     public static void serverTick(Level level, BlockPos pos, BlockState state, SeaPlumBlockEntity be) {
-
     }
 
-    public void addFruitEntity(int amount, BlockPos pos) {
+    public void addFruitEntity(@Nullable CompoundTag tag, int amount, BlockPos pos) {
         if (getFruitEntityCount() < getMaxFruit()) {
             for (int i = 0; i < amount; i++) {
-                RandomSource rand = RandomSource.create();
-
-                SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos, pos, rand.nextFloat());
+                SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos, pos);
                 plum.moveTo(plum.position().add(0.5D,0.0D,0.5D));
 
-                level.addFreshEntity(plum);
+                if (tag != null) {
+                    plum.deserializeNBT(tag);
+                }
 
                 fruitEntities.add(plum);
+
+                level.addFreshEntity(plum);
             }
         }
     }
@@ -76,18 +83,13 @@ public class SeaPlumBlockEntity extends BlockEntity {
         super.load(tag);
         setFruitCount(tag.getInt("FruitCount"));
 
-        if (tag.contains("FruitEntities", 10)) {
-            ListTag listTag = tag.getList("FruitEntities", 10);
+        for (int i = 0; i < getFruitCount(); i++) {
+            ListTag list = tag.getList("FruitEntities", 10);
 
-            for (int i = 0; i < getFruitEntityCount(); i++) {
-                fruitEntities.get(i).deserializeNBT(tag);
-            }
+            CompoundTag compound = list.getCompound(1);
+
+            addFruitEntity(compound, i, getBlockPos());
         }
-    }
-
-    @Override
-    public boolean isRemoved() {
-        return super.isRemoved();
     }
 
     @Override

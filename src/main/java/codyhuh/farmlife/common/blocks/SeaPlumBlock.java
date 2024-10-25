@@ -5,6 +5,7 @@ import codyhuh.farmlife.registry.FLBlockEntities;
 import codyhuh.farmlife.registry.FLItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
+import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -134,7 +135,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
                 plum.addFruit(1);
                 BoneMealItem.applyBonemeal(held, pLevel, pos, player);
                 BoneMealItem.addGrowthParticles(pLevel, pos, 3);
-                plum.addFruitEntity(1, pos);
+                plum.addFruitEntity(null, 1, pos);
 
                 if (!player.getAbilities().instabuild) {
                     held.shrink(1);

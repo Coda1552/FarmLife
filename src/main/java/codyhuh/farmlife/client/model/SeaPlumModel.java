@@ -1,5 +1,6 @@
 package codyhuh.farmlife.client.model;
 
+import codyhuh.farmlife.common.block_entities.SeaPlumBlockEntity;
 import codyhuh.farmlife.common.entities.item.SeaPlumFruitEntity;
 import com.mojang.blaze3d.vertex.PoseStack;
 import com.mojang.blaze3d.vertex.VertexConsumer;
@@ -36,11 +37,15 @@ public class SeaPlumModel<T extends SeaPlumFruitEntity> extends EntityModel<T> {
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
 		stem.getAllParts().forEach(ModelPart::resetPose);
 
-		stem.xRot = Mth.sin(ageInTicks * 0.15F) * 0.3F;
-		stem.zRot = Mth.cos(ageInTicks * 0.15F) * 0.3F;
+		if (entity.level().getBlockEntity(entity.getBlockPos()) instanceof SeaPlumBlockEntity plum) {
+			int i = plum.getFruitEntityCount();
 
-		fruit.xRot = -Mth.sin(ageInTicks * 0.15F) * 0.15F;
-		fruit.zRot = -Mth.cos(ageInTicks * 0.15F) * 0.15F;
+			stem.xRot = Mth.sin(ageInTicks * 0.15F) * 0.3F;
+			stem.zRot = Mth.cos(ageInTicks * 0.15F) * 0.3F;
+
+			fruit.xRot = -Mth.sin(ageInTicks * 0.15F) * 0.15F;
+			fruit.zRot = -Mth.cos(ageInTicks * 0.15F) * 0.15F;
+		}
 	}
 
 	@Override

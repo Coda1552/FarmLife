@@ -1,5 +1,6 @@
 package codyhuh.farmlife.common.entities.item;
 
+import codyhuh.farmlife.common.block_entities.SeaPlumBlockEntity;
 import codyhuh.farmlife.registry.FLEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
@@ -13,14 +14,13 @@ import net.minecraft.world.level.Level;
 // Some code adapted from Endergetic Expansion
 public class SeaPlumFruitEntity extends Entity {
     private static final EntityDataAccessor<BlockPos> DATA_BLOCK_POS = SynchedEntityData.defineId(SeaPlumFruitEntity.class, EntityDataSerializers.BLOCK_POS);
-    public float factor = 0.5F;
 
     public SeaPlumFruitEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         setNoGravity(true);
     }
 
-    public SeaPlumFruitEntity(Level world, BlockPos pos, BlockPos origin, float factor) {
+    public SeaPlumFruitEntity(Level world, BlockPos pos, BlockPos origin) {
         this(FLEntities.SEA_PLUM_FRUIT.get(), world);
         float xPos = origin.getX();
         float zPos = origin.getZ();
@@ -32,7 +32,15 @@ public class SeaPlumFruitEntity extends Entity {
         this.xo = this.getX();
         this.yo = this.getY();
         this.zo = this.getZ();
-        this.factor = factor;
+    }
+
+    @Override
+    public void tick() {
+        super.tick();
+
+        if (level().getBlockEntity(getBlockPos()) instanceof SeaPlumBlockEntity be && be.getFruitEntityCount() == 0) {
+            discard();
+        }
     }
 
     @Override
