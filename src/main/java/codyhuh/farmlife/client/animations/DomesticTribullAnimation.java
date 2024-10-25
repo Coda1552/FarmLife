@@ -16,6 +16,7 @@ public class DomesticTribullAnimation {
 			))
 			.build();
 
+	// todo - speed this up by 1.85x
 	public static final AnimationDefinition WALK = AnimationDefinition.Builder.withLength(2.0F).looping()
 			.addAnimation("root", new AnimationChannel(AnimationChannel.Targets.ROTATION,
 					new Keyframe(0.0F, KeyframeAnimations.degreeVec(0.0F, 0.0F, 1.0F), AnimationChannel.Interpolations.LINEAR),
