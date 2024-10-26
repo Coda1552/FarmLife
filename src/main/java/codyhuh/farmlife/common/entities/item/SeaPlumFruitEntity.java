@@ -3,29 +3,19 @@ package codyhuh.farmlife.common.entities.item;
 import codyhuh.farmlife.common.block_entities.SeaPlumBlockEntity;
 import codyhuh.farmlife.registry.FLEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.network.protocol.game.ClientboundAddExperienceOrbPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
-import net.minecraft.world.damagesource.DamageSource;
-import net.minecraft.world.entity.*;
-import net.minecraft.world.entity.ai.attributes.AttributeSupplier;
-import net.minecraft.world.entity.ai.attributes.Attributes;
-import net.minecraft.world.item.ItemStack;
-import net.minecraft.world.item.Items;
+import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
-import net.minecraft.world.phys.Vec3;
 
 // Some code adapted from Endergetic Expansion
-public class SeaPlumFruitEntity extends LivingEntity {
+public class SeaPlumFruitEntity extends Entity {
     private static final EntityDataAccessor<BlockPos> DATA_BLOCK_POS = SynchedEntityData.defineId(SeaPlumFruitEntity.class, EntityDataSerializers.BLOCK_POS);
 
-    public SeaPlumFruitEntity(EntityType<? extends LivingEntity> pEntityType, Level pLevel) {
+    public SeaPlumFruitEntity(EntityType<?> pEntityType, Level pLevel) {
         super(pEntityType, pLevel);
         setNoGravity(true);
     }
@@ -44,23 +34,17 @@ public class SeaPlumFruitEntity extends LivingEntity {
         this.zo = this.getZ();
     }
 
-    public static AttributeSupplier.Builder createAttributes() {
-        return createLivingAttributes().add(Attributes.MAX_HEALTH, 1.0D);
-    }
-
     @Override
     public void tick() {
         super.tick();
 
-        if (level().getBlockEntity(getBlockPos()) instanceof SeaPlumBlockEntity be) {
-            if (be.getFruitCount() == 0) discard();
-            if (isRemoved()) be.removeFruit(1);
+        if (level().getBlockEntity(getBlockPos()) instanceof SeaPlumBlockEntity be && be.getFruitCount() == 0) {
+            discard();
         }
     }
 
     @Override
     protected void defineSynchedData() {
-        super.defineSynchedData();
         this.entityData.define(DATA_BLOCK_POS, BlockPos.ZERO);
     }
 
@@ -73,8 +57,7 @@ public class SeaPlumFruitEntity extends LivingEntity {
     }
 
     @Override
-    public void readAdditionalSaveData(CompoundTag pCompound) {
-        super.readAdditionalSaveData(pCompound);
+    protected void readAdditionalSaveData(CompoundTag pCompound) {
         int i = pCompound.getInt("BlockPosX");
         int j = pCompound.getInt("BlockPosY");
         int k = pCompound.getInt("BlockPosZ");
@@ -82,49 +65,9 @@ public class SeaPlumFruitEntity extends LivingEntity {
     }
 
     @Override
-    public void addAdditionalSaveData(CompoundTag pCompound) {
-        super.addAdditionalSaveData(pCompound);
+    protected void addAdditionalSaveData(CompoundTag pCompound) {
         pCompound.putInt("BlockPosX", this.getBlockPos().getX());
         pCompound.putInt("BlockPosY", this.getBlockPos().getY());
         pCompound.putInt("BlockPosZ", this.getBlockPos().getZ());
-    }
-
-    @Override
-    public Iterable<ItemStack> getArmorSlots() {
-        return NonNullList.withSize(0, ItemStack.EMPTY);
-    }
-
-    @Override
-    public boolean hurt(DamageSource pSource, float pAmount) {
-        return false;
-    }
-
-    @Override
-    public boolean canBeCollidedWith() {
-        return false;
-    }
-
-    @Override
-    public ItemStack getItemBySlot(EquipmentSlot pSlot) {
-        return ItemStack.EMPTY;
-    }
-
-    @Override
-    public void setItemSlot(EquipmentSlot pSlot, ItemStack pStack) {
-    }
-
-    @Override
-    public HumanoidArm getMainArm() {
-        return HumanoidArm.RIGHT;
-    }
-
-    @Override
-    public boolean attackable() {
-        return false;
-    }
-
-    @Override
-    public boolean skipAttackInteraction(Entity pEntity) {
-        return true;
     }
 }

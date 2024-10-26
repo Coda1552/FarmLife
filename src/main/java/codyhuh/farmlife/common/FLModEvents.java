@@ -5,7 +5,6 @@ import codyhuh.farmlife.common.entities.DomesticTribull;
 import codyhuh.farmlife.common.entities.Galliraptor;
 import codyhuh.farmlife.common.entities.Platefish;
 import codyhuh.farmlife.common.entities.item.GalliraptorEggEntity;
-import codyhuh.farmlife.common.entities.item.SeaPlumFruitEntity;
 import codyhuh.farmlife.registry.FLBlocks;
 import codyhuh.farmlife.registry.FLEntities;
 import codyhuh.farmlife.registry.FLItems;
@@ -48,6 +47,5 @@ public class FLModEvents {
         event.put(FLEntities.DOMESTIC_TRIBULL.get(), DomesticTribull.createAttributes().build());
         event.put(FLEntities.GALLIRAPTOR.get(), Galliraptor.createAttributes().build());
         event.put(FLEntities.PLATEFISH.get(), Platefish.createAttributes().build());
-        event.put(FLEntities.SEA_PLUM_FRUIT.get(), SeaPlumFruitEntity.createAttributes().build());
     }
 }
