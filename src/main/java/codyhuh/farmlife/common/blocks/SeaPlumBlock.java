@@ -135,7 +135,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
 
         if (canGrow(pLevel, pos) && pState.getValue(AGE) > 0 && te instanceof SeaPlumBlockEntity plum) {
             if (held.is(Items.BONE_MEAL) && plum.getFruitCount() < plum.getMaxFruit()) {
-                plum.addFruit(1);
+                plum.addFruit(pLevel, pos, 1);
                 BoneMealItem.applyBonemeal(held, pLevel, pos, player);
                 BoneMealItem.addGrowthParticles(pLevel, pos, 3);
                 plum.addFruitEntity(pLevel, pos);
@@ -189,7 +189,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
             BlockEntity te = pLevel.getBlockEntity(pPos);
 
             if (te instanceof SeaPlumBlockEntity plum) {
-                plum.addFruit(1);
+                plum.addFruit(pLevel, pPos, 1);
             }
         }
         else {

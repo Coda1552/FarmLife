@@ -11,7 +11,6 @@ import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 
-// Some code adapted from Endergetic Expansion
 public class SeaPlumFruitEntity extends Entity {
     private static final EntityDataAccessor<BlockPos> DATA_BLOCK_POS = SynchedEntityData.defineId(SeaPlumFruitEntity.class, EntityDataSerializers.BLOCK_POS);
 
@@ -22,11 +21,6 @@ public class SeaPlumFruitEntity extends Entity {
 
     public SeaPlumFruitEntity(Level world, BlockPos pos, BlockPos origin) {
         this(FLEntities.SEA_PLUM_FRUIT.get(), world);
-        float xPos = origin.getX();
-        float zPos = origin.getZ();
-        float yPos = origin.getY();
-
-        this.setPos(xPos, yPos, zPos);
         this.setBlockPos(pos);
 
         this.xo = this.getX();
