@@ -76,7 +76,7 @@ public class DomesticTribullModel<T extends Entity> extends AgeableHierarchicalM
 		this.head.xRot = headPitch * 0.017453292F;
 		this.head.yRot = netHeadYaw * 0.017453292F;
 
-		this.animateWalk(DomesticTribullAnimation.WALK, limbSwing, limbSwingAmount, 3.0F, 100.0F);
+		this.animateWalk(DomesticTribullAnimation.WALK, limbSwing * 1.85F, limbSwingAmount, 3.0F, 100.0F);
 		if (this.young) this.applyStatic(DomesticTribullAnimation.BABY_TRANSFORM);
 	}
 
