@@ -20,12 +20,12 @@ import java.util.function.Supplier;
 public class FLBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmLife.MOD_ID);
 
-    public static final RegistryObject<Block> PEACOCK_BURST_POPPY = register("peacock_burst_poppy", () -> new FlowerBlock(() -> MobEffects.LUCK, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
-    public static final RegistryObject<Block> ELECTRIC_BURST_POPPY = register("electric_burst_poppy", () -> new FlowerBlock(() -> MobEffects.HARM, 1, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
-    public static final RegistryObject<Block> FANCY_BURST_POPPY = register("fancy_burst_poppy", () -> new FlowerBlock(() -> MobEffects.REGENERATION, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
-    public static final RegistryObject<Block> OLIVE_BURST_POPPY = register("olive_burst_poppy", () -> new FlowerBlock(() -> MobEffects.HUNGER, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
-    public static final RegistryObject<Block> RUSTY_BURST_POPPY = register("rusty_burst_poppy", () -> new FlowerBlock(() -> MobEffects.WEAKNESS, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
-    public static final RegistryObject<Block> SUNSTREAK_BURST_POPPY = register("sunstreak_burst_poppy", () -> new FlowerBlock(() -> MobEffects.FIRE_RESISTANCE, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> PEACOCK_BURST_POPPY = BLOCKS.register("peacock_burst_poppy", () -> new FlowerBlock(() -> MobEffects.LUCK, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> ELECTRIC_BURST_POPPY = BLOCKS.register("electric_burst_poppy", () -> new FlowerBlock(() -> MobEffects.HARM, 1, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> FANCY_BURST_POPPY = BLOCKS.register("fancy_burst_poppy", () -> new FlowerBlock(() -> MobEffects.REGENERATION, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> OLIVE_BURST_POPPY = BLOCKS.register("olive_burst_poppy", () -> new FlowerBlock(() -> MobEffects.HUNGER, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> RUSTY_BURST_POPPY = BLOCKS.register("rusty_burst_poppy", () -> new FlowerBlock(() -> MobEffects.WEAKNESS, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> SUNSTREAK_BURST_POPPY = BLOCKS.register("sunstreak_burst_poppy", () -> new FlowerBlock(() -> MobEffects.FIRE_RESISTANCE, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
 
     public static final RegistryObject<Block> SEA_PLUM = BLOCKS.register("sea_plum", () -> new SeaPlumBlock(BlockBehaviour.Properties.of().noCollission().sound(SoundType.WET_GRASS).randomTicks()));
 
@@ -37,7 +37,7 @@ public class FLBlocks {
     public static final RegistryObject<Block> POTTED_SUNSTREAK_BURST_POPPY = BLOCKS.register("potted_sunstreak_burst_poppy", () -> new FlowerPotBlock(null, SUNSTREAK_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> TRIBULL_MILK_CAULDRON = BLOCKS.register("tribull_milk_cauldron", () -> new TribullMilkCauldronBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(2.0F).noOcclusion().randomTicks()));
-    public static final RegistryObject<Block> TRIBULL_CHEESE_WHEEL = register("tribull_cheese_wheel", () -> new TribullCheeseWheelBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.WOOL)), new Item.Properties().stacksTo(16));
+    public static final RegistryObject<Block> TRIBULL_CHEESE_WHEEL = BLOCKS.register("tribull_cheese_wheel", () -> new TribullCheeseWheelBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.WOOL)));
 
     public static final RegistryObject<Block> PLATEFISH_PLATE = BLOCKS.register("platefish_plate", () -> new PlatefishPlateBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.STONE)));
 
