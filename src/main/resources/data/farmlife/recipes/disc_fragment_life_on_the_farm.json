@@ -1,0 +1,36 @@
+{
+  "type": "minecraft:crafting_shapeless",
+  "category": "misc",
+  "ingredients": [
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    },
+    {
+      "item": "farmlife:disc_fragment_life_on_the_farm"
+    }
+  ],
+  "result": {
+    "item": "farmlife:music_disc_life_on_the_farm"
+  }
+}

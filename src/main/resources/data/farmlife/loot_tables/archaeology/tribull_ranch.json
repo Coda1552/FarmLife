@@ -1,0 +1,16 @@
+{
+  "type": "minecraft:archaeology",
+  "pools": [
+    {
+      "rolls": 1,
+      "bonus_rolls": 0,
+      "entries": [
+        {
+          "type": "minecraft:item",
+          "name": "farmlife:disc_fragment_life_on_the_farm"
+        }
+      ]
+    }
+  ],
+  "random_sequence": "minecraft:archaeology/desert_pyramid"
+}

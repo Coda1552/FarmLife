@@ -31,6 +31,7 @@ public class FLItems {
 
     // Misc.
     public static final RegistryObject<Item> GALLIRAPTOR_EGG = ITEMS.register("galliraptor_egg", () -> new GalliraptorEggItem(new Item.Properties().stacksTo(16)));
+    public static final RegistryObject<Item> DISC_FRAGMENT_LIFE_ON_THE_FARM = ITEMS.register("disc_fragment_life_on_the_farm", () -> new DiscFragmentItem(new Item.Properties()));
     public static final RegistryObject<Item> MUSIC_DISC_LIFE_ON_THE_FARM = ITEMS.register("music_disc_life_on_the_farm", () -> new RecordItem(14, FLSounds.MUSIC_DISC_LIFE_ON_THE_FARM, new Item.Properties().rarity(Rarity.RARE).stacksTo(1),  2223));
 
     // Spawn Eggs

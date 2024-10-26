@@ -1,0 +1,6 @@
+{
+  "parent": "item/generated",
+  "textures": {
+    "layer0": "farmlife:item/disc_fragment_life_on_the_farm"
+  }
+}
