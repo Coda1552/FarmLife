@@ -5,7 +5,6 @@ import codyhuh.farmlife.registry.FLBlockEntities;
 import codyhuh.farmlife.registry.FLItems;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.Direction;
-import net.minecraft.nbt.CompoundTag;
 import net.minecraft.server.level.ServerLevel;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
@@ -126,16 +125,20 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
         }
     }
 
+    private boolean canGrow(LevelReader level, BlockPos pos) {
+        return level.getFluidState(pos.above()).is(FluidTags.WATER);
+    }
+
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pos, Player player, InteractionHand pHand, BlockHitResult pHit) {
         BlockEntity te = pLevel.getBlockEntity(pos);
         ItemStack held = player.getItemInHand(player.getUsedItemHand());
 
-        if (pState.getValue(AGE) > 0 && te instanceof SeaPlumBlockEntity plum) {
+        if (canGrow(pLevel, pos) && pState.getValue(AGE) > 0 && te instanceof SeaPlumBlockEntity plum) {
             if (held.is(Items.BONE_MEAL) && plum.getFruitCount() < plum.getMaxFruit()) {
                 plum.addFruit(1);
                 BoneMealItem.applyBonemeal(held, pLevel, pos, player);
                 BoneMealItem.addGrowthParticles(pLevel, pos, 3);
-                plum.addFruitEntity(null, 1, pos);
+                plum.addFruitEntity(pLevel, pos);
 
                 if (!player.getAbilities().instabuild) {
                     held.shrink(1);
@@ -178,7 +181,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
     }
 
     public boolean isBonemealSuccess(Level pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {
-        return true;
+        return canGrow(pLevel, pPos);
     }
 
     public void performBonemeal(ServerLevel pLevel, RandomSource pRandom, BlockPos pPos, BlockState pState) {

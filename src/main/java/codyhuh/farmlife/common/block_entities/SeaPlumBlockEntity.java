@@ -5,17 +5,9 @@ import codyhuh.farmlife.registry.FLBlockEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.nbt.Tag;
-import net.minecraft.util.RandomSource;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
-import org.jetbrains.annotations.Nullable;
-
-import java.util.Objects;
-import java.util.UUID;
 
 public class SeaPlumBlockEntity extends BlockEntity {
     private final int maxFruits = 3;
@@ -29,20 +21,15 @@ public class SeaPlumBlockEntity extends BlockEntity {
     public static void serverTick(Level level, BlockPos pos, BlockState state, SeaPlumBlockEntity be) {
     }
 
-    public void addFruitEntity(@Nullable CompoundTag tag, int amount, BlockPos pos) {
-        if (getFruitEntityCount() < getMaxFruit()) {
-            for (int i = 0; i < amount; i++) {
-                SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos, pos);
-                plum.moveTo(plum.position().add(0.5D,0.0D,0.5D));
+    public void addFruitEntity(Level level, BlockPos pos) {
+        if (getFruitCount() <= getMaxFruit()) {
+            SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos, pos);
+            plum.moveTo(plum.position().add(0.5D,0.0D,0.5D));
 
-                if (tag != null) {
-                    plum.deserializeNBT(tag);
-                }
+            fruitEntities.add(plum);
 
-                fruitEntities.add(plum);
+            level.addFreshEntity(plum);
 
-                level.addFreshEntity(plum);
-            }
         }
     }
 
@@ -83,13 +70,18 @@ public class SeaPlumBlockEntity extends BlockEntity {
         super.load(tag);
         setFruitCount(tag.getInt("FruitCount"));
 
-        for (int i = 0; i < getFruitCount(); i++) {
+        // todo- fix sea plums not saving data. maybe bc getLevel() is returning null?
+        for(int i = 0; i < getFruitCount(); ++i) {
+            addFruitEntity(getLevel(), getBlockPos());
+        }
+
+/*        for (int i = 0; i < getFruitCount(); ++i) {
             ListTag list = tag.getList("FruitEntities", 10);
 
-            CompoundTag compound = list.getCompound(1);
+            CompoundTag compound = list.getCompound(i);
 
             addFruitEntity(compound, i, getBlockPos());
-        }
+        }*/
     }
 
     @Override
@@ -97,14 +89,14 @@ public class SeaPlumBlockEntity extends BlockEntity {
         super.saveAdditional(tag);
         tag.putInt("FruitCount", getFruitCount());
 
-        if (!tag.contains("FruitEntities")) {
+/*        if (!tag.contains("FruitEntities")) {
             tag.put("FruitEntities", new ListTag());
         }
 
         ListTag listTag = tag.getList("FruitEntities", 10);
 
-        for (int i = 0; i < getFruitEntityCount(); i++) {
+        for (int i = 0; i < getFruitCount(); i++) {
             listTag.add(i, fruitEntities.get(i).serializeNBT());
-        }
+        }*/
     }
 }

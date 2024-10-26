@@ -38,7 +38,7 @@ public class SeaPlumModel<T extends SeaPlumFruitEntity> extends EntityModel<T> {
 		stem.getAllParts().forEach(ModelPart::resetPose);
 
 		if (entity.level().getBlockEntity(entity.getBlockPos()) instanceof SeaPlumBlockEntity plum) {
-			int i = plum.getFruitEntityCount();
+			int i = plum.getFruitCount();
 
 			stem.xRot = Mth.sin(ageInTicks * 0.15F) * 0.3F;
 			stem.zRot = Mth.cos(ageInTicks * 0.15F) * 0.3F;

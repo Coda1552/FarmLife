@@ -38,7 +38,7 @@ public class SeaPlumFruitEntity extends Entity {
     public void tick() {
         super.tick();
 
-        if (level().getBlockEntity(getBlockPos()) instanceof SeaPlumBlockEntity be && be.getFruitEntityCount() == 0) {
+        if (level().getBlockEntity(getBlockPos()) instanceof SeaPlumBlockEntity be && be.getFruitCount() == 0) {
             discard();
         }
     }
