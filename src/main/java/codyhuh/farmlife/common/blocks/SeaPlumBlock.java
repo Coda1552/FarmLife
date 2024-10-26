@@ -144,7 +144,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
                     held.shrink(1);
                 }
             }
-            else if (plum.hasFruit() && plum.hasFruitEntity()) {
+            else if (plum.hasFruit()) {
                 pLevel.playSound(null, pos, SoundEvents.SWEET_BERRY_BUSH_PICK_BERRIES, SoundSource.BLOCKS, 1.0F, 0.8F + pLevel.random.nextFloat() * 0.4F);
                 double d0 = (double) EntityType.ITEM.getHeight() / 2.0D;
                 double d1 = (double)pos.getX() + 0.5D + Mth.nextDouble(pLevel.random, -0.25D, 0.25D);
@@ -202,7 +202,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             BlockEntity be = worldIn.getBlockEntity(pos);
-            if (be instanceof SeaPlumBlockEntity plum && plum.hasFruitEntity()) {
+            if (be instanceof SeaPlumBlockEntity plum ) {
                 plum.fruitEntities.forEach(Entity::discard);
                 plum.fruitEntities.clear();
             }

@@ -5,15 +5,6 @@
     },
     "age=1": {
       "model": "farmlife:block/sea_plum1"
-    },
-    "age=2": {
-      "model": "farmlife:block/sea_plum1"
-    },
-    "age=3": {
-      "model": "farmlife:block/sea_plum1"
-    },
-    "age=4": {
-      "model": "farmlife:block/sea_plum1"
     }
   }
 }
