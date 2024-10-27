@@ -6,7 +6,6 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -28,7 +27,7 @@ public class SeaPlumBlockEntity extends BlockEntity implements IForgeBlockEntity
 
     public void addFruitEntity(Level level, BlockPos pos) {
         if (getFruitCount() <= getMaxFruit()) {
-            SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos, pos);
+            SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos);
             plum.moveTo(plum.getBlockPos().getCenter().add(0.0D,-0.5D,0.0D));
 
             fruitEntities.add(plum);

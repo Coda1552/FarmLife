@@ -4,10 +4,6 @@ import codyhuh.farmlife.common.block_entities.SeaPlumBlockEntity;
 import codyhuh.farmlife.registry.FLEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.network.protocol.Packet;
-import net.minecraft.network.protocol.game.ClientGamePacketListener;
-import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
-import net.minecraft.network.protocol.game.ClientboundEntityEventPacket;
 import net.minecraft.network.syncher.EntityDataAccessor;
 import net.minecraft.network.syncher.EntityDataSerializers;
 import net.minecraft.network.syncher.SynchedEntityData;
@@ -23,7 +19,7 @@ public class SeaPlumFruitEntity extends Entity {
         setNoGravity(true);
     }
 
-    public SeaPlumFruitEntity(Level world, BlockPos pos, BlockPos origin) {
+    public SeaPlumFruitEntity(Level world, BlockPos pos) {
         this(FLEntities.SEA_PLUM_FRUIT.get(), world);
         this.setBlockPos(pos);
 
