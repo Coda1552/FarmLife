@@ -6,6 +6,7 @@ import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
 import net.minecraft.nbt.ListTag;
+import net.minecraft.network.protocol.game.ClientboundAddEntityPacket;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
@@ -78,7 +79,13 @@ public class SeaPlumBlockEntity extends BlockEntity implements IForgeBlockEntity
 
             CompoundTag compound = list.getCompound(i);
 
-            EntityType.create(compound, getLevel());
+            var entity = EntityType.create(compound, getLevel()).get();
+
+            if (entity instanceof SeaPlumFruitEntity fruit) {
+                fruitEntities.add(i, fruit);
+                fruit.setBlockPos(getBlockPos());
+                // todo - sea plums exist but are not "there" after relogging
+            }
         }
     }
 
