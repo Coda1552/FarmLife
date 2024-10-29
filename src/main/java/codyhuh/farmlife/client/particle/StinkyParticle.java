@@ -12,7 +12,7 @@ public class StinkyParticle extends RisingParticle {
     public StinkyParticle(ClientLevel p_107717_, double p_107718_, double p_107719_, double p_107720_, double p_107721_, double p_107722_, double p_107723_, SpriteSet p_107724_) {
         super(p_107717_, p_107718_, p_107719_, p_107720_, p_107721_, p_107722_, p_107723_);
         this.sprites = p_107724_;
-        this.scale(1.5F);
+        this.scale(2.5F);
         this.lifetime = 24;
         this.hasPhysics = true;
         this.setSpriteFromAge(p_107724_);
