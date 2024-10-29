@@ -16,7 +16,7 @@ public class PlatefishRenderer extends MobRenderer<Platefish, PlatefishModel<Pla
     private static final ResourceLocation SHEARED_TEXTURE = new ResourceLocation(FarmLife.MOD_ID,"textures/entity/platefish/sheared_platefish.png");
 
     public PlatefishRenderer(EntityRendererProvider.Context ctx) {
-        super(ctx, new PlatefishModel<>(ctx.bakeLayer(FLModelLayers.PLATEFISH)), 0.2F);
+        super(ctx, new PlatefishModel<>(ctx.bakeLayer(FLModelLayers.PLATEFISH)), 0.3F);
     }
 
     @Override
