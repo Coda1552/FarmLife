@@ -25,10 +25,20 @@ public class SeaPlumBlockEntity extends BlockEntity implements IForgeBlockEntity
     public static void serverTick(Level level, BlockPos pos, BlockState state, SeaPlumBlockEntity be) {
     }
 
+    public void addFruitEntity(SeaPlumFruitEntity fruit, Level level, BlockPos pos) {
+        if (getFruitCount() <= getMaxFruit()) {
+            fruit.moveTo(pos.getCenter().add(0.0D,-0.5D,0.0D));
+
+            fruitEntities.add(fruit);
+
+            level.addFreshEntity(fruit);
+        }
+    }
+
     public void addFruitEntity(Level level, BlockPos pos) {
         if (getFruitCount() <= getMaxFruit()) {
             SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos);
-            plum.moveTo(plum.getBlockPos().getCenter().add(0.0D,-0.5D,0.0D));
+            plum.moveTo(pos.getCenter().add(0.0D,-0.5D,0.0D));
 
             fruitEntities.add(plum);
 
@@ -68,22 +78,21 @@ public class SeaPlumBlockEntity extends BlockEntity implements IForgeBlockEntity
         return getFruitCount() > 0;
     }
 
-
     @Override
     public void onLoad() {
         setFruitCount(data.getInt("FruitCount"));
 
-        for (int i = 0; i < getFruitCount(); ++i) {
+        for (int i = 0; i < getFruitCount(); i++) {
             ListTag list = data.getList("FruitEntities", 10);
 
             CompoundTag compound = list.getCompound(i);
 
             var entity = EntityType.create(compound, getLevel()).get();
+            System.out.println("entitytype = " + entity);
 
             if (entity instanceof SeaPlumFruitEntity fruit) {
+                addFruitEntity(fruit, level, getBlockPos());
                 fruitEntities.add(i, fruit);
-                fruit.setBlockPos(getBlockPos());
-                // todo - sea plums exist but are not "there" after relogging
             }
         }
     }
