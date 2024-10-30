@@ -29,6 +29,7 @@ public class FLItems {
     public static final RegistryObject<Item> PLATEFISH_PLATE = ITEMS.register("platefish_plate", () -> new BlockItem(FLBlocks.PLATEFISH_PLATE.get(), new Item.Properties()));
     public static final RegistryObject<Item> DISC_FRAGMENT_LIFE_ON_THE_FARM = ITEMS.register("disc_fragment_life_on_the_farm", () -> new DiscFragmentItem(new Item.Properties()));
     public static final RegistryObject<Item> MUSIC_DISC_LIFE_ON_THE_FARM = ITEMS.register("music_disc_life_on_the_farm", () -> new RecordItem(14, FLSounds.MUSIC_DISC_LIFE_ON_THE_FARM, new Item.Properties().rarity(Rarity.RARE).stacksTo(1),  2223));
+    public static final RegistryObject<Item> BURST_POPPY_SEEDS = ITEMS.register("burst_poppy_seeds", () -> new BlockItem(FLBlocks.BURST_POPPY_SPROUT.get(), new Item.Properties()));
     public static final RegistryObject<Item> PEACOCK_BURST_POPPY = ITEMS.register("peacock_burst_poppy", () -> new BlockItem(FLBlocks.PEACOCK_BURST_POPPY.get(), new Item.Properties()));
     public static final RegistryObject<Item> ELECTRIC_BURST_POPPY = ITEMS.register("electric_burst_poppy", () -> new BlockItem(FLBlocks.ELECTRIC_BURST_POPPY.get(), new Item.Properties()));
     public static final RegistryObject<Item> FANCY_BURST_POPPY = ITEMS.register("fancy_burst_poppy", () -> new BlockItem(FLBlocks.FANCY_BURST_POPPY.get(), new Item.Properties()));

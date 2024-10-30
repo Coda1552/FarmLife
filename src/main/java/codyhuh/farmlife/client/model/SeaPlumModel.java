@@ -35,8 +35,8 @@ public class SeaPlumModel<T extends SeaPlumFruitEntity> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		float speed = 0.1F;
-		float degree = 0.3F;
+		float speed = 0.05F;
+		float degree = 0.175F;
 		float diff = 0.0F;
 
 		if (entity.level().getBlockEntity(entity.getBlockPos()) instanceof SeaPlumBlockEntity be) {

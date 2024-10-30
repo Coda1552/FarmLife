@@ -1,24 +1,31 @@
 package codyhuh.farmlife.registry;
 
-import codyhuh.farmlife.common.blocks.PlatefishPlateBlock;
-import codyhuh.farmlife.common.blocks.SeaPlumBlock;
+import codyhuh.farmlife.common.blocks.*;
 import net.minecraft.world.effect.MobEffects;
 import net.minecraft.world.item.BlockItem;
 import net.minecraft.world.item.Item;
+import net.minecraft.world.item.Items;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.state.BlockBehaviour;
 import net.minecraftforge.registries.RegistryObject;
 import codyhuh.farmlife.FarmLife;
 import net.minecraftforge.registries.DeferredRegister;
 import net.minecraftforge.registries.ForgeRegistries;
-import codyhuh.farmlife.common.blocks.TribullCheeseWheelBlock;
-import codyhuh.farmlife.common.blocks.TribullMilkCauldronBlock;
 
 import java.util.function.BiFunction;
 import java.util.function.Supplier;
 
 public class FLBlocks {
     public static final DeferredRegister<Block> BLOCKS = DeferredRegister.create(ForgeRegistries.BLOCKS, FarmLife.MOD_ID);
+
+    public static final RegistryObject<Block> BURST_POPPY_SPROUT = BLOCKS.register("burst_poppy_sprout", () -> new BurstPoppySproutBlock(BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+
+    public static final RegistryObject<Block> IMMATURE_PEACOCK_BURST_POPPY = BLOCKS.register("immature_peacock_burst_poppy", () -> new ImmatureBurstPoppyBlock(FLBlocks.PEACOCK_BURST_POPPY, Items.CYAN_DYE, Items.MAGENTA_DYE, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> IMMATURE_ELECTRIC_BURST_POPPY = BLOCKS.register("immature_electric_burst_poppy", () -> new ImmatureBurstPoppyBlock(FLBlocks.ELECTRIC_BURST_POPPY, Items.BLUE_DYE, Items.LIGHT_BLUE_DYE, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> IMMATURE_FANCY_BURST_POPPY = BLOCKS.register("immature_fancy_burst_poppy", () -> new ImmatureBurstPoppyBlock(FLBlocks.FANCY_BURST_POPPY, Items.PINK_DYE, Items.PURPLE_DYE, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> IMMATURE_OLIVE_BURST_POPPY = BLOCKS.register("immature_olive_burst_poppy", () -> new ImmatureBurstPoppyBlock(FLBlocks.OLIVE_BURST_POPPY, Items.GREEN_DYE, Items.LIME_DYE, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> IMMATURE_RUSTY_BURST_POPPY = BLOCKS.register("immature_rusty_burst_poppy", () -> new ImmatureBurstPoppyBlock(FLBlocks.RUSTY_BURST_POPPY, Items.BROWN_DYE, Items.RED_DYE, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
+    public static final RegistryObject<Block> IMMATURE_SUNSTREAK_BURST_POPPY = BLOCKS.register("immature_sunstreak_burst_poppy", () -> new ImmatureBurstPoppyBlock(FLBlocks.SUNSTREAK_BURST_POPPY, Items.ORANGE_DYE, Items.YELLOW_DYE, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
 
     public static final RegistryObject<Block> PEACOCK_BURST_POPPY = BLOCKS.register("peacock_burst_poppy", () -> new FlowerBlock(() -> MobEffects.LUCK, 5, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));
     public static final RegistryObject<Block> ELECTRIC_BURST_POPPY = BLOCKS.register("electric_burst_poppy", () -> new FlowerBlock(() -> MobEffects.HARM, 1, BlockBehaviour.Properties.of().noCollission().instabreak().sound(SoundType.GRASS)));

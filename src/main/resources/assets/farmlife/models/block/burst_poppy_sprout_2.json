@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "farmlife:block/burst_poppy_sprout_2"
+  },
+  "render_type": "cutout"
+}

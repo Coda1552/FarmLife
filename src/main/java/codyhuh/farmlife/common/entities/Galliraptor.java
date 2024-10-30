@@ -36,7 +36,7 @@ import javax.annotation.Nullable;
 public class Galliraptor extends Animal {
     private static final EntityDataAccessor<Integer> VARIANT = SynchedEntityData.defineId(Galliraptor.class, EntityDataSerializers.INT);
     private static final EntityDataAccessor<Boolean> PECKING = SynchedEntityData.defineId(Galliraptor.class, EntityDataSerializers.BOOLEAN);
-    private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(Items.MELON, Items.MELON_SEEDS);
+    private static final Ingredient TEMPTATION_ITEMS = Ingredient.of(FLItems.BURST_POPPY_SEEDS.get());
     public int timeUntilNextEgg = this.random.nextInt(8000) + 8000;
 
     public Galliraptor(EntityType<? extends Galliraptor> type, Level worldIn) {

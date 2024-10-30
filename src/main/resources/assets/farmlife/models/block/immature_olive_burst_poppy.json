@@ -1,0 +1,7 @@
+{
+  "parent": "minecraft:block/cross",
+  "textures": {
+    "cross": "farmlife:block/immature_olive_burst_poppy"
+  },
+  "render_type": "cutout"
+}

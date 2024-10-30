@@ -19,6 +19,13 @@
   "item.farmlife.galliraptor_spawn_egg": "Galliraptor Spawn Egg",
   "item.farmlife.platefish_spawn_egg": "Platefish Spawn Egg",
 
+  "block.farmlife.burst_poppy_sprout": "Burst Poppy Seeds",
+  "block.farmlife.immature_peacock_burst_poppy": "Immature Peacock Burst Poppy",
+  "block.farmlife.immature_electric_burst_poppy": "Immature Electric Burst Poppy",
+  "block.farmlife.immature_fancy_burst_poppy": "Immature Fancy Burst Poppy",
+  "block.farmlife.immature_olive_burst_poppy": "Immature Olive Burst Poppy",
+  "block.farmlife.immature_rusty_burst_poppy": "Immature Rusty Burst Poppy",
+  "block.farmlife.immature_sunstreak_burst_poppy": "Immature Sunstreak Burst Poppy",
   "block.farmlife.peacock_burst_poppy": "Peacock Burst Poppy",
   "block.farmlife.electric_burst_poppy": "Electric Burst Poppy",
   "block.farmlife.fancy_burst_poppy": "Fancy Burst Poppy",
