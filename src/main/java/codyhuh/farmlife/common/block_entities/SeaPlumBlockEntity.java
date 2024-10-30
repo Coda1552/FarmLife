@@ -2,11 +2,10 @@ package codyhuh.farmlife.common.block_entities;
 
 import codyhuh.farmlife.common.entities.item.SeaPlumFruitEntity;
 import codyhuh.farmlife.registry.FLBlockEntities;
+import codyhuh.farmlife.registry.FLEntities;
 import net.minecraft.core.BlockPos;
 import net.minecraft.core.NonNullList;
 import net.minecraft.nbt.CompoundTag;
-import net.minecraft.nbt.ListTag;
-import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
 import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
@@ -16,28 +15,14 @@ public class SeaPlumBlockEntity extends BlockEntity implements IForgeBlockEntity
     public NonNullList<SeaPlumFruitEntity> fruitEntities = NonNullList.create();
     private final int maxFruits = 3;
     private int fruitCount = 0;
-    private CompoundTag data = new CompoundTag();
 
     public SeaPlumBlockEntity(BlockPos pPos, BlockState pBlockState) {
         super(FLBlockEntities.SEA_PLUM.get(), pPos, pBlockState);
     }
 
-    public static void serverTick(Level level, BlockPos pos, BlockState state, SeaPlumBlockEntity be) {
-    }
-
-    public void addFruitEntity(SeaPlumFruitEntity fruit, Level level, BlockPos pos) {
-        if (getFruitCount() <= getMaxFruit()) {
-            fruit.moveTo(pos.getCenter().add(0.0D,-0.5D,0.0D));
-
-            fruitEntities.add(fruit);
-
-            level.addFreshEntity(fruit);
-        }
-    }
-
     public void addFruitEntity(Level level, BlockPos pos) {
         if (getFruitCount() <= getMaxFruit()) {
-            SeaPlumFruitEntity plum = new SeaPlumFruitEntity(level, pos);
+            SeaPlumFruitEntity plum = new SeaPlumFruitEntity(getBlockPos(), level);
             plum.moveTo(pos.getCenter().add(0.0D,-0.5D,0.0D));
 
             fruitEntities.add(plum);
@@ -79,45 +64,14 @@ public class SeaPlumBlockEntity extends BlockEntity implements IForgeBlockEntity
     }
 
     @Override
-    public void onLoad() {
-        setFruitCount(data.getInt("FruitCount"));
-
-        for (int i = 0; i < getFruitCount(); i++) {
-            ListTag list = data.getList("FruitEntities", 10);
-
-            CompoundTag compound = list.getCompound(i);
-
-            var entity = EntityType.create(compound, getLevel()).get();
-            System.out.println("entitytype = " + entity);
-
-            if (entity instanceof SeaPlumFruitEntity fruit) {
-                addFruitEntity(fruit, level, getBlockPos());
-                fruitEntities.add(i, fruit);
-            }
-        }
-    }
-
-    @Override
     public void load(CompoundTag tag) {
-        data = tag.copy();
-        super.load(data);
+        setFruitCount(tag.getInt("FruitCount"));
+        super.load(tag);
     }
 
     @Override
     public void saveAdditional(CompoundTag tag) {
         tag.putInt("FruitCount", getFruitCount());
-
-        if (!tag.contains("FruitEntities")) {
-            tag.put("FruitEntities", new ListTag());
-        }
-
-        ListTag listTag = tag.getList("FruitEntities", 10);
-
-        for (int i = 0; i < getFruitCount(); i++) {
-            listTag.add(i, fruitEntities.get(i).serializeNBT());
-        }
-
-        data = tag.copy();
-        super.saveAdditional(data);
+        super.saveAdditional(tag);
     }
 }

@@ -10,6 +10,9 @@ import net.minecraft.network.syncher.SynchedEntityData;
 import net.minecraft.world.entity.Entity;
 import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.entity.BlockEntity;
+
+import java.util.UUID;
 
 public class SeaPlumFruitEntity extends Entity {
     private static final EntityDataAccessor<BlockPos> DATA_BLOCK_POS = SynchedEntityData.defineId(SeaPlumFruitEntity.class, EntityDataSerializers.BLOCK_POS);
@@ -19,20 +22,19 @@ public class SeaPlumFruitEntity extends Entity {
         setNoGravity(true);
     }
 
-    public SeaPlumFruitEntity(Level world, BlockPos pos) {
-        this(FLEntities.SEA_PLUM_FRUIT.get(), world);
+    public SeaPlumFruitEntity(BlockPos pos, Level pLevel) {
+        this(FLEntities.SEA_PLUM_FRUIT.get(), pLevel);
         this.setBlockPos(pos);
-
-        this.xo = this.getX();
-        this.yo = this.getY();
-        this.zo = this.getZ();
     }
 
     @Override
     public void tick() {
         super.tick();
 
-        if (level().getBlockEntity(getBlockPos()) instanceof SeaPlumBlockEntity be && be.getFruitCount() == 0) {
+        if (level().getBlockEntity(getBlockPos()) instanceof SeaPlumBlockEntity plum) {
+            plum.fruitEntities.add(this);
+        }
+        else {
             discard();
         }
     }

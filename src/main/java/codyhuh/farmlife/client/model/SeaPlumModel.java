@@ -35,18 +35,32 @@ public class SeaPlumModel<T extends SeaPlumFruitEntity> extends EntityModel<T> {
 
 	@Override
 	public void setupAnim(T entity, float limbSwing, float limbSwingAmount, float ageInTicks, float netHeadYaw, float headPitch) {
-		stem.getAllParts().forEach(ModelPart::resetPose);
+		float speed = 0.1F;
+		float degree = 0.3F;
+		float diff = 0.0F;
 
-		if (entity.level().getBlockEntity(entity.getBlockPos()) instanceof SeaPlumBlockEntity plum) {
-			int i = plum.getFruitCount();
+		if (entity.level().getBlockEntity(entity.getBlockPos()) instanceof SeaPlumBlockEntity be) {
+			float i = be.fruitEntities.indexOf(entity) + 1F;
 
-			stem.xRot = Mth.sin(ageInTicks * 0.15F) * 0.3F;
-			stem.zRot = Mth.cos(ageInTicks * 0.15F) * 0.3F;
+			if (i == 0) {
+				diff = 1.5708F;
+			}
+			if (i == 1) {
+				diff = 2.0F * 1.5708F;
+			}
+			if (i == 2) {
+				diff = 3.0F * 1.5708F;
+			}
 
-			fruit.xRot = -Mth.sin(ageInTicks * 0.15F) * 0.15F;
-			fruit.zRot = -Mth.cos(ageInTicks * 0.15F) * 0.15F;
+			stem.xRot = Mth.sin(i + ageInTicks * speed) * degree * 1.25F;
+			stem.yRot = diff;
+			stem.zRot = Mth.sin(i + ageInTicks * speed) * degree;
+
+			fruit.xRot = Mth.cos(i + ageInTicks * speed) * (-degree * 0.5F) * 1.25F;
+			fruit.zRot = Mth.cos(i + ageInTicks * speed) * (-degree * 0.5F);
 		}
 	}
+
 
 	@Override
 	public void renderToBuffer(PoseStack poseStack, VertexConsumer vertexConsumer, int packedLight, int packedOverlay, float red, float green, float blue, float alpha) {

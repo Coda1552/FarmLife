@@ -24,8 +24,6 @@ import net.minecraft.world.item.context.BlockPlaceContext;
 import net.minecraft.world.level.*;
 import net.minecraft.world.level.block.*;
 import net.minecraft.world.level.block.entity.BlockEntity;
-import net.minecraft.world.level.block.entity.BlockEntityTicker;
-import net.minecraft.world.level.block.entity.BlockEntityType;
 import net.minecraft.world.level.block.state.BlockState;
 import net.minecraft.world.level.block.state.StateDefinition;
 import net.minecraft.world.level.block.state.properties.BlockStateProperties;
@@ -51,29 +49,8 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
         this.registerDefaultState(this.stateDefinition.any().setValue(AGE, 0));
     }
 
-    @Nullable
-    @Override
-    public <T extends BlockEntity> BlockEntityTicker<T> getTicker(Level level, BlockState p_153213_, BlockEntityType<T> type) {
-        return seaPlumTicker(level, type, FLBlockEntities.SEA_PLUM.get());
-    }
-
-    public static <T extends BlockEntity> BlockEntityTicker<T> seaPlumTicker(Level p_151988_, BlockEntityType<T> p_151989_, BlockEntityType<? extends SeaPlumBlockEntity> p_151990_) {
-        return createTickerHelper(p_151989_, p_151990_, SeaPlumBlockEntity::serverTick);
-    }
-
-    @Nullable
-    protected static <E extends BlockEntity, A extends BlockEntity> BlockEntityTicker<A> createTickerHelper(BlockEntityType<A> pServerType, BlockEntityType<E> pClientType, BlockEntityTicker<? super E> pTicker) {
-        return pClientType == pServerType ? (BlockEntityTicker<A>)pTicker : null;
-    }
-
     public ItemStack getCloneItemStack(BlockGetter pLevel, BlockPos pPos, BlockState pState) {
         return new ItemStack(FLItems.SEA_PLUM.get());
-    }
-
-    @Override
-    public boolean triggerEvent(BlockState pState, Level pLevel, BlockPos pPos, int pId, int pParam) {
-        BlockEntity blockentity = pLevel.getBlockEntity(pPos);
-        return blockentity != null && blockentity.triggerEvent(pId, pParam);
     }
 
     protected boolean mayPlaceOn(BlockState p_154539_, BlockGetter p_154540_, BlockPos p_154541_) {
@@ -158,6 +135,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
 
                     itementity.setItem(plumStack);
                     itementity.moveTo(d1, d2, d3);
+                    itementity.setDeltaMovement(itementity.getDeltaMovement().add(0.0D, 0.07D, 0.0D));
 
                     pLevel.addFreshEntity(itementity);
                 }
@@ -202,6 +180,7 @@ public class SeaPlumBlock extends BushBlock implements EntityBlock, Bonemealable
     public void onRemove(BlockState state, Level worldIn, BlockPos pos, BlockState newState, boolean isMoving) {
         if (!state.is(newState.getBlock())) {
             BlockEntity be = worldIn.getBlockEntity(pos);
+
             if (be instanceof SeaPlumBlockEntity plum && plum.hasFruitEntity()) {
                 plum.fruitEntities.forEach(Entity::discard);
                 plum.fruitEntities.clear();
