@@ -12,31 +12,23 @@ import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.inventory.AbstractContainerMenu;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.block.entity.BaseContainerBlockEntity;
+import net.minecraft.world.level.block.entity.BlockEntity;
 import net.minecraft.world.level.block.state.BlockState;
 
 import java.util.ArrayList;
 import java.util.List;
 
-public class PlatefishPlateBlockEntity extends BaseContainerBlockEntity {
-    private final NonNullList<ItemStack> items = NonNullList.withSize(3, ItemStack.EMPTY);
+public class PlatefishPlateBlockEntity extends BlockEntity {
+    private final NonNullList<ItemStack> items = NonNullList.withSize(1, ItemStack.EMPTY);
+    private ItemStack item = ItemStack.EMPTY;
+    private float rotation = 0.0F;
 
     public PlatefishPlateBlockEntity(BlockPos p_155229_, BlockState p_155230_) {
         super(FLBlockEntities.PLATEFISH_PLATE.get(), p_155229_, p_155230_);
     }
 
-    @Override
-    protected Component getDefaultName() {
-        return Component.translatable("container." + FarmLife.MOD_ID + ".platefish_plate");
-    }
-
-    @Override
-    protected AbstractContainerMenu createMenu(int p_58627_, Inventory p_58628_) {
-        return null;
-    }
-
-    @Override
-    public boolean canOpen(Player p_58645_) {
-        return false;
+    public float getRotation() {
+        return rotation;
     }
 
     public int countItems(List<ItemStack> stacks) {
@@ -55,62 +47,36 @@ public class PlatefishPlateBlockEntity extends BaseContainerBlockEntity {
         return items;
     }
 
-    @Override
-    public int getContainerSize() {
-        return 3;
+    public ItemStack getItem() {
+        return item;
     }
 
-    @Override
-    public boolean isEmpty() {
-        for (int i = 0; i < getContainerSize(); i++) {
-            if (!getItem(i).isEmpty()) return false;
-        }
-        return true;
+    public void removeItem() {
+        rotation = 0.0F;
+        item = ItemStack.EMPTY;
     }
 
-    @Override
-    public ItemStack getItem(int slot) {
-        return items.get(slot);
+    public void setItem(ItemStack stack) {
+        item = stack;
     }
 
-    @Override
-    public ItemStack removeItem(int p_18942_, int p_18943_) {
-        return ContainerHelper.removeItem(this.items, p_18942_, p_18943_);
-    }
-
-    @Override
-    public ItemStack removeItemNoUpdate(int p_18951_) {
-        return ContainerHelper.takeItem(this.items, p_18951_);
-    }
-
-    @Override
-    public void setItem(int slot, ItemStack stack) {
-        this.items.set(slot, stack);
-    }
-
-    @Override
-    public boolean stillValid(Player player) {
-        if (this.level.getBlockEntity(this.worldPosition) != this) {
-            return false;
-        } else {
-            return player.distanceToSqr((double)this.worldPosition.getX() + 0.5D, (double)this.worldPosition.getY() + 0.5D, (double)this.worldPosition.getZ() + 0.5D) <= 64.0D;
-        }
-    }
-
-    @Override
-    public void clearContent() {
-        items.clear();
+    public void setRotation(float rot) {
+        this.rotation = rot;
     }
 
     @Override
     public void load(CompoundTag tag) {
         super.load(tag);
-        ContainerHelper.loadAllItems(tag, items);
+        setRotation(tag.getFloat("Rotation"));
+        if (tag.contains("Item")) {
+            setItem(ItemStack.of(tag.getCompound("Item")));
+        }
     }
 
     @Override
     public void saveAdditional(CompoundTag tag) {
         super.saveAdditional(tag);
-        ContainerHelper.saveAllItems(tag, items);
+        tag.put("Item", this.item.save(new CompoundTag()));
+        tag.putFloat("Rotation", rotation);
     }
 }

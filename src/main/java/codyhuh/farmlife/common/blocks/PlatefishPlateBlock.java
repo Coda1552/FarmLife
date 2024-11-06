@@ -48,27 +48,22 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
         if (stack.getItem().isEdible() && pLevel.getBlockEntity(pPos) instanceof PlatefishPlateBlockEntity blockEntity) {
-            int itemCount = blockEntity.countItems(blockEntity.getItems());
-
-            if (itemCount < blockEntity.getContainerSize()) {
+            if (blockEntity.getItem().isEmpty()) {
                 pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 0.35F, 1.0F);
-
-                blockEntity.setItem(itemCount, stack.split(1));
-
-                return InteractionResult.SUCCESS;
+                blockEntity.setItem(stack.split(1));
+                blockEntity.setRotation(pPlayer.getYRot());
             }
+
             return InteractionResult.SUCCESS;
         }
-
         else if (stack.isEmpty() && pLevel.getBlockEntity(pPos) instanceof PlatefishPlateBlockEntity blockEntity) {
-            int itemCount = blockEntity.countItems(blockEntity.getItems());
-            ItemStack toRemove = blockEntity.getItem(Math.max(1, blockEntity.countItems(blockEntity.getItems())) - 1);
+            ItemStack toRemove = blockEntity.getItem();
 
-            if (itemCount > 0) {
-                if (pPlayer.isShiftKeyDown()) {
+            if (!blockEntity.getItem().isEmpty()) {
+                if (!pPlayer.isSecondaryUseActive()) {
                     pPlayer.getInventory().add(toRemove);
                     pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_FRAME_REMOVE_ITEM, SoundSource.BLOCKS, 0.35F, 1.0F);
-                    blockEntity.removeItem(itemCount, 1);
+                    blockEntity.removeItem();
                 }
                 else if (pPlayer.getFoodData().getFoodLevel() < 20) {
                     // todo - particles
@@ -80,7 +75,7 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
                     pPlayer.eat(pLevel, toRemove);
 
                     pLevel.addFreshEntity(itemEntity);
-                    blockEntity.removeItem(itemCount, 1);
+                    blockEntity.removeItem();
                 }
                 return InteractionResult.SUCCESS;
 

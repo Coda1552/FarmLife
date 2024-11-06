@@ -26,26 +26,15 @@ public class PlatefishPlateBlockEntityRenderer implements BlockEntityRenderer<Pl
         Minecraft mc = Minecraft.getInstance();
 
         poseStack.pushPose();
-        //poseStack.translate(0.5D, 0.05D, 0.625D);
-        poseStack.translate(0.6D, 0.05D, 0.7D);
-        poseStack.mulPose(Axis.XP.rotationDegrees(-90.0F));
 
-        //RandomSource rand = RandomSource.create();
-        //float f = rand.nextFloat();
-        //poseStack.mulPose(Axis.ZP.rotation(f));
+        poseStack.translate(0.5D, 0.075D, 0.5D);
+        poseStack.mulPose(Axis.XP.rotationDegrees(90.0F));
+        poseStack.mulPose(Axis.ZP.rotationDegrees(blockEntity.getRotation()));
+        poseStack.scale(0.65F, 0.65F, 0.65F);
 
-        for (int i = 0; i < blockEntity.countItems(blockEntity.getItems()); i++) {
-            ItemStack stack = blockEntity.getItem(i);
-
-            //poseStack.mulPose(Axis.ZP.rotation(i % 2 == 0 ? 0.65F : -0.65F));
-
-            poseStack.translate(0.05D, 0.1D, 0.0305D);
-            //poseStack.scale(0.985F, 0.985F, 1.0F);
-
-            BakedModel model = mc.getItemRenderer().getModel(stack, mc.level, null, 0);
-
-            mc.getItemRenderer().render(stack, ItemDisplayContext.GROUND, true, poseStack, buffer, combinedLight, combinedOverlay, model);
-        }
+        ItemStack stack = blockEntity.getItem();
+        BakedModel model = mc.getItemRenderer().getModel(stack, mc.level, null, 0);
+        mc.getItemRenderer().render(stack, ItemDisplayContext.FIXED, true, poseStack, buffer, combinedLight, combinedOverlay, model);
 
         poseStack.popPose();
     }
