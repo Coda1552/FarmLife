@@ -36,17 +36,17 @@ public class FLBlocks {
 
     public static final RegistryObject<Block> SEA_PLUM = BLOCKS.register("sea_plum", () -> new SeaPlumBlock(BlockBehaviour.Properties.of().noCollission().sound(SoundType.WET_GRASS).randomTicks()));
 
-    public static final RegistryObject<Block> POTTED_PEACOCK_BURST_POPPY = BLOCKS.register("potted_peacock_burst_poppy", () -> new FlowerPotBlock(null, PEACOCK_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_ELECTRIC_BURST_POPPY = BLOCKS.register("potted_electric_burst_poppy", () -> new FlowerPotBlock(null, ELECTRIC_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_FANCY_BURST_POPPY = BLOCKS.register("potted_fancy_burst_poppy", () -> new FlowerPotBlock(null, FANCY_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_OLIVE_BURST_POPPY = BLOCKS.register("potted_olive_burst_poppy", () -> new FlowerPotBlock(null, OLIVE_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_RUSTY_BURST_POPPY = BLOCKS.register("potted_rusty_burst_poppy", () -> new FlowerPotBlock(null, RUSTY_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
-    public static final RegistryObject<Block> POTTED_SUNSTREAK_BURST_POPPY = BLOCKS.register("potted_sunstreak_burst_poppy", () -> new FlowerPotBlock(null, SUNSTREAK_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_PEACOCK_BURST_POPPY = BLOCKS.register("potted_peacock_burst_poppy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.defaultBlockState().getBlock(), PEACOCK_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_ELECTRIC_BURST_POPPY = BLOCKS.register("potted_electric_burst_poppy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.defaultBlockState().getBlock(), ELECTRIC_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_FANCY_BURST_POPPY = BLOCKS.register("potted_fancy_burst_poppy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.defaultBlockState().getBlock(), FANCY_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_OLIVE_BURST_POPPY = BLOCKS.register("potted_olive_burst_poppy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.defaultBlockState().getBlock(), OLIVE_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_RUSTY_BURST_POPPY = BLOCKS.register("potted_rusty_burst_poppy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.defaultBlockState().getBlock(), RUSTY_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
+    public static final RegistryObject<Block> POTTED_SUNSTREAK_BURST_POPPY = BLOCKS.register("potted_sunstreak_burst_poppy", () -> new FlowerPotBlock(() -> (FlowerPotBlock) Blocks.FLOWER_POT.defaultBlockState().getBlock(), SUNSTREAK_BURST_POPPY, BlockBehaviour.Properties.of().instabreak().noOcclusion()));
 
     public static final RegistryObject<Block> TRIBULL_MILK_CAULDRON = BLOCKS.register("tribull_milk_cauldron", () -> new TribullMilkCauldronBlock(BlockBehaviour.Properties.of().requiresCorrectToolForDrops().strength(2.0F).noOcclusion().randomTicks()));
     public static final RegistryObject<Block> TRIBULL_CHEESE_WHEEL = BLOCKS.register("tribull_cheese_wheel", () -> new TribullCheeseWheelBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.WOOL)));
 
-    public static final RegistryObject<Block> PLATEFISH_PLATE = BLOCKS.register("platefish_plate", () -> new PlatefishPlateBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.STONE)));
+    public static final RegistryObject<Block> PLATTER = BLOCKS.register("platter", () -> new PlatterBlock(BlockBehaviour.Properties.of().strength(0.5F).sound(SoundType.STONE)));
 
     private static <T extends Block> RegistryObject<T> register(String name, Supplier<T> block) {
         return register(name, block, new Item.Properties());

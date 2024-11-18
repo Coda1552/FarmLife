@@ -9,7 +9,7 @@ import codyhuh.farmlife.client.particle.StinkyParticle;
 import codyhuh.farmlife.client.render.DomesticTribullRenderer;
 import codyhuh.farmlife.client.render.GalliraptorRenderer;
 import codyhuh.farmlife.client.render.PlatefishRenderer;
-import codyhuh.farmlife.client.render.block_entities.PlatefishPlateBlockEntityRenderer;
+import codyhuh.farmlife.client.render.block_entities.PlatterBlockEntityRenderer;
 import codyhuh.farmlife.client.render.item.SeaPlumFruitRenderer;
 import codyhuh.farmlife.registry.FLBlockEntities;
 import codyhuh.farmlife.registry.FLEntities;
@@ -32,7 +32,7 @@ public class ClientEvents {
         event.registerEntityRenderer(FLEntities.PLATEFISH.get(), PlatefishRenderer::new);
         event.registerEntityRenderer(FLEntities.SEA_PLUM_FRUIT.get(), SeaPlumFruitRenderer::new);
 
-        event.registerBlockEntityRenderer(FLBlockEntities.PLATEFISH_PLATE.get(), PlatefishPlateBlockEntityRenderer::new);
+        event.registerBlockEntityRenderer(FLBlockEntities.PLATTER.get(), PlatterBlockEntityRenderer::new);
     }
 
     @SubscribeEvent

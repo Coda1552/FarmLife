@@ -1,9 +1,8 @@
 package codyhuh.farmlife.common.blocks;
 
-import codyhuh.farmlife.common.block_entities.PlatefishPlateBlockEntity;
+import codyhuh.farmlife.common.block_entities.PlatterBlockEntity;
 import codyhuh.farmlife.registry.FLBlockEntities;
 import net.minecraft.core.BlockPos;
-import net.minecraft.core.Vec3i;
 import net.minecraft.sounds.SoundEvents;
 import net.minecraft.sounds.SoundSource;
 import net.minecraft.world.Container;
@@ -26,16 +25,16 @@ import net.minecraft.world.phys.shapes.Shapes;
 import net.minecraft.world.phys.shapes.VoxelShape;
 import org.jetbrains.annotations.Nullable;
 
-public class PlatefishPlateBlock extends BaseEntityBlock {
+public class PlatterBlock extends BaseEntityBlock {
 
-    public PlatefishPlateBlock(Properties p_49224_) {
+    public PlatterBlock(Properties p_49224_) {
         super(p_49224_);
     }
 
     @Nullable
     @Override
     public BlockEntity newBlockEntity(BlockPos pos, BlockState state) {
-        return FLBlockEntities.PLATEFISH_PLATE.get().create(pos, state);
+        return FLBlockEntities.PLATTER.get().create(pos, state);
     }
 
     @Override
@@ -47,7 +46,7 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
     public InteractionResult use(BlockState pState, Level pLevel, BlockPos pPos, Player pPlayer, InteractionHand pHand, BlockHitResult pHit) {
         ItemStack stack = pPlayer.getItemInHand(pHand);
 
-        if (stack.getItem().isEdible() && pLevel.getBlockEntity(pPos) instanceof PlatefishPlateBlockEntity blockEntity) {
+        if (stack.getItem().isEdible() && pLevel.getBlockEntity(pPos) instanceof PlatterBlockEntity blockEntity) {
             if (blockEntity.getItem().isEmpty()) {
                 pLevel.playSound(pPlayer, pPos, SoundEvents.ITEM_FRAME_ADD_ITEM, SoundSource.BLOCKS, 0.35F, 1.0F);
                 blockEntity.setItem(stack.split(1));
@@ -56,7 +55,7 @@ public class PlatefishPlateBlock extends BaseEntityBlock {
 
             return InteractionResult.SUCCESS;
         }
-        else if (stack.isEmpty() && pLevel.getBlockEntity(pPos) instanceof PlatefishPlateBlockEntity blockEntity) {
+        else if (stack.isEmpty() && pLevel.getBlockEntity(pPos) instanceof PlatterBlockEntity blockEntity) {
             ItemStack toRemove = blockEntity.getItem();
 
             if (!blockEntity.getItem().isEmpty()) {

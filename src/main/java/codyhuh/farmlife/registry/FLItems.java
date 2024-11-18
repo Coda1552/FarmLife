@@ -26,7 +26,8 @@ public class FLItems {
     public static final RegistryObject<Item> SEA_PLUM = ITEMS.register("sea_plum", () -> new BlockItem(FLBlocks.SEA_PLUM.get(), new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.1F).nutrition(2).build())));
     public static final RegistryObject<Item> FULI = ITEMS.register("fuli", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.15F).nutrition(2).build())));
     public static final RegistryObject<Item> COOKED_FULI = ITEMS.register("cooked_fuli", () -> new Item(new Item.Properties().food(new FoodProperties.Builder().saturationMod(0.375F).nutrition(7).build())));
-    public static final RegistryObject<Item> PLATEFISH_PLATE = ITEMS.register("platefish_plate", () -> new BlockItem(FLBlocks.PLATEFISH_PLATE.get(), new Item.Properties()));
+    public static final RegistryObject<Item> PLATEFISH_PLATE = ITEMS.register("platefish_plate", () -> new Item(new Item.Properties()));
+    public static final RegistryObject<Item> PLATTER = ITEMS.register("platter", () -> new BlockItem(FLBlocks.PLATTER.get(), new Item.Properties()));
     public static final RegistryObject<Item> DISC_FRAGMENT_LIFE_ON_THE_FARM = ITEMS.register("disc_fragment_life_on_the_farm", () -> new DiscFragmentItem(new Item.Properties()));
     public static final RegistryObject<Item> MUSIC_DISC_LIFE_ON_THE_FARM = ITEMS.register("music_disc_life_on_the_farm", () -> new RecordItem(14, FLSounds.MUSIC_DISC_LIFE_ON_THE_FARM, new Item.Properties().rarity(Rarity.RARE).stacksTo(1),  2223));
     public static final RegistryObject<Item> BURST_POPPY_SEEDS = ITEMS.register("burst_poppy_seeds", () -> new BlockItem(FLBlocks.BURST_POPPY_SPROUT.get(), new Item.Properties()));

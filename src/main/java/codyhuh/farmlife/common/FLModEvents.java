@@ -14,8 +14,10 @@ import net.minecraft.core.dispenser.AbstractProjectileDispenseBehavior;
 import net.minecraft.world.entity.projectile.Projectile;
 import net.minecraft.world.item.ItemStack;
 import net.minecraft.world.level.Level;
+import net.minecraft.world.level.block.Blocks;
 import net.minecraft.world.level.block.ComposterBlock;
 import net.minecraft.world.level.block.DispenserBlock;
+import net.minecraft.world.level.block.FlowerPotBlock;
 import net.minecraftforge.event.entity.EntityAttributeCreationEvent;
 import net.minecraftforge.eventbus.api.SubscribeEvent;
 import net.minecraftforge.fml.common.Mod;
@@ -26,12 +28,20 @@ public class FLModEvents {
 
     @SubscribeEvent
     public static void registerCommon(FMLCommonSetupEvent event) {
-        ComposterBlock.COMPOSTABLES.put(FLBlocks.PEACOCK_BURST_POPPY.get(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put(FLBlocks.ELECTRIC_BURST_POPPY.get(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put(FLBlocks.FANCY_BURST_POPPY.get(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put(FLBlocks.OLIVE_BURST_POPPY.get(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put(FLBlocks.RUSTY_BURST_POPPY.get(), 0.3F);
-        ComposterBlock.COMPOSTABLES.put(FLBlocks.SUNSTREAK_BURST_POPPY.get(), 0.3F);
+        event.enqueueWork(() -> {
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(FLBlocks.FANCY_BURST_POPPY.getId(), FLBlocks.POTTED_FANCY_BURST_POPPY);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(FLBlocks.OLIVE_BURST_POPPY.getId(), FLBlocks.POTTED_OLIVE_BURST_POPPY);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(FLBlocks.ELECTRIC_BURST_POPPY.getId(), FLBlocks.POTTED_ELECTRIC_BURST_POPPY);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(FLBlocks.RUSTY_BURST_POPPY.getId(), FLBlocks.POTTED_RUSTY_BURST_POPPY);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(FLBlocks.SUNSTREAK_BURST_POPPY.getId(), FLBlocks.POTTED_SUNSTREAK_BURST_POPPY);
+            ((FlowerPotBlock) Blocks.FLOWER_POT).addPlant(FLBlocks.PEACOCK_BURST_POPPY.getId(), FLBlocks.POTTED_PEACOCK_BURST_POPPY);
+            ComposterBlock.COMPOSTABLES.put(FLBlocks.PEACOCK_BURST_POPPY.get(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(FLBlocks.ELECTRIC_BURST_POPPY.get(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(FLBlocks.FANCY_BURST_POPPY.get(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(FLBlocks.OLIVE_BURST_POPPY.get(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(FLBlocks.RUSTY_BURST_POPPY.get(), 0.3F);
+            ComposterBlock.COMPOSTABLES.put(FLBlocks.SUNSTREAK_BURST_POPPY.get(), 0.3F);
+        });
 
         DispenserBlock.registerBehavior(FLItems.GALLIRAPTOR_EGG.get(), new AbstractProjectileDispenseBehavior() {
             protected Projectile getProjectile(Level p_123468_, Position p_123469_, ItemStack p_123470_) {

@@ -2,8 +2,8 @@
 	"ambientocclusion": false,
 	"texture_size": [32, 32],
 	"textures": {
-		"0": "farmlife:block/platefish_plate",
-		"particle": "farmlife:block/platefish_plate"
+		"0": "farmlife:block/platter",
+		"particle": "farmlife:block/platter"
 	},
 	"elements": [
 		{
